@@ -1,0 +1,97 @@
+{
+  "date": "2026-10-20",
+  "mode": "built-in image_gen__imagegen",
+  "type": "identity-preserve",
+  "scope": "reference-only; root must crop hair and preserve original pet face/ears/body",
+  "layout": {
+    "columns": 3,
+    "rows": 2,
+    "columnsByItem": [
+      "acorn-bob",
+      "cloud-bun",
+      "sea-braid"
+    ],
+    "rowsByView": [
+      "front",
+      "back"
+    ]
+  },
+  "entries": [
+    {
+      "species": "rabbit",
+      "prompt": "Use case: identity-preserve. Asset type: transparent illustrated game pet hairstyle sprite reference atlas.\nEdit the referenced character atlas into a NEW 3 column by 2 row sheet. Exactly six equal cells, one full character centered identically per cell, comfortable empty transparent gutters. Top row FRONT, bottom row TRUE BACK of the corresponding hairstyle. Three columns LEFT acorn-bob (tiny softly curved acorn brown forehead fringe), MIDDLE cloud-bun (short natural fringe with one low, small rounded bun), RIGHT sea-braid (short natural fringe and two very short, fine braids ending above the chin, with tiny muted blue ties only). All hair warm chestnut brown.\nThis is the SAME animal, SAME original head, ears, round eye shape/position, original muzzle/body/paws/feet/proportions and soft furry storybook watercolor rendering. Preserve identity aggressively: no human face, no adult hairpiece, no giant hair volume. Hair must grow directly from its scalp, extremely close to round skull with tapered root strands mixing into the original fur and subtle matching skin/fur boundary. Expose BOTH original eyes fully and all original ear roots. Hair is modest fine animal fur-like hair, not a wig laid over the forehead. Forehead fringe stays short, above the eyes; no hanging curtain sideburns below cheek. Back hair follows natural skull curve, not a floating shape; real rear, no face on back.\nNo clothes, shoes, bag, hat, props, text, frames, ground shadow or background. Keep all cells fully transparent except actual fur and hair, genuine alpha. High fidelity to reference identity/pose. Desired atlas 1536 by 1280 with uniform cells.\nUse ONLY reference atlas LEFT column original floppy-eared cream rabbit for all six cells: its left ear erect tilting slightly outward and right ear floppy angled down-right, EXACT original ear shapes and locations. Preserve its cream chubby head/body. Hair grows between and around original ear roots, with the ears clearly in front of the scalp hair; no alteration of ear angle. It is a tiny fluffy rabbit, not a human doll.",
+      "source": "C:\\Users\\Lenovo\\.codex\\generated_images\\01a1575d-fbe1-7c23-817b-019725f6df2e\\exec-d10d993b-4775-4e14-b354-18817b7910c8.png",
+      "reference": "D:\\团队项目\\group-project\\src\\static\\pets\\rabbit-atlas.png",
+      "destination": "C:\\Users\\Lenovo\\.codex\\visualizations\\2026\\10\\14\\01a13a25-b0e8-7d03-8a72-e82e9b21fd33\\phase-one-preview\\natural-hair-art\\rabbit-hair-reference-v1.png",
+      "review": "Generated output inspected. Hair roots follow skull, original eyes exposed; compact lateral growth; true back shown. Generated facial microdetails and back rabbit ear coloring drift slightly, so ONLY hair area should be extracted and original anatomy retained. Exact integration fitting remains root responsibility.",
+      "image": {
+        "width": 1374,
+        "height": 1145,
+        "bytes": 1765180,
+        "rgba": true,
+        "alphaLevels": 256,
+        "transparentPixels": 770804,
+        "opaquePixels": 120,
+        "partialPixels": 802306,
+        "realTransparency": true
+      }
+    },
+    {
+      "species": "capybara",
+      "prompt": "Use case: identity-preserve. Asset type: transparent illustrated game pet hairstyle sprite reference atlas.\nEdit the referenced character atlas into a NEW 3 column by 2 row sheet. Exactly six equal cells, one full character centered identically per cell, comfortable empty transparent gutters. Top row FRONT, bottom row TRUE BACK of the corresponding hairstyle. Three columns LEFT acorn-bob (tiny softly curved acorn brown forehead fringe), MIDDLE cloud-bun (short natural fringe with one low, small rounded bun), RIGHT sea-braid (short natural fringe and two very short, fine braids ending above the chin, with tiny muted blue ties only). All hair warm chestnut brown.\nThis is the SAME animal, SAME original head, ears, round eye shape/position, original muzzle/body/paws/feet/proportions and soft furry storybook watercolor rendering. Preserve identity aggressively: no human face, no adult hairpiece, no giant hair volume. Hair must grow directly from its scalp, extremely close to round skull with tapered root strands mixing into the original fur and subtle matching skin/fur boundary. Expose BOTH original eyes fully and all original ear roots. Hair is modest fine animal fur-like hair, not a wig laid over the forehead. Forehead fringe stays short, above the eyes; no hanging curtain sideburns below cheek. Back hair follows natural skull curve, not a floating shape; real rear, no face on back.\nNo clothes, shoes, bag, hat, props, text, frames, ground shadow or background. Keep all cells fully transparent except actual fur and hair, genuine alpha. High fidelity to reference identity/pose. Desired atlas 1536 by 1280 with uniform cells.\nUse ONLY reference atlas LEFT column original cinnamon capybara for all six cells: EXACT original small round ears, broad round furry face, narrow dark oval eyes and tan central muzzle, tubby body. Hair sits as a small cap of animal fur at top of existing head, no widening. The left and right round ears remain fully visible. Preserve original paws and broad feet.",
+      "source": "C:\\Users\\Lenovo\\.codex\\generated_images\\01a1575d-fbe1-7c23-817b-019725f6df2e\\exec-5f55595b-c682-4f02-a698-151a04bb01ed.png",
+      "reference": "D:\\团队项目\\group-project\\src\\static\\pets\\capybara-atlas.png",
+      "destination": "C:\\Users\\Lenovo\\.codex\\visualizations\\2026\\10\\14\\01a13a25-b0e8-7d03-8a72-e82e9b21fd33\\phase-one-preview\\natural-hair-art\\capybara-hair-reference-v1.png",
+      "review": "Generated output inspected. Hair roots follow skull, original eyes exposed; compact lateral growth; true back shown. Generated facial microdetails and back rabbit ear coloring drift slightly, so ONLY hair area should be extracted and original anatomy retained. Exact integration fitting remains root responsibility.",
+      "image": {
+        "width": 1374,
+        "height": 1145,
+        "bytes": 1957580,
+        "rgba": true,
+        "alphaLevels": 256,
+        "transparentPixels": 640940,
+        "opaquePixels": 463,
+        "partialPixels": 931827,
+        "realTransparency": true
+      }
+    },
+    {
+      "species": "mushroom",
+      "prompt": "Use case: identity-preserve. Asset type: transparent illustrated game pet hairstyle sprite reference atlas.\nEdit the referenced character atlas into a NEW 3 column by 2 row sheet. Exactly six equal cells, one full character centered identically per cell, comfortable empty transparent gutters. Top row FRONT, bottom row TRUE BACK of the corresponding hairstyle. Three columns LEFT acorn-bob (tiny softly curved acorn brown forehead fringe), MIDDLE cloud-bun (short natural fringe with one low, small rounded bun), RIGHT sea-braid (short natural fringe and two very short, fine braids ending above the chin, with tiny muted blue ties only). All hair warm chestnut brown.\nThis is the SAME animal, SAME original head, ears, round eye shape/position, original muzzle/body/paws/feet/proportions and soft furry storybook watercolor rendering. Preserve identity aggressively: no human face, no adult hairpiece, no giant hair volume. Hair must grow directly from its scalp, extremely close to round skull with tapered root strands mixing into the original fur and subtle matching skin/fur boundary. Expose BOTH original eyes fully and all original ear roots. Hair is modest fine animal fur-like hair, not a wig laid over the forehead. Forehead fringe stays short, above the eyes; no hanging curtain sideburns below cheek. Back hair follows natural skull curve, not a floating shape; real rear, no face on back.\nNo clothes, shoes, bag, hat, props, text, frames, ground shadow or background. Keep all cells fully transparent except actual fur and hair, genuine alpha. High fidelity to reference identity/pose. Desired atlas 1536 by 1280 with uniform cells.\nUse ONLY reference atlas LEFT column original ROUND green mushroom cap pet for all six cells. The big pointed-domed green mushroom cap with beige/yellow flecks, exact original brim and gills, must remain untouched. Hairstyle exists ONLY on the cream creature's actual small forehead UNDER the mushroom brim, close to its small face/scalp. NO HAIR ON TOP OF THE MUSHROOM. Front: tiny brown fringe below brim above eyes; cloud-bun uses tiny side/low nape bun tucked under cap, sea-braid uses two tiny short braids under the brim beside cheeks. Back: small brown nape patch visible just below mushroom brim, low bun or tiny braids appropriate. Do not cover green cap with hair, do not alter mushroom shape. Preserve cream body and little brown feet.",
+      "source": "C:\\Users\\Lenovo\\.codex\\generated_images\\01a1575d-fbe1-7c23-817b-019725f6df2e\\exec-d5d2f405-de68-4fd6-9868-78d90077f18c.png",
+      "reference": "D:\\团队项目\\group-project\\src\\static\\pets\\mushroom-atlas.png",
+      "destination": "C:\\Users\\Lenovo\\.codex\\visualizations\\2026\\10\\14\\01a13a25-b0e8-7d03-8a72-e82e9b21fd33\\phase-one-preview\\natural-hair-art\\mushroom-hair-reference-v1.png",
+      "review": "Generated output inspected. Hair roots follow skull, original eyes exposed; compact lateral growth; true back shown. Generated facial microdetails and back rabbit ear coloring drift slightly, so ONLY hair area should be extracted and original anatomy retained. Exact integration fitting remains root responsibility.",
+      "image": {
+        "width": 1374,
+        "height": 1145,
+        "bytes": 1499596,
+        "rgba": true,
+        "alphaLevels": 256,
+        "transparentPixels": 833750,
+        "opaquePixels": 214,
+        "partialPixels": 739266,
+        "realTransparency": true
+      }
+    },
+    {
+      "species": "squirrel",
+      "prompt": "Use case: identity-preserve. Asset type: transparent illustrated game pet hairstyle sprite reference atlas.\nEdit the referenced character atlas into a NEW 3 column by 2 row sheet. Exactly six equal cells, one full character centered identically per cell, comfortable empty transparent gutters. Top row FRONT, bottom row TRUE BACK of the corresponding hairstyle. Three columns LEFT acorn-bob (tiny softly curved acorn brown forehead fringe), MIDDLE cloud-bun (short natural fringe with one low, small rounded bun), RIGHT sea-braid (short natural fringe and two very short, fine braids ending above the chin, with tiny muted blue ties only). All hair warm chestnut brown.\nThis is the SAME animal, SAME original head, ears, round eye shape/position, original muzzle/body/paws/feet/proportions and soft furry storybook watercolor rendering. Preserve identity aggressively: no human face, no adult hairpiece, no giant hair volume. Hair must grow directly from its scalp, extremely close to round skull with tapered root strands mixing into the original fur and subtle matching skin/fur boundary. Expose BOTH original eyes fully and all original ear roots. Hair is modest fine animal fur-like hair, not a wig laid over the forehead. Forehead fringe stays short, above the eyes; no hanging curtain sideburns below cheek. Back hair follows natural skull curve, not a floating shape; real rear, no face on back.\nNo clothes, shoes, bag, hat, props, text, frames, ground shadow or background. Keep all cells fully transparent except actual fur and hair, genuine alpha. High fidelity to reference identity/pose. Desired atlas 1536 by 1280 with uniform cells.\nUse ONLY reference atlas LEFT column original pointed tufted-eared orange squirrel for all six cells. EXACT original pointed tall animal ears, small cream face and original large curled tail on viewer LEFT. Preserve tail shape/position and ear tuft tips. Hair forms just a small close-cropped crown/forehead fringe within original head width, fitting neatly BETWEEN the two pointed ears, ears in front and fully visible. No covering eyes or cream cheeks. Back preserves tall tufted ears and large curled tail.",
+      "source": "C:\\Users\\Lenovo\\.codex\\generated_images\\01a1575d-fbe1-7c23-817b-019725f6df2e\\exec-5cf356a9-4eba-4b9e-9d9d-afa19eab5001.png",
+      "reference": "D:\\团队项目\\group-project\\src\\static\\pets\\squirrel-atlas.png",
+      "destination": "C:\\Users\\Lenovo\\.codex\\visualizations\\2026\\10\\14\\01a13a25-b0e8-7d03-8a72-e82e9b21fd33\\phase-one-preview\\natural-hair-art\\squirrel-hair-reference-v1.png",
+      "review": "Generated output inspected. Hair roots follow skull, original eyes exposed; compact lateral growth; true back shown. Generated facial microdetails and back rabbit ear coloring drift slightly, so ONLY hair area should be extracted and original anatomy retained. Exact integration fitting remains root responsibility.",
+      "image": {
+        "width": 1374,
+        "height": 1145,
+        "bytes": 1823085,
+        "rgba": true,
+        "alphaLevels": 256,
+        "transparentPixels": 708898,
+        "opaquePixels": 123,
+        "partialPixels": 864209,
+        "realTransparency": true
+      }
+    }
+  ]
+}

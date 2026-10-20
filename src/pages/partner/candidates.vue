@@ -5,6 +5,13 @@
     <view class="subtitle">
       同一校区、同类活动、同一天且时间重叠。邀请后仍需对方确认。
     </view>
+    <view v-if="sent.length" class="panel">
+      <view>邀请已发出，等待对方确认。</view>
+      <view class="muted">在消息中心查看接受、拒绝或取消后的状态。</view>
+      <view class="actions">
+        <button class="primary" @tap="openInvitations">查看邀请进度</button>
+      </view>
+    </view>
     <view v-if="error" class="error">{{ error }}</view>
     <view
       v-for="candidate in items"
@@ -74,6 +81,9 @@ const planId = ref(''),
   busy = ref(false),
   loading = ref(false),
   cursor = ref(null)
+function openInvitations() {
+  uni.switchTab({ url: '/pages/messages/index' })
+}
 onLoad((options) => {
   planId.value = options.planId
   load(true)

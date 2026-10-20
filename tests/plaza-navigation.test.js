@@ -1,0 +1,170 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+import {
+  createPlazaNavigator,
+  PLAZA_HOUSES,
+  PLAZA_AREAS
+} from '../src/utils/plaza-navigation.js'
+
+const distance = (a, b) => Math.hypot(a.x - b.x, ((a.y - b.y) * 801) / 1280)
+const inside = (point, box) =>
+  point.x > box[0] && point.x < box[2] && point.y > box[1] && point.y < box[3]
+const obstacles = [
+  [0.43, 0.43, 0.59, 0.59], // 中心树岛
+  [0.17, 0.17, 0.365, 0.36], // 搭子屋顶
+  [0.63, 0.11, 0.89, 0.305], // 失物屋顶
+  [0.11, 0.61, 0.335, 0.69], // 集市实体屋顶；右上角斜檐外是步道
+  [0.72, 0.53, 0.95, 0.69] // 自己的家屋顶
+]
+
+test('点击房子先行走，抵达真实门口后只能消费一次进入事件', () => {
+  const navigator = createPlazaNavigator()
+  const house = PLAZA_HOUSES.find((item) => item.id === 'partner')
+  navigator.enterHouse(house.id)
+  assert.equal(navigator.getState().moving, true)
+  assert.equal(navigator.consumeEntry(), null)
+  navigator.advance(0.1)
+  assert.equal(navigator.consumeEntry(), null)
+  navigator.advance(100)
+  assert.equal(navigator.getState().moving, false)
+  assert.ok(distance(navigator.getState().position, house.door) < 0.000001)
+  assert.equal(navigator.consumeEntry().id, house.id)
+  assert.equal(navigator.consumeEntry(), null)
+  navigator.advance(100)
+  assert.equal(navigator.consumeEntry(), null)
+})
+
+test('四条门口支路与步道相接，逐步行走不会穿过中心树岛或建筑屋顶', () => {
+  const navigator = createPlazaNavigator({ speed: 0.16 })
+  for (const house of PLAZA_HOUSES) {
+    navigator.enterHouse(house.id)
+    let steps = 0
+    while (navigator.getState().moving && steps++ < 1000) {
+      const before = navigator.getState().position
+      navigator.advance(0.04)
+      const after = navigator.getState().position
+      assert.ok(distance(before, after) <= 0.16 * 0.04 + 0.000001)
+      assert.ok(obstacles.every((box) => !inside(after, box)))
+    }
+    assert.ok(steps < 1000)
+    assert.ok(distance(navigator.getState().position, house.door) < 0.000001)
+    assert.equal(navigator.consumeEntry().id, house.id)
+  }
+})
+
+test('支路途中改目标保留当前位置，退回相连步道后前往新门口', () => {
+  const navigator = createPlazaNavigator({ speed: 0.16 })
+  navigator.enterHouse('partner')
+  for (let i = 0; i < 200 && navigator.getState().position.x >= 0.34; i++)
+    navigator.advance(0.04)
+  const branchPosition = navigator.getState().position
+  assert.ok(branchPosition.x < 0.34)
+  navigator.enterHouse('lost')
+  assert.deepEqual(navigator.getState().position, branchPosition)
+  assert.equal(navigator.consumeEntry(), null)
+  let returnedToLoop = false
+  while (navigator.getState().moving) {
+    const before = navigator.getState().position
+    navigator.advance(0.04)
+    const after = navigator.getState().position
+    if (after.x >= 0.369) returnedToLoop = true
+    assert.ok(distance(before, after) <= 0.16 * 0.04 + 0.000001)
+    assert.ok(obstacles.every((box) => !inside(after, box)))
+  }
+  assert.equal(returnedToLoop, true)
+  assert.equal(navigator.consumeEntry().id, 'lost')
+})
+
+test('新普通目标和离页取消都清除待进入，位置不跳动也不会延迟入门', () => {
+  const navigator = createPlazaNavigator()
+  navigator.enterHouse('home')
+  navigator.advance(0.2)
+  navigator.moveTo({ x: 0.33, y: 0.5 })
+  navigator.advance(100)
+  assert.equal(navigator.consumeEntry(), null)
+  navigator.enterHouse('market')
+  navigator.advance(0.2)
+  const stopped = navigator.getState().position
+  navigator.cancelEntry()
+  navigator.advance(100)
+  assert.deepEqual(navigator.getState().position, stopped)
+  assert.equal(navigator.consumeEntry(), null)
+  navigator.enterHouse('market')
+  navigator.advance(100)
+  navigator.cancelEntry()
+  assert.equal(navigator.consumeEntry(), null)
+})
+
+test('普通门口目标也能触发进入，非法目标不会破坏当前行走', () => {
+  const navigator = createPlazaNavigator()
+  const house = PLAZA_HOUSES.find((item) => item.id === 'home')
+  navigator.moveTo(house.door)
+  const before = navigator.getState()
+  assert.throws(() => navigator.moveTo({ x: NaN, y: 0 }), TypeError)
+  assert.throws(() => navigator.enterHouse('missing'), RangeError)
+  assert.deepEqual(navigator.getState(), before)
+  navigator.advance(100)
+  assert.equal(navigator.consumeEntry().id, 'home')
+  assert.throws(() => createPlazaNavigator({ speed: 0 }), TypeError)
+})
+
+test('池边与休息亭沿支路抵达后才触发一次地点事件，业务房子仍只有四栋', () => {
+  assert.equal(PLAZA_HOUSES.length, 4)
+  assert.deepEqual(
+    PLAZA_AREAS.map((area) => area.id),
+    ['pond', 'pavilion']
+  )
+  const navigator = createPlazaNavigator({ speed: 0.16 })
+  for (const area of PLAZA_AREAS) {
+    navigator.enterArea(area.id)
+    assert.equal(navigator.getState().moving, true)
+    assert.equal(navigator.consumeEntry(), null)
+    let steps = 0
+    while (navigator.getState().moving && steps++ < 1000) {
+      navigator.advance(0.04)
+      const point = navigator.getState().position
+      assert.ok(obstacles.every((box) => !inside(point, box)))
+      assert.ok(
+        point.x >= 0.205 || point.y <= 0.835,
+        '只在栈台上停靠，不走入池水'
+      )
+    }
+    assert.ok(steps < 1000)
+    assert.ok(distance(navigator.getState().position, area.door) < 0.000001)
+    const entry = navigator.consumeEntry()
+    assert.equal(entry.id, area.id)
+    assert.equal(entry.kind, 'area')
+    assert.equal(navigator.consumeEntry(), null)
+  }
+})
+
+test('池边支路途中转去亭子或房子不会瞬移，取消后不会误开钓鱼面板', () => {
+  const navigator = createPlazaNavigator({ speed: 0.16 })
+  navigator.enterArea('pond')
+  for (let i = 0; i < 500 && navigator.getState().position.x >= 0.29; i++)
+    navigator.advance(0.04)
+  const before = navigator.getState().position
+  assert.ok(before.x < 0.29)
+  navigator.enterArea('pavilion')
+  assert.deepEqual(navigator.getState().position, before)
+  assert.equal(navigator.consumeEntry(), null)
+  while (navigator.getState().moving) {
+    const previous = navigator.getState().position
+    navigator.advance(0.04)
+    const next = navigator.getState().position
+    assert.ok(distance(previous, next) <= 0.16 * 0.04 + 0.000001)
+    assert.ok(obstacles.every((box) => !inside(next, box)))
+    assert.ok(next.x >= 0.205 || next.y <= 0.835)
+  }
+  assert.equal(navigator.consumeEntry().id, 'pavilion')
+  navigator.enterArea('pond')
+  navigator.advance(0.3)
+  navigator.enterHouse('partner')
+  navigator.advance(100)
+  assert.equal(navigator.consumeEntry().id, 'partner')
+  navigator.enterArea('pond')
+  navigator.cancelEntry()
+  navigator.advance(100)
+  assert.equal(navigator.consumeEntry(), null)
+  assert.throws(() => navigator.enterArea('missing'), RangeError)
+})

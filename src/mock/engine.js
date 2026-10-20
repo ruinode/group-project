@@ -1,5 +1,10 @@
 import { ServiceError, requireThat } from '../utils/errors.js'
 import { findCandidates } from './matching.js'
+import { getPet, savePet } from './pet.js'
+import { listDemoBulletins } from './bulletin.js'
+import { dispatchFishing } from './fishing.js'
+import { dispatchWardrobe } from './wardrobe.js'
+import { dispatchDive } from './dive.js'
 const types = {
   plan: 'plan',
   help: 'help',
@@ -79,6 +84,15 @@ export function dispatch(db, method, p = {}) {
       '演示模式仅切换虚构身份；真实登录请接入后端'
     )
   me()
+  if (method.startsWith('wardrobe.'))
+    return dispatchWardrobe(db, me().id, method.slice(9), p)
+  if (method.startsWith('dive.'))
+    return dispatchDive(db, me().id, method.slice(5), p)
+  if (method.startsWith('fishing.'))
+    return dispatchFishing(db, me().id, method.slice(8), p)
+  if (method === 'bulletin.list') return list(listDemoBulletins())
+  if (method === 'pet.get') return getPet(db, me().id, p)
+  if (method === 'pet.save') return savePet(db, me().id, p)
   if (method === 'user.getProfile') return user(p.userId || me().id)
   if (method === 'user.updateProfile') {
     const u = me()

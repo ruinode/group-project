@@ -1,0 +1,346 @@
+{
+  "rabbit": {
+    "acorn-bob": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-acorn-bob-front.png",
+            "bounds": {
+              "x": 9.5,
+              "y": 50.04,
+              "width": 92.07,
+              "height": 58.08
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-acorn-bob-back.png",
+            "bounds": {
+              "x": 9.17,
+              "y": 51.03,
+              "width": 92.73,
+              "height": 65.34
+            }
+          }
+        ]
+      }
+    },
+    "cloud-bun": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-cloud-bun-front.png",
+            "bounds": {
+              "x": 9.995,
+              "y": 50.04,
+              "width": 112.86,
+              "height": 75.24
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-cloud-bun-back.png",
+            "bounds": {
+              "x": 9.5,
+              "y": 51.03,
+              "width": 97.35,
+              "height": 70.29
+            }
+          }
+        ]
+      }
+    },
+    "sea-braid": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-sea-braid-front.png",
+            "bounds": {
+              "x": 10.325,
+              "y": 50.04,
+              "width": 95.37,
+              "height": 78.21
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-sea-braid-back.png",
+            "bounds": {
+              "x": 12.14,
+              "y": 51.03,
+              "width": 90.09,
+              "height": 82.5
+            }
+          }
+        ]
+      }
+    }
+  },
+  "capybara": {
+    "acorn-bob": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-acorn-bob-front.png",
+            "bounds": {
+              "x": 24.695,
+              "y": 23.02,
+              "width": 91.665,
+              "height": 24.5
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-acorn-bob-back.png",
+            "bounds": {
+              "x": 24.065,
+              "y": 22.5,
+              "width": 87.885,
+              "height": 34.8
+            }
+          }
+        ]
+      }
+    },
+    "cloud-bun": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-cloud-bun-front.png",
+            "bounds": {
+              "x": 25.388,
+              "y": 23.265,
+              "width": 105.84,
+              "height": 33.32
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-cloud-bun-back.png",
+            "bounds": {
+              "x": 23.593,
+              "y": 22.5,
+              "width": 102.06,
+              "height": 40.2
+            }
+          }
+        ]
+      }
+    },
+    "sea-braid": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-sea-braid-front.png",
+            "bounds": {
+              "x": 20.443,
+              "y": 23.02,
+              "width": 98.91,
+              "height": 55.125
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-sea-braid-back.png",
+            "bounds": {
+              "x": 22.805,
+              "y": 22.5,
+              "width": 96.075,
+              "height": 57.3
+            }
+          }
+        ]
+      }
+    }
+  },
+  "mushroom": {
+    "acorn-bob": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-acorn-bob-front.png",
+            "bounds": {
+              "x": 38.205,
+              "y": 99.9,
+              "width": 54.315,
+              "height": 22.22
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-acorn-bob-back.png",
+            "bounds": {
+              "x": 43.815,
+              "y": 119,
+              "width": 45.9,
+              "height": 10.83
+            }
+          }
+        ]
+      }
+    },
+    "cloud-bun": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-cloud-bun-front.png",
+            "bounds": {
+              "x": 38.23,
+              "y": 99.9,
+              "width": 61.455,
+              "height": 30.8
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-cloud-bun-back.png",
+            "bounds": {
+              "x": 43.942,
+              "y": 119,
+              "width": 45.645,
+              "height": 15.2
+            }
+          }
+        ]
+      }
+    },
+    "sea-braid": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-sea-braid-front.png",
+            "bounds": {
+              "x": 36.496,
+              "y": 99.9,
+              "width": 59.925,
+              "height": 34.54
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-sea-braid-back.png",
+            "bounds": {
+              "x": 40.627,
+              "y": 119,
+              "width": 50.745,
+              "height": 20.33
+            }
+          }
+        ]
+      }
+    }
+  },
+  "squirrel": {
+    "acorn-bob": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-acorn-bob-front.png",
+            "bounds": {
+              "x": 54.15,
+              "y": 61.075,
+              "width": 79.625,
+              "height": 44.525
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-acorn-bob-back.png",
+            "bounds": {
+              "x": 69.425,
+              "y": 63.466,
+              "width": 64.35,
+              "height": 49.128
+            }
+          }
+        ]
+      }
+    },
+    "cloud-bun": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-cloud-bun-front.png",
+            "bounds": {
+              "x": 54.898,
+              "y": 61.075,
+              "width": 89.7,
+              "height": 56.55
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-cloud-bun-back.png",
+            "bounds": {
+              "x": 69.588,
+              "y": 63.466,
+              "width": 73.775,
+              "height": 50.196
+            }
+          }
+        ]
+      }
+    },
+    "sea-braid": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-sea-braid-front.png",
+            "bounds": {
+              "x": 54.231,
+              "y": 61.075,
+              "width": 84.5,
+              "height": 65.325
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-sea-braid-back.png",
+            "bounds": {
+              "x": 67.8,
+              "y": 63.466,
+              "width": 68.575,
+              "height": 57.405
+            }
+          }
+        ]
+      }
+    }
+  }
+}

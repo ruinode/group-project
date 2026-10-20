@@ -1,0 +1,562 @@
+{
+  "rabbit": {
+    "rain-boots": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-rain-boots-front-left.png",
+            "bounds": {
+              "x": 23.5,
+              "y": 146.67326732673268,
+              "width": 27,
+              "height": 24.32673267326733
+            }
+          },
+          {
+            "source": "/static/pets/fitted/rabbit-rain-boots-front-right.png",
+            "bounds": {
+              "x": 64.5,
+              "y": 145.26262626262627,
+              "width": 28,
+              "height": 25.737373737373737
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-rain-boots-back-left.png",
+            "bounds": {
+              "x": 22.5,
+              "y": 150.35294117647058,
+              "width": 27,
+              "height": 20.647058823529413
+            }
+          },
+          {
+            "source": "/static/pets/fitted/rabbit-rain-boots-back-right.png",
+            "bounds": {
+              "x": 63.5,
+              "y": 147.7659574468085,
+              "width": 28,
+              "height": 23.23404255319149
+            }
+          }
+        ]
+      }
+    },
+    "shell-shoes": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-shell-shoes-front-left.png",
+            "bounds": {
+              "x": 23.5,
+              "y": 149.1081081081081,
+              "width": 27,
+              "height": 21.891891891891895
+            }
+          },
+          {
+            "source": "/static/pets/fitted/rabbit-shell-shoes-front-right.png",
+            "bounds": {
+              "x": 64.5,
+              "y": 148.0909090909091,
+              "width": 28,
+              "height": 22.909090909090907
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-shell-shoes-back-left.png",
+            "bounds": {
+              "x": 22.5,
+              "y": 151.85454545454544,
+              "width": 27,
+              "height": 19.145454545454545
+            }
+          },
+          {
+            "source": "/static/pets/fitted/rabbit-shell-shoes-back-right.png",
+            "bounds": {
+              "x": 63.5,
+              "y": 150.70642201834863,
+              "width": 28,
+              "height": 20.293577981651378
+            }
+          }
+        ]
+      }
+    },
+    "leaf-slippers": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-leaf-slippers-front-left.png",
+            "bounds": {
+              "x": 23.5,
+              "y": 148.9090909090909,
+              "width": 27,
+              "height": 22.09090909090909
+            }
+          },
+          {
+            "source": "/static/pets/fitted/rabbit-leaf-slippers-front-right.png",
+            "bounds": {
+              "x": 64.5,
+              "y": 147.40740740740742,
+              "width": 28,
+              "height": 23.59259259259259
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/rabbit-leaf-slippers-back-left.png",
+            "bounds": {
+              "x": 22.5,
+              "y": 152.1,
+              "width": 27,
+              "height": 18.9
+            }
+          },
+          {
+            "source": "/static/pets/fitted/rabbit-leaf-slippers-back-right.png",
+            "bounds": {
+              "x": 63.5,
+              "y": 149.31372549019608,
+              "width": 28,
+              "height": 21.686274509803923
+            }
+          }
+        ]
+      }
+    }
+  },
+  "capybara": {
+    "rain-boots": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-rain-boots-front-left.png",
+            "bounds": {
+              "x": 26.5,
+              "y": 148.1851851851852,
+              "width": 32,
+              "height": 22.814814814814813
+            }
+          },
+          {
+            "source": "/static/pets/fitted/capybara-rain-boots-front-right.png",
+            "bounds": {
+              "x": 83.5,
+              "y": 146.84313725490196,
+              "width": 32,
+              "height": 24.15686274509804
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-rain-boots-back-left.png",
+            "bounds": {
+              "x": 26.5,
+              "y": 146.17757009345794,
+              "width": 32,
+              "height": 24.822429906542055
+            }
+          },
+          {
+            "source": "/static/pets/fitted/capybara-rain-boots-back-right.png",
+            "bounds": {
+              "x": 83.5,
+              "y": 144.17171717171718,
+              "width": 32,
+              "height": 26.82828282828283
+            }
+          }
+        ]
+      }
+    },
+    "shell-shoes": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-shell-shoes-front-left.png",
+            "bounds": {
+              "x": 26.5,
+              "y": 149.28571428571428,
+              "width": 32,
+              "height": 21.71428571428571
+            }
+          },
+          {
+            "source": "/static/pets/fitted/capybara-shell-shoes-front-right.png",
+            "bounds": {
+              "x": 83.5,
+              "y": 149.28571428571428,
+              "width": 32,
+              "height": 21.71428571428571
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-shell-shoes-back-left.png",
+            "bounds": {
+              "x": 26.5,
+              "y": 147.85714285714286,
+              "width": 32,
+              "height": 23.142857142857142
+            }
+          },
+          {
+            "source": "/static/pets/fitted/capybara-shell-shoes-back-right.png",
+            "bounds": {
+              "x": 83.5,
+              "y": 148.06194690265488,
+              "width": 32,
+              "height": 22.938053097345133
+            }
+          }
+        ]
+      }
+    },
+    "leaf-slippers": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-leaf-slippers-front-left.png",
+            "bounds": {
+              "x": 26.5,
+              "y": 149.8521739130435,
+              "width": 32,
+              "height": 21.14782608695652
+            }
+          },
+          {
+            "source": "/static/pets/fitted/capybara-leaf-slippers-front-right.png",
+            "bounds": {
+              "x": 83.5,
+              "y": 150.56302521008405,
+              "width": 32,
+              "height": 20.436974789915965
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/capybara-leaf-slippers-back-left.png",
+            "bounds": {
+              "x": 26.5,
+              "y": 148.2991452991453,
+              "width": 32,
+              "height": 22.700854700854702
+            }
+          },
+          {
+            "source": "/static/pets/fitted/capybara-leaf-slippers-back-right.png",
+            "bounds": {
+              "x": 83.5,
+              "y": 148.4915254237288,
+              "width": 32,
+              "height": 22.508474576271187
+            }
+          }
+        ]
+      }
+    }
+  },
+  "mushroom": {
+    "rain-boots": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-rain-boots-front-left.png",
+            "bounds": {
+              "x": 37.5,
+              "y": 150.75,
+              "width": 24,
+              "height": 20.25
+            }
+          },
+          {
+            "source": "/static/pets/fitted/mushroom-rain-boots-front-right.png",
+            "bounds": {
+              "x": 69.5,
+              "y": 150.27472527472528,
+              "width": 23,
+              "height": 20.725274725274723
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-rain-boots-back-left.png",
+            "bounds": {
+              "x": 37.5,
+              "y": 150.53684210526316,
+              "width": 24,
+              "height": 20.46315789473684
+            }
+          },
+          {
+            "source": "/static/pets/fitted/mushroom-rain-boots-back-right.png",
+            "bounds": {
+              "x": 69.5,
+              "y": 149.58620689655172,
+              "width": 23,
+              "height": 21.413793103448278
+            }
+          }
+        ]
+      }
+    },
+    "shell-shoes": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-shell-shoes-front-left.png",
+            "bounds": {
+              "x": 37.5,
+              "y": 150.91836734693877,
+              "width": 24,
+              "height": 20.081632653061224
+            }
+          },
+          {
+            "source": "/static/pets/fitted/mushroom-shell-shoes-front-right.png",
+            "bounds": {
+              "x": 69.5,
+              "y": 151.14736842105265,
+              "width": 23,
+              "height": 19.852631578947367
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-shell-shoes-back-left.png",
+            "bounds": {
+              "x": 37.5,
+              "y": 150.09677419354838,
+              "width": 24,
+              "height": 20.903225806451612
+            }
+          },
+          {
+            "source": "/static/pets/fitted/mushroom-shell-shoes-back-right.png",
+            "bounds": {
+              "x": 69.5,
+              "y": 150.06741573033707,
+              "width": 23,
+              "height": 20.93258426966292
+            }
+          }
+        ]
+      }
+    },
+    "leaf-slippers": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-leaf-slippers-front-left.png",
+            "bounds": {
+              "x": 37.5,
+              "y": 150.95876288659792,
+              "width": 24,
+              "height": 20.04123711340206
+            }
+          },
+          {
+            "source": "/static/pets/fitted/mushroom-leaf-slippers-front-right.png",
+            "bounds": {
+              "x": 69.5,
+              "y": 150.3,
+              "width": 23,
+              "height": 20.7
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/mushroom-leaf-slippers-back-left.png",
+            "bounds": {
+              "x": 37.5,
+              "y": 150.09677419354838,
+              "width": 24,
+              "height": 20.903225806451612
+            }
+          },
+          {
+            "source": "/static/pets/fitted/mushroom-leaf-slippers-back-right.png",
+            "bounds": {
+              "x": 69.5,
+              "y": 150.75,
+              "width": 23,
+              "height": 20.25
+            }
+          }
+        ]
+      }
+    }
+  },
+  "squirrel": {
+    "rain-boots": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-rain-boots-front-left.png",
+            "bounds": {
+              "x": 58.5,
+              "y": 149.85714285714286,
+              "width": 28,
+              "height": 21.142857142857142
+            }
+          },
+          {
+            "source": "/static/pets/fitted/squirrel-rain-boots-front-right.png",
+            "bounds": {
+              "x": 102.5,
+              "y": 149.77319587628867,
+              "width": 29,
+              "height": 21.22680412371134
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-rain-boots-back-left.png",
+            "bounds": {
+              "x": 58.5,
+              "y": 150.84,
+              "width": 28,
+              "height": 20.160000000000004
+            }
+          },
+          {
+            "source": "/static/pets/fitted/squirrel-rain-boots-back-right.png",
+            "bounds": {
+              "x": 102.5,
+              "y": 148.30434782608697,
+              "width": 29,
+              "height": 22.695652173913043
+            }
+          }
+        ]
+      }
+    },
+    "shell-shoes": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-shell-shoes-front-left.png",
+            "bounds": {
+              "x": 58.5,
+              "y": 151.15533980582524,
+              "width": 28,
+              "height": 19.844660194174757
+            }
+          },
+          {
+            "source": "/static/pets/fitted/squirrel-shell-shoes-front-right.png",
+            "bounds": {
+              "x": 102.5,
+              "y": 149.4742268041237,
+              "width": 29,
+              "height": 21.525773195876287
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-shell-shoes-back-left.png",
+            "bounds": {
+              "x": 58.5,
+              "y": 151.6990291262136,
+              "width": 28,
+              "height": 19.300970873786408
+            }
+          },
+          {
+            "source": "/static/pets/fitted/squirrel-shell-shoes-back-right.png",
+            "bounds": {
+              "x": 102.5,
+              "y": 148.6195652173913,
+              "width": 29,
+              "height": 22.380434782608695
+            }
+          }
+        ]
+      }
+    },
+    "leaf-slippers": {
+      "front": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-leaf-slippers-front-left.png",
+            "bounds": {
+              "x": 58.5,
+              "y": 152.07407407407408,
+              "width": 28,
+              "height": 18.925925925925924
+            }
+          },
+          {
+            "source": "/static/pets/fitted/squirrel-leaf-slippers-front-right.png",
+            "bounds": {
+              "x": 102.5,
+              "y": 151.30188679245282,
+              "width": 29,
+              "height": 19.69811320754717
+            }
+          }
+        ]
+      },
+      "back": {
+        "parts": [
+          {
+            "source": "/static/pets/fitted/squirrel-leaf-slippers-back-left.png",
+            "bounds": {
+              "x": 58.5,
+              "y": 151.50980392156862,
+              "width": 28,
+              "height": 19.490196078431374
+            }
+          },
+          {
+            "source": "/static/pets/fitted/squirrel-leaf-slippers-back-right.png",
+            "bounds": {
+              "x": 102.5,
+              "y": 148.37362637362637,
+              "width": 29,
+              "height": 22.626373626373624
+            }
+          }
+        ]
+      }
+    }
+  }
+}

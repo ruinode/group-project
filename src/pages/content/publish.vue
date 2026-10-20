@@ -139,6 +139,8 @@ async function save() {
   try {
     const params = { ...form, images: [...form.images] }
     if (!form.category.trim()) throw new Error('请填写类别或技能')
+    if (['plan', 'help'].includes(type.value))
+      params.category = form.category.trim()
     if (type.value === 'plan')
       Object.assign(params, {
         startAt: localToIso(date.value, startTime.value),

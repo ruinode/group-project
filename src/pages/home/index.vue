@@ -24,6 +24,15 @@
         <button class="secondary" @tap="askSubscription">接收匹配通知</button>
       </view>
     </view>
+    <view class="panel">
+      <view class="row">
+        <view>
+          <view class="section-title" style="margin-top: 0">我的宠物</view>
+          <view class="muted">挑个伙伴，搭配成喜欢的样子。</view>
+        </view>
+        <button class="secondary" @tap="openPet">去搭配</button>
+      </view>
+    </view>
     <view v-if="isMock" class="panel">
       <view class="section-title" style="margin-top: 0">演示身份</view>
       <view class="muted">
@@ -88,6 +97,9 @@ async function loadMore() {
 }
 function publicProfile() {
   openProfile(profile.value.id)
+}
+function openPet() {
+  uni.navigateTo({ url: '/pages/pet/index' })
 }
 function switchUser(id) {
   switchDemoUser(id)
