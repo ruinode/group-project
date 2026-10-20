@@ -28,6 +28,8 @@
 | conversation.list | C | 本机演示；真实后端待实现 |
 | message.send | C | 本机演示；真实后端待实现 |
 | message.list | C | 本机演示；真实后端待实现 |
+| comment.create | C | 失物公开评论本机演示；真实后端待实现 |
+| comment.list | C | 失物公开评论本机演示；真实后端待实现 |
 | notification.list | C | 本机演示；真实后端待实现 |
 | notification.markRead | C | 本机演示；真实后端待实现 |
 | favorite.set | B | 本机演示；真实后端待实现 |

@@ -15,10 +15,11 @@
 | Membership | planId、userId、status | 正式数据库建议独立记录，planId+userId 唯一 |
 | Invitation | id、senderId、recipientId、sourcePlanId、targetPlanId、status | 来源为被邀请人的单人计划，目标为邀请人的计划 |
 | MarketPost | id、ownerId、priceCents、status | 图片走公共上传；预约记录后续 Reservation |
-| LostFoundPost | id、ownerId、category、location、status | 类别为丢失 / 拾获；作者确认归还 |
+| LostFoundPost | id、ownerId、lostKind、category、images、location、status | lostKind 为丢失/拾获；category 为卡片/钥匙/杂物；1～3 张图片；作者确认完成 |
 | HelpPost | id、ownerId、category、body、status | category 首版为所需技能；后续匹配 User.skillTags |
 | Conversation | id、participantIds、contentType、contentId | 同一内容与参与者组合去重；仅参与者访问 |
 | Message | id、conversationId、senderId、body、createdAt | 发送者取登录态；会话权限由后端校验 |
+| Comment | id、contentType、contentId、authorId、body、createdAt | 首版用于失物公开评论；发布者收到站内通知 |
 | Notification | id、recipientId、contentType、contentId、read | 业务事件去重；本人读写；模板发送与业务事务分开 |
 | Favorite / Report | userId、contentType、contentId 等 | 收藏唯一；举报处理管理员专用 |
 | Upload | imageId、ownerId、usage、mime、size、status | 校验类型/大小/归属；确认后才能关联业务内容 |

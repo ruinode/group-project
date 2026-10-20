@@ -3,7 +3,12 @@
     <DemoNotice />
     <view v-if="error" class="error">{{ error }}</view>
     <view v-if="item" class="panel">
-      <text class="tag">{{ contentNames[type] }} · {{ item.status }}</text>
+      <view class="row">
+        <text class="tag">{{ contentNames[type] }} · {{ statusLabel(item.status) }}</text>
+        <text v-if="type === 'lost_found'" class="tag">
+          {{ lostKindLabel(item.lostKind) }} · {{ lostCategoryLabel(item.category) }}
+        </text>
+      </view>
       <view class="title" style="margin-top: 20rpx">{{ item.title }}</view>
       <view
         class="link"
@@ -62,6 +67,40 @@
         </button>
       </view>
     </view>
+    <view v-if="item && type === 'lost_found'" class="panel">
+      <view class="row">
+        <view class="section-title comment-title">评论区</view>
+        <text class="muted">公开交流物品线索</text>
+      </view>
+      <view v-if="commentsLoading" class="muted comment-state">正在读取评论…</view>
+      <view v-else-if="!comments.length" class="muted comment-state">
+        暂时没有评论，可以留下物品线索。
+      </view>
+      <view v-for="comment in comments" :key="comment.id" class="comment-item">
+        <view class="row">
+          <text class="link" @tap="openProfile(comment.authorId)">
+            {{ comment.author?.nickname || '同学' }} ↗
+          </text>
+          <text class="muted">{{ formatTime(comment.createdAt) }}</text>
+        </view>
+        <view class="body comment-body">{{ comment.body }}</view>
+      </view>
+      <textarea
+        class="input textarea"
+        v-model="commentBody"
+        maxlength="500"
+        placeholder="请勿公开身份证号、手机号等隐私信息"
+      />
+      <view class="actions">
+        <button
+          class="primary"
+          :disabled="commentSaving || !commentBody.trim()"
+          @tap="sendComment"
+        >
+          {{ commentSaving ? '正在发送…' : '发表评论' }}
+        </button>
+      </view>
+    </view>
   </view>
 </template>
 <script setup>
@@ -82,7 +121,11 @@ const type = ref('plan'),
   item = ref(null),
   error = ref(''),
   busy = ref(false),
-  selected = ref(false)
+  selected = ref(false),
+  comments = ref([]),
+  commentBody = ref(''),
+  commentsLoading = ref(false),
+  commentSaving = ref(false)
 const isOwn = computed(() => item.value?.ownerId === session.user?.id)
 const service = () =>
   api[type.value === 'lost_found' ? 'lostFound' : type.value]
@@ -103,8 +146,40 @@ async function load() {
       )
       cursor = favorites.nextCursor
     } while (cursor && !selected.value)
+    if (type.value === 'lost_found') await loadComments()
   } catch (e) {
     error.value = errorText(e)
+  }
+}
+async function loadComments() {
+  commentsLoading.value = true
+  try {
+    const result = await api.comment.list({
+      contentType: type.value,
+      contentId: id.value,
+      pageSize: 50
+    })
+    comments.value = result.items
+  } finally {
+    commentsLoading.value = false
+  }
+}
+async function sendComment() {
+  if (commentSaving.value || !commentBody.value.trim()) return
+  commentSaving.value = true
+  error.value = ''
+  try {
+    await api.comment.create({
+      contentType: type.value,
+      contentId: id.value,
+      body: commentBody.value
+    })
+    commentBody.value = ''
+    await loadComments()
+  } catch (e) {
+    error.value = errorText(e)
+  } finally {
+    commentSaving.value = false
   }
 }
 onShow(load)
@@ -186,4 +261,38 @@ function finish() {
 function preview(image) {
   uni.previewImage({ current: image, urls: item.value.images })
 }
+const statusLabels = {
+  active: '进行中',
+  returned: '已完成',
+  closed: '已关闭',
+  open: '进行中',
+  full: '已满员',
+  completed: '已完成',
+  reserved: '已预约'
+}
+const lostCategories = { card: '卡片', key: '钥匙', misc: '杂物' }
+const lostKinds = { lost: '丢失', found: '拾获' }
+const statusLabel = (status) => statusLabels[status] || status
+const lostCategoryLabel = (category) => lostCategories[category] || category
+const lostKindLabel = (kind) => lostKinds[kind] || '失物'
 </script>
+
+<style scoped>
+.comment-title {
+  margin-top: 0;
+}
+.comment-state {
+  padding: 28rpx 0;
+}
+.comment-item {
+  padding: 22rpx 0;
+  border-bottom: 2rpx solid #edf0e5;
+}
+.comment-body {
+  margin-top: 10rpx;
+}
+.comment-item + .textarea,
+.comment-state + .textarea {
+  margin-top: 24rpx;
+}
+</style>
