@@ -3,7 +3,10 @@
     {
       "path": "pages/plaza/index",
       "style": {
-        "navigationBarTitleText": "生活广场"
+        "navigationBarTitleText": "生活广场",
+        "navigationStyle": "custom",
+        "pageOrientation": "auto",
+        "disableScroll": true
       }
     },
     {
@@ -16,6 +19,12 @@
       "path": "pages/home/index",
       "style": {
         "navigationBarTitleText": "我的家"
+      }
+    },
+    {
+      "path": "pages/pet/index",
+      "style": {
+        "navigationBarTitleText": "我的宠物"
       }
     },
     {

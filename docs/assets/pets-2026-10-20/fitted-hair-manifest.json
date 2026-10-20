@@ -1,0 +1,5423 @@
+{
+  "date": "2026-10-20",
+  "method": "Technical alpha extraction of built-in generated hair only; original pet face/ears/body remain untouched.",
+  "frame": [
+    144,
+    176
+  ],
+  "entries": [
+    {
+      "species": "rabbit",
+      "id": "acorn-bob",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/rabbit-hair-reference-v1.png",
+      "sourceCrop": [
+        48,
+        175,
+        279,
+        176
+      ],
+      "cellOrigin": [
+        0,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            48,
+            302
+          ],
+          [
+            58,
+            268
+          ],
+          [
+            74,
+            231
+          ],
+          [
+            101,
+            208
+          ],
+          [
+            147,
+            190
+          ],
+          [
+            188,
+            177
+          ],
+          [
+            210,
+            179
+          ],
+          [
+            232,
+            189
+          ],
+          [
+            249,
+            203
+          ],
+          [
+            270,
+            224
+          ],
+          [
+            289,
+            251
+          ],
+          [
+            305,
+            276
+          ],
+          [
+            315,
+            306
+          ],
+          [
+            325,
+            335
+          ],
+          [
+            314,
+            350
+          ],
+          [
+            307,
+            327
+          ],
+          [
+            303,
+            310
+          ],
+          [
+            293,
+            291
+          ],
+          [
+            275,
+            276
+          ],
+          [
+            252,
+            267
+          ],
+          [
+            236,
+            254
+          ],
+          [
+            225,
+            236
+          ],
+          [
+            215,
+            249
+          ],
+          [
+            201,
+            262
+          ],
+          [
+            181,
+            269
+          ],
+          [
+            161,
+            271
+          ],
+          [
+            147,
+            262
+          ],
+          [
+            127,
+            263
+          ],
+          [
+            109,
+            275
+          ],
+          [
+            91,
+            288
+          ],
+          [
+            78,
+            307
+          ],
+          [
+            77,
+            331
+          ],
+          [
+            83,
+            347
+          ],
+          [
+            68,
+            340
+          ],
+          [
+            53,
+            321
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        198,
+        187
+      ],
+      "targetAnchor": [
+        59,
+        54
+      ],
+      "scaleX": 0.33,
+      "scaleY": 0.33,
+      "nativeBounds": {
+        "x": 9.5,
+        "y": 50.04,
+        "width": 92.07,
+        "height": 58.08
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/rabbit-acorn-bob-front.png",
+        "width": 184,
+        "height": 116,
+        "bytes": 8338,
+        "alphaLevels": 99,
+        "transparentPixels": 13477
+      },
+      "pixelCount": 17745
+    },
+    {
+      "species": "rabbit",
+      "id": "acorn-bob",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/rabbit-hair-reference-v1.png",
+      "sourceCrop": [
+        47,
+        710,
+        281,
+        198
+      ],
+      "cellOrigin": [
+        0,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            49,
+            224
+          ],
+          [
+            59,
+            188
+          ],
+          [
+            85,
+            166
+          ],
+          [
+            126,
+            153
+          ],
+          [
+            167,
+            146
+          ],
+          [
+            199,
+            140
+          ],
+          [
+            229,
+            147
+          ],
+          [
+            249,
+            160
+          ],
+          [
+            270,
+            184
+          ],
+          [
+            287,
+            210
+          ],
+          [
+            312,
+            249
+          ],
+          [
+            326,
+            281
+          ],
+          [
+            327,
+            306
+          ],
+          [
+            307,
+            325
+          ],
+          [
+            274,
+            332
+          ],
+          [
+            229,
+            334
+          ],
+          [
+            189,
+            332
+          ],
+          [
+            155,
+            333
+          ],
+          [
+            121,
+            328
+          ],
+          [
+            93,
+            321
+          ],
+          [
+            68,
+            307
+          ],
+          [
+            53,
+            283
+          ],
+          [
+            49,
+            256
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        198,
+        719
+      ],
+      "targetAnchor": [
+        59,
+        54
+      ],
+      "scaleX": 0.33,
+      "scaleY": 0.33,
+      "nativeBounds": {
+        "x": 9.17,
+        "y": 51.03,
+        "width": 92.73,
+        "height": 65.34
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/rabbit-acorn-bob-back.png",
+        "width": 185,
+        "height": 131,
+        "bytes": 16269,
+        "alphaLevels": 82,
+        "transparentPixels": 5858
+      },
+      "pixelCount": 41623
+    },
+    {
+      "species": "rabbit",
+      "id": "cloud-bun",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/rabbit-hair-reference-v1.png",
+      "sourceCrop": [
+        533,
+        175,
+        342,
+        228
+      ],
+      "cellOrigin": [
+        458,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            73.5,
+            302
+          ],
+          [
+            83.5,
+            268
+          ],
+          [
+            99.5,
+            231
+          ],
+          [
+            126.5,
+            208
+          ],
+          [
+            172.5,
+            190
+          ],
+          [
+            213.5,
+            177
+          ],
+          [
+            235.5,
+            179
+          ],
+          [
+            257.5,
+            189
+          ],
+          [
+            274.5,
+            203
+          ],
+          [
+            295.5,
+            224
+          ],
+          [
+            314.5,
+            251
+          ],
+          [
+            330.5,
+            276
+          ],
+          [
+            340.5,
+            306
+          ],
+          [
+            350.5,
+            335
+          ],
+          [
+            339.5,
+            350
+          ],
+          [
+            332.5,
+            327
+          ],
+          [
+            328.5,
+            310
+          ],
+          [
+            318.5,
+            291
+          ],
+          [
+            300.5,
+            276
+          ],
+          [
+            277.5,
+            267
+          ],
+          [
+            261.5,
+            254
+          ],
+          [
+            250.5,
+            236
+          ],
+          [
+            240.5,
+            249
+          ],
+          [
+            226.5,
+            262
+          ],
+          [
+            206.5,
+            269
+          ],
+          [
+            186.5,
+            271
+          ],
+          [
+            172.5,
+            262
+          ],
+          [
+            152.5,
+            263
+          ],
+          [
+            134.5,
+            275
+          ],
+          [
+            116.5,
+            288
+          ],
+          [
+            103.5,
+            307
+          ],
+          [
+            102.5,
+            331
+          ],
+          [
+            108.5,
+            347
+          ],
+          [
+            93.5,
+            340
+          ],
+          [
+            78.5,
+            321
+          ]
+        ],
+        [
+          [
+            422.5,
+            365
+          ],
+          [
+            421.604051630086,
+            373.10855594189263
+          ],
+          [
+            418.9553637633466,
+            380.8627290799562
+          ],
+          [
+            414.6696967693729,
+            387.92362483940644
+          ],
+          [
+            408.9343548607132,
+            393.9826481936184
+          ],
+          [
+            402,
+            398.7749907475931
+          ],
+          [
+            394.1696967693728,
+            402.09120413551096
+          ],
+          [
+            385.7856669939738,
+            403.7863539193627
+          ],
+          [
+            377.2143330060262,
+            403.7863539193627
+          ],
+          [
+            368.8303032306272,
+            402.091204135511
+          ],
+          [
+            361,
+            398.7749907475931
+          ],
+          [
+            354.0656451392868,
+            393.9826481936184
+          ],
+          [
+            348.3303032306272,
+            387.92362483940644
+          ],
+          [
+            344.04463623665333,
+            380.8627290799562
+          ],
+          [
+            341.395948369914,
+            373.10855594189263
+          ],
+          [
+            340.5,
+            365
+          ],
+          [
+            341.395948369914,
+            356.89144405810737
+          ],
+          [
+            344.04463623665333,
+            349.1372709200438
+          ],
+          [
+            348.3303032306271,
+            342.07637516059356
+          ],
+          [
+            354.0656451392868,
+            336.0173518063816
+          ],
+          [
+            361,
+            331.2250092524069
+          ],
+          [
+            368.8303032306271,
+            327.90879586448904
+          ],
+          [
+            377.21433300602615,
+            326.2136460806373
+          ],
+          [
+            385.7856669939738,
+            326.2136460806373
+          ],
+          [
+            394.1696967693728,
+            327.908795864489
+          ],
+          [
+            402,
+            331.2250092524069
+          ],
+          [
+            408.9343548607132,
+            336.0173518063816
+          ],
+          [
+            414.6696967693728,
+            342.07637516059356
+          ],
+          [
+            418.95536376334667,
+            349.1372709200438
+          ],
+          [
+            421.604051630086,
+            356.89144405810737
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        681.5,
+        187
+      ],
+      "targetAnchor": [
+        59,
+        54
+      ],
+      "scaleX": 0.33,
+      "scaleY": 0.33,
+      "nativeBounds": {
+        "x": 9.995,
+        "y": 50.04,
+        "width": 112.86,
+        "height": 75.24
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/rabbit-cloud-bun-front.png",
+        "width": 226,
+        "height": 150,
+        "bytes": 9608,
+        "alphaLevels": 111,
+        "transparentPixels": 24797
+      },
+      "pixelCount": 20903,
+      "postProcessing": {
+        "record": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/rabbit-bun-ear-clean.json",
+        "originalBackup": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/rabbit-cloud-bun-front-before-ear-clean.png",
+        "description": "Removed erroneous floppy-ear rim component; original source crop/polygon/threshold/anchor/scale remain recorded above; other RGBA pixels losslessly preserved. Do not rerun extraction over this correction."
+      }
+    },
+    {
+      "species": "rabbit",
+      "id": "cloud-bun",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/rabbit-hair-reference-v1.png",
+      "sourceCrop": [
+        529,
+        710,
+        295,
+        213
+      ],
+      "cellOrigin": [
+        458,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            72,
+            224
+          ],
+          [
+            82,
+            188
+          ],
+          [
+            108,
+            166
+          ],
+          [
+            149,
+            153
+          ],
+          [
+            190,
+            146
+          ],
+          [
+            222,
+            140
+          ],
+          [
+            252,
+            147
+          ],
+          [
+            272,
+            160
+          ],
+          [
+            293,
+            184
+          ],
+          [
+            310,
+            210
+          ],
+          [
+            335,
+            249
+          ],
+          [
+            349,
+            281
+          ],
+          [
+            350,
+            306
+          ],
+          [
+            330,
+            325
+          ],
+          [
+            297,
+            332
+          ],
+          [
+            252,
+            334
+          ],
+          [
+            212,
+            332
+          ],
+          [
+            178,
+            333
+          ],
+          [
+            144,
+            328
+          ],
+          [
+            116,
+            321
+          ],
+          [
+            91,
+            307
+          ],
+          [
+            76,
+            283
+          ],
+          [
+            72,
+            256
+          ]
+        ],
+        [
+          [
+            364,
+            305
+          ],
+          [
+            362.90738003669026,
+            314.1481143959814
+          ],
+          [
+            359.67727288213007,
+            322.8964122953352
+          ],
+          [
+            354.45084971874735,
+            330.8625511008688
+          ],
+          [
+            347.4565303179429,
+            337.69837232100537
+          ],
+          [
+            339,
+            343.1051177665153
+          ],
+          [
+            329.45084971874735,
+            346.84648671698676
+          ],
+          [
+            319.22642316338266,
+            348.758963396204
+          ],
+          [
+            308.77357683661734,
+            348.758963396204
+          ],
+          [
+            298.54915028125265,
+            346.84648671698676
+          ],
+          [
+            289,
+            343.1051177665153
+          ],
+          [
+            280.5434696820571,
+            337.69837232100537
+          ],
+          [
+            273.54915028125265,
+            330.8625511008688
+          ],
+          [
+            268.32272711786993,
+            322.8964122953352
+          ],
+          [
+            265.09261996330974,
+            314.1481143959814
+          ],
+          [
+            264,
+            305
+          ],
+          [
+            265.09261996330974,
+            295.8518856040186
+          ],
+          [
+            268.32272711786993,
+            287.1035877046648
+          ],
+          [
+            273.54915028125265,
+            279.1374488991312
+          ],
+          [
+            280.5434696820571,
+            272.3016276789947
+          ],
+          [
+            289,
+            266.89488223348474
+          ],
+          [
+            298.54915028125265,
+            263.15351328301324
+          ],
+          [
+            308.7735768366173,
+            261.241036603796
+          ],
+          [
+            319.2264231633827,
+            261.241036603796
+          ],
+          [
+            329.45084971874735,
+            263.15351328301324
+          ],
+          [
+            339,
+            266.8948822334847
+          ],
+          [
+            347.4565303179429,
+            272.3016276789947
+          ],
+          [
+            354.45084971874735,
+            279.1374488991312
+          ],
+          [
+            359.67727288213007,
+            287.1035877046648
+          ],
+          [
+            362.90738003669026,
+            295.85188560401855
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        679,
+        719
+      ],
+      "targetAnchor": [
+        59,
+        54
+      ],
+      "scaleX": 0.33,
+      "scaleY": 0.33,
+      "nativeBounds": {
+        "x": 9.5,
+        "y": 51.03,
+        "width": 97.35,
+        "height": 70.29
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/rabbit-cloud-bun-back.png",
+        "width": 195,
+        "height": 141,
+        "bytes": 17162,
+        "alphaLevels": 94,
+        "transparentPixels": 8677
+      },
+      "pixelCount": 42444
+    },
+    {
+      "species": "rabbit",
+      "id": "sea-braid",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/rabbit-hair-reference-v1.png",
+      "sourceCrop": [
+        999,
+        175,
+        289,
+        237
+      ],
+      "cellOrigin": [
+        916,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            80.5,
+            302
+          ],
+          [
+            90.5,
+            268
+          ],
+          [
+            106.5,
+            231
+          ],
+          [
+            133.5,
+            208
+          ],
+          [
+            179.5,
+            190
+          ],
+          [
+            220.5,
+            177
+          ],
+          [
+            242.5,
+            179
+          ],
+          [
+            264.5,
+            189
+          ],
+          [
+            281.5,
+            203
+          ],
+          [
+            302.5,
+            224
+          ],
+          [
+            321.5,
+            251
+          ],
+          [
+            337.5,
+            276
+          ],
+          [
+            347.5,
+            306
+          ],
+          [
+            357.5,
+            335
+          ],
+          [
+            346.5,
+            350
+          ],
+          [
+            339.5,
+            327
+          ],
+          [
+            335.5,
+            310
+          ],
+          [
+            325.5,
+            291
+          ],
+          [
+            307.5,
+            276
+          ],
+          [
+            284.5,
+            267
+          ],
+          [
+            268.5,
+            254
+          ],
+          [
+            257.5,
+            236
+          ],
+          [
+            247.5,
+            249
+          ],
+          [
+            233.5,
+            262
+          ],
+          [
+            213.5,
+            269
+          ],
+          [
+            193.5,
+            271
+          ],
+          [
+            179.5,
+            262
+          ],
+          [
+            159.5,
+            263
+          ],
+          [
+            141.5,
+            275
+          ],
+          [
+            123.5,
+            288
+          ],
+          [
+            110.5,
+            307
+          ],
+          [
+            109.5,
+            331
+          ],
+          [
+            115.5,
+            347
+          ],
+          [
+            100.5,
+            340
+          ],
+          [
+            85.5,
+            321
+          ]
+        ],
+        [
+          [
+            97.5,
+            277
+          ],
+          [
+            123.5,
+            275
+          ],
+          [
+            141.5,
+            310
+          ],
+          [
+            133.5,
+            338
+          ],
+          [
+            126.5,
+            365
+          ],
+          [
+            133.5,
+            390
+          ],
+          [
+            129.5,
+            410
+          ],
+          [
+            109.5,
+            408
+          ],
+          [
+            99.5,
+            389
+          ],
+          [
+            101.5,
+            363
+          ],
+          [
+            104.5,
+            337
+          ],
+          [
+            93.5,
+            312
+          ]
+        ],
+        [
+          [
+            333.5,
+            277
+          ],
+          [
+            358.5,
+            285
+          ],
+          [
+            370.5,
+            315
+          ],
+          [
+            368.5,
+            345
+          ],
+          [
+            375.5,
+            370
+          ],
+          [
+            382.5,
+            390
+          ],
+          [
+            376.5,
+            409
+          ],
+          [
+            358.5,
+            409
+          ],
+          [
+            348.5,
+            391
+          ],
+          [
+            353.5,
+            369
+          ],
+          [
+            346.5,
+            345
+          ],
+          [
+            342.5,
+            318
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        1146.5,
+        187
+      ],
+      "targetAnchor": [
+        59,
+        54
+      ],
+      "scaleX": 0.33,
+      "scaleY": 0.33,
+      "nativeBounds": {
+        "x": 10.325,
+        "y": 50.04,
+        "width": 95.37,
+        "height": 78.21
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/rabbit-sea-braid-front.png",
+        "width": 191,
+        "height": 156,
+        "bytes": 10181,
+        "alphaLevels": 102,
+        "transparentPixels": 20039
+      },
+      "pixelCount": 21916
+    },
+    {
+      "species": "rabbit",
+      "id": "sea-braid",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/rabbit-hair-reference-v1.png",
+      "sourceCrop": [
+        1004,
+        710,
+        273,
+        250
+      ],
+      "cellOrigin": [
+        916,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            81,
+            224
+          ],
+          [
+            91,
+            188
+          ],
+          [
+            117,
+            166
+          ],
+          [
+            158,
+            153
+          ],
+          [
+            199,
+            146
+          ],
+          [
+            231,
+            140
+          ],
+          [
+            261,
+            147
+          ],
+          [
+            281,
+            160
+          ],
+          [
+            302,
+            184
+          ],
+          [
+            319,
+            210
+          ],
+          [
+            344,
+            249
+          ],
+          [
+            358,
+            281
+          ],
+          [
+            359,
+            306
+          ],
+          [
+            339,
+            325
+          ],
+          [
+            306,
+            332
+          ],
+          [
+            261,
+            334
+          ],
+          [
+            221,
+            332
+          ],
+          [
+            187,
+            333
+          ],
+          [
+            153,
+            328
+          ],
+          [
+            125,
+            321
+          ],
+          [
+            100,
+            307
+          ],
+          [
+            85,
+            283
+          ],
+          [
+            81,
+            256
+          ]
+        ],
+        [
+          [
+            104,
+            278
+          ],
+          [
+            123,
+            283
+          ],
+          [
+            140,
+            306
+          ],
+          [
+            141,
+            330
+          ],
+          [
+            133,
+            349
+          ],
+          [
+            138,
+            370
+          ],
+          [
+            133,
+            385
+          ],
+          [
+            111,
+            384
+          ],
+          [
+            100,
+            365
+          ],
+          [
+            107,
+            344
+          ],
+          [
+            106,
+            325
+          ],
+          [
+            97,
+            303
+          ]
+        ],
+        [
+          [
+            312,
+            279
+          ],
+          [
+            333,
+            286
+          ],
+          [
+            347,
+            309
+          ],
+          [
+            347,
+            333
+          ],
+          [
+            356,
+            351
+          ],
+          [
+            353,
+            378
+          ],
+          [
+            333,
+            386
+          ],
+          [
+            320,
+            376
+          ],
+          [
+            323,
+            354
+          ],
+          [
+            315,
+            335
+          ],
+          [
+            316,
+            311
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        1146,
+        719
+      ],
+      "targetAnchor": [
+        59,
+        54
+      ],
+      "scaleX": 0.33,
+      "scaleY": 0.33,
+      "nativeBounds": {
+        "x": 12.14,
+        "y": 51.03,
+        "width": 90.09,
+        "height": 82.5
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/rabbit-sea-braid-back.png",
+        "width": 180,
+        "height": 165,
+        "bytes": 16956,
+        "alphaLevels": 79,
+        "transparentPixels": 10469
+      },
+      "pixelCount": 43485
+    },
+    {
+      "species": "capybara",
+      "id": "acorn-bob",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/capybara-hair-reference-v1.png",
+      "sourceCrop": [
+        97,
+        60,
+        291,
+        100
+      ],
+      "cellOrigin": [
+        0,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            91,
+            151
+          ],
+          [
+            113,
+            137
+          ],
+          [
+            130,
+            117
+          ],
+          [
+            148,
+            96
+          ],
+          [
+            170,
+            81
+          ],
+          [
+            192,
+            74
+          ],
+          [
+            215,
+            64
+          ],
+          [
+            240,
+            62
+          ],
+          [
+            267,
+            66
+          ],
+          [
+            293,
+            77
+          ],
+          [
+            314,
+            90
+          ],
+          [
+            329,
+            108
+          ],
+          [
+            345,
+            132
+          ],
+          [
+            367,
+            150
+          ],
+          [
+            388,
+            156
+          ],
+          [
+            370,
+            158
+          ],
+          [
+            348,
+            155
+          ],
+          [
+            328,
+            151
+          ],
+          [
+            310,
+            151
+          ],
+          [
+            291,
+            147
+          ],
+          [
+            273,
+            147
+          ],
+          [
+            255,
+            144
+          ],
+          [
+            235,
+            146
+          ],
+          [
+            219,
+            143
+          ],
+          [
+            205,
+            140
+          ],
+          [
+            190,
+            135
+          ],
+          [
+            177,
+            139
+          ],
+          [
+            159,
+            148
+          ],
+          [
+            139,
+            150
+          ],
+          [
+            118,
+            151
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        244,
+        64
+      ],
+      "targetAnchor": [
+        71,
+        24
+      ],
+      "scaleX": 0.315,
+      "scaleY": 0.245,
+      "nativeBounds": {
+        "x": 24.695,
+        "y": 23.02,
+        "width": 91.665,
+        "height": 24.5
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/capybara-acorn-bob-front.png",
+        "width": 183,
+        "height": 49,
+        "bytes": 5310,
+        "alphaLevels": 112,
+        "transparentPixels": 4191
+      },
+      "pixelCount": 14647
+    },
+    {
+      "species": "capybara",
+      "id": "acorn-bob",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/capybara-hair-reference-v1.png",
+      "sourceCrop": [
+        94,
+        629,
+        279,
+        116
+      ],
+      "cellOrigin": [
+        0,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            94,
+            148
+          ],
+          [
+            115,
+            122
+          ],
+          [
+            138,
+            99
+          ],
+          [
+            166,
+            78
+          ],
+          [
+            200,
+            63
+          ],
+          [
+            237,
+            59
+          ],
+          [
+            270,
+            65
+          ],
+          [
+            300,
+            78
+          ],
+          [
+            326,
+            99
+          ],
+          [
+            348,
+            124
+          ],
+          [
+            372,
+            146
+          ],
+          [
+            352,
+            154
+          ],
+          [
+            329,
+            158
+          ],
+          [
+            312,
+            161
+          ],
+          [
+            290,
+            168
+          ],
+          [
+            266,
+            171
+          ],
+          [
+            240,
+            172
+          ],
+          [
+            216,
+            166
+          ],
+          [
+            195,
+            159
+          ],
+          [
+            172,
+            157
+          ],
+          [
+            151,
+            152
+          ],
+          [
+            129,
+            154
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        243,
+        634
+      ],
+      "targetAnchor": [
+        71,
+        24
+      ],
+      "scaleX": 0.315,
+      "scaleY": 0.3,
+      "nativeBounds": {
+        "x": 24.065,
+        "y": 22.5,
+        "width": 87.885,
+        "height": 34.8
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/capybara-acorn-bob-back.png",
+        "width": 176,
+        "height": 70,
+        "bytes": 7741,
+        "alphaLevels": 99,
+        "transparentPixels": 4734
+      },
+      "pixelCount": 19568
+    },
+    {
+      "species": "capybara",
+      "id": "cloud-bun",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/capybara-hair-reference-v1.png",
+      "sourceCrop": [
+        544,
+        61,
+        336,
+        136
+      ],
+      "cellOrigin": [
+        458,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            77.8,
+            151
+          ],
+          [
+            99.8,
+            137
+          ],
+          [
+            116.8,
+            117
+          ],
+          [
+            134.8,
+            96
+          ],
+          [
+            156.8,
+            81
+          ],
+          [
+            178.8,
+            74
+          ],
+          [
+            201.8,
+            64
+          ],
+          [
+            226.8,
+            62
+          ],
+          [
+            253.8,
+            66
+          ],
+          [
+            279.8,
+            77
+          ],
+          [
+            300.8,
+            90
+          ],
+          [
+            315.8,
+            108
+          ],
+          [
+            331.8,
+            132
+          ],
+          [
+            353.8,
+            150
+          ],
+          [
+            374.8,
+            156
+          ],
+          [
+            356.8,
+            158
+          ],
+          [
+            334.8,
+            155
+          ],
+          [
+            314.8,
+            151
+          ],
+          [
+            296.8,
+            151
+          ],
+          [
+            277.8,
+            147
+          ],
+          [
+            259.8,
+            147
+          ],
+          [
+            241.8,
+            144
+          ],
+          [
+            221.8,
+            146
+          ],
+          [
+            205.8,
+            143
+          ],
+          [
+            191.8,
+            140
+          ],
+          [
+            176.8,
+            135
+          ],
+          [
+            163.8,
+            139
+          ],
+          [
+            145.8,
+            148
+          ],
+          [
+            125.8,
+            150
+          ],
+          [
+            104.8,
+            151
+          ]
+        ],
+        [
+          [
+            426.8,
+            158
+          ],
+          [
+            425.9914612271508,
+            165.6927325602571
+          ],
+          [
+            423.6011819327762,
+            173.0492557938046
+          ],
+          [
+            419.73362879187306,
+            179.74805433482152
+          ],
+          [
+            414.55783243527776,
+            185.4963585426636
+          ],
+          [
+            408.3,
+            190.0429399400242
+          ],
+          [
+            401.23362879187306,
+            193.18909110292068
+          ],
+          [
+            393.6675531409032,
+            194.79731012862612
+          ],
+          [
+            385.93244685909684,
+            194.79731012862612
+          ],
+          [
+            378.36637120812696,
+            193.18909110292068
+          ],
+          [
+            371.3,
+            190.04293994002424
+          ],
+          [
+            365.04216756472226,
+            185.4963585426636
+          ],
+          [
+            359.86637120812696,
+            179.74805433482152
+          ],
+          [
+            355.9988180672238,
+            173.0492557938046
+          ],
+          [
+            353.6085387728492,
+            165.6927325602571
+          ],
+          [
+            352.8,
+            158
+          ],
+          [
+            353.6085387728492,
+            150.3072674397429
+          ],
+          [
+            355.9988180672238,
+            142.9507442061954
+          ],
+          [
+            359.86637120812696,
+            136.25194566517848
+          ],
+          [
+            365.04216756472226,
+            130.5036414573364
+          ],
+          [
+            371.3,
+            125.95706005997577
+          ],
+          [
+            378.36637120812696,
+            122.81090889707932
+          ],
+          [
+            385.9324468590968,
+            121.20268987137389
+          ],
+          [
+            393.6675531409032,
+            121.20268987137389
+          ],
+          [
+            401.23362879187306,
+            122.81090889707932
+          ],
+          [
+            408.3,
+            125.95706005997577
+          ],
+          [
+            414.55783243527776,
+            130.5036414573364
+          ],
+          [
+            419.73362879187306,
+            136.25194566517848
+          ],
+          [
+            423.6011819327762,
+            142.9507442061954
+          ],
+          [
+            425.9914612271508,
+            150.30726743974287
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        688.8,
+        64
+      ],
+      "targetAnchor": [
+        71,
+        24
+      ],
+      "scaleX": 0.315,
+      "scaleY": 0.245,
+      "nativeBounds": {
+        "x": 25.388,
+        "y": 23.265,
+        "width": 105.84,
+        "height": 33.32
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/capybara-cloud-bun-front.png",
+        "width": 212,
+        "height": 67,
+        "bytes": 6579,
+        "alphaLevels": 115,
+        "transparentPixels": 8307
+      },
+      "pixelCount": 18027
+    },
+    {
+      "species": "capybara",
+      "id": "cloud-bun",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/capybara-hair-reference-v1.png",
+      "sourceCrop": [
+        540,
+        629,
+        324,
+        134
+      ],
+      "cellOrigin": [
+        458,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            83.5,
+            148
+          ],
+          [
+            104.5,
+            122
+          ],
+          [
+            127.5,
+            99
+          ],
+          [
+            155.5,
+            78
+          ],
+          [
+            189.5,
+            63
+          ],
+          [
+            226.5,
+            59
+          ],
+          [
+            259.5,
+            65
+          ],
+          [
+            289.5,
+            78
+          ],
+          [
+            315.5,
+            99
+          ],
+          [
+            337.5,
+            124
+          ],
+          [
+            361.5,
+            146
+          ],
+          [
+            341.5,
+            154
+          ],
+          [
+            318.5,
+            158
+          ],
+          [
+            301.5,
+            161
+          ],
+          [
+            279.5,
+            168
+          ],
+          [
+            255.5,
+            171
+          ],
+          [
+            229.5,
+            172
+          ],
+          [
+            205.5,
+            166
+          ],
+          [
+            184.5,
+            159
+          ],
+          [
+            161.5,
+            157
+          ],
+          [
+            140.5,
+            152
+          ],
+          [
+            118.5,
+            154
+          ]
+        ],
+        [
+          [
+            416.5,
+            153
+          ],
+          [
+            415.64775642861844,
+            160.48482086943935
+          ],
+          [
+            413.12827284806144,
+            167.64251915072882
+          ],
+          [
+            409.05166278062296,
+            174.16026908252903
+          ],
+          [
+            403.5960936479955,
+            179.75321371718618
+          ],
+          [
+            397,
+            184.1769145362398
+          ],
+          [
+            389.55166278062296,
+            187.23803458662553
+          ],
+          [
+            381.5766100674385,
+            188.80278823325784
+          ],
+          [
+            373.4233899325615,
+            188.80278823325784
+          ],
+          [
+            365.44833721937704,
+            187.23803458662553
+          ],
+          [
+            358,
+            184.1769145362398
+          ],
+          [
+            351.4039063520045,
+            179.7532137171862
+          ],
+          [
+            345.94833721937704,
+            174.16026908252903
+          ],
+          [
+            341.87172715193856,
+            167.6425191507288
+          ],
+          [
+            339.35224357138156,
+            160.48482086943935
+          ],
+          [
+            338.5,
+            153
+          ],
+          [
+            339.35224357138156,
+            145.51517913056068
+          ],
+          [
+            341.87172715193856,
+            138.3574808492712
+          ],
+          [
+            345.94833721937704,
+            131.83973091747097
+          ],
+          [
+            351.4039063520045,
+            126.24678628281382
+          ],
+          [
+            358,
+            121.82308546376021
+          ],
+          [
+            365.44833721937704,
+            118.76196541337447
+          ],
+          [
+            373.42338993256146,
+            117.19721176674216
+          ],
+          [
+            381.5766100674385,
+            117.19721176674216
+          ],
+          [
+            389.55166278062296,
+            118.76196541337447
+          ],
+          [
+            397,
+            121.82308546376021
+          ],
+          [
+            403.5960936479955,
+            126.24678628281382
+          ],
+          [
+            409.05166278062296,
+            131.83973091747094
+          ],
+          [
+            413.12827284806144,
+            138.35748084927118
+          ],
+          [
+            415.64775642861844,
+            145.51517913056065
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        690.5,
+        634
+      ],
+      "targetAnchor": [
+        71,
+        24
+      ],
+      "scaleX": 0.315,
+      "scaleY": 0.3,
+      "nativeBounds": {
+        "x": 23.593,
+        "y": 22.5,
+        "width": 102.06,
+        "height": 40.2
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/capybara-cloud-bun-back.png",
+        "width": 204,
+        "height": 80,
+        "bytes": 8880,
+        "alphaLevels": 115,
+        "transparentPixels": 7595
+      },
+      "pixelCount": 22823
+    },
+    {
+      "species": "capybara",
+      "id": "sea-braid",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/capybara-hair-reference-v1.png",
+      "sourceCrop": [
+        984,
+        60,
+        314,
+        225
+      ],
+      "cellOrigin": [
+        916,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            75.5,
+            151
+          ],
+          [
+            97.5,
+            137
+          ],
+          [
+            114.5,
+            117
+          ],
+          [
+            132.5,
+            96
+          ],
+          [
+            154.5,
+            81
+          ],
+          [
+            176.5,
+            74
+          ],
+          [
+            199.5,
+            64
+          ],
+          [
+            224.5,
+            62
+          ],
+          [
+            251.5,
+            66
+          ],
+          [
+            277.5,
+            77
+          ],
+          [
+            298.5,
+            90
+          ],
+          [
+            313.5,
+            108
+          ],
+          [
+            329.5,
+            132
+          ],
+          [
+            351.5,
+            150
+          ],
+          [
+            372.5,
+            156
+          ],
+          [
+            354.5,
+            158
+          ],
+          [
+            332.5,
+            155
+          ],
+          [
+            312.5,
+            151
+          ],
+          [
+            294.5,
+            151
+          ],
+          [
+            275.5,
+            147
+          ],
+          [
+            257.5,
+            147
+          ],
+          [
+            239.5,
+            144
+          ],
+          [
+            219.5,
+            146
+          ],
+          [
+            203.5,
+            143
+          ],
+          [
+            189.5,
+            140
+          ],
+          [
+            174.5,
+            135
+          ],
+          [
+            161.5,
+            139
+          ],
+          [
+            143.5,
+            148
+          ],
+          [
+            123.5,
+            150
+          ],
+          [
+            102.5,
+            151
+          ]
+        ],
+        [
+          [
+            81,
+            146
+          ],
+          [
+            99,
+            147
+          ],
+          [
+            100,
+            166
+          ],
+          [
+            94,
+            183
+          ],
+          [
+            95,
+            201
+          ],
+          [
+            87,
+            221
+          ],
+          [
+            91,
+            235
+          ],
+          [
+            88,
+            253
+          ],
+          [
+            95,
+            276
+          ],
+          [
+            84,
+            282
+          ],
+          [
+            75,
+            264
+          ],
+          [
+            72,
+            248
+          ],
+          [
+            73,
+            233
+          ],
+          [
+            70,
+            218
+          ],
+          [
+            74,
+            201
+          ],
+          [
+            72,
+            183
+          ],
+          [
+            77,
+            165
+          ]
+        ],
+        [
+          [
+            348,
+            143
+          ],
+          [
+            365,
+            147
+          ],
+          [
+            370,
+            165
+          ],
+          [
+            368,
+            183
+          ],
+          [
+            373,
+            201
+          ],
+          [
+            369,
+            218
+          ],
+          [
+            373,
+            235
+          ],
+          [
+            371,
+            250
+          ],
+          [
+            380,
+            276
+          ],
+          [
+            367,
+            283
+          ],
+          [
+            355,
+            274
+          ],
+          [
+            357,
+            254
+          ],
+          [
+            355,
+            237
+          ],
+          [
+            352,
+            220
+          ],
+          [
+            352,
+            204
+          ],
+          [
+            347,
+            184
+          ],
+          [
+            347,
+            165
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        1144.5,
+        64
+      ],
+      "targetAnchor": [
+        71,
+        24
+      ],
+      "scaleX": 0.315,
+      "scaleY": 0.245,
+      "nativeBounds": {
+        "x": 20.443,
+        "y": 23.02,
+        "width": 98.91,
+        "height": 55.125
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/capybara-sea-braid-front.png",
+        "width": 198,
+        "height": 110,
+        "bytes": 6987,
+        "alphaLevels": 106,
+        "transparentPixels": 15507
+      },
+      "pixelCount": 19322
+    },
+    {
+      "species": "capybara",
+      "id": "sea-braid",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/capybara-hair-reference-v1.png",
+      "sourceCrop": [
+        988,
+        629,
+        305,
+        191
+      ],
+      "cellOrigin": [
+        916,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            76,
+            148
+          ],
+          [
+            97,
+            122
+          ],
+          [
+            120,
+            99
+          ],
+          [
+            148,
+            78
+          ],
+          [
+            182,
+            63
+          ],
+          [
+            219,
+            59
+          ],
+          [
+            252,
+            65
+          ],
+          [
+            282,
+            78
+          ],
+          [
+            308,
+            99
+          ],
+          [
+            330,
+            124
+          ],
+          [
+            354,
+            146
+          ],
+          [
+            334,
+            154
+          ],
+          [
+            311,
+            158
+          ],
+          [
+            294,
+            161
+          ],
+          [
+            272,
+            168
+          ],
+          [
+            248,
+            171
+          ],
+          [
+            222,
+            172
+          ],
+          [
+            198,
+            166
+          ],
+          [
+            177,
+            159
+          ],
+          [
+            154,
+            157
+          ],
+          [
+            133,
+            152
+          ],
+          [
+            111,
+            154
+          ]
+        ],
+        [
+          [
+            88,
+            113
+          ],
+          [
+            104,
+            120
+          ],
+          [
+            106,
+            140
+          ],
+          [
+            100,
+            157
+          ],
+          [
+            98,
+            175
+          ],
+          [
+            93,
+            190
+          ],
+          [
+            95,
+            203
+          ],
+          [
+            91,
+            218
+          ],
+          [
+            97,
+            240
+          ],
+          [
+            87,
+            247
+          ],
+          [
+            78,
+            234
+          ],
+          [
+            74,
+            219
+          ],
+          [
+            76,
+            203
+          ],
+          [
+            74,
+            187
+          ],
+          [
+            78,
+            171
+          ],
+          [
+            76,
+            153
+          ],
+          [
+            81,
+            132
+          ]
+        ],
+        [
+          [
+            337,
+            112
+          ],
+          [
+            354,
+            117
+          ],
+          [
+            365,
+            133
+          ],
+          [
+            367,
+            151
+          ],
+          [
+            367,
+            170
+          ],
+          [
+            365,
+            188
+          ],
+          [
+            369,
+            202
+          ],
+          [
+            367,
+            217
+          ],
+          [
+            375,
+            239
+          ],
+          [
+            366,
+            247
+          ],
+          [
+            356,
+            234
+          ],
+          [
+            353,
+            219
+          ],
+          [
+            355,
+            203
+          ],
+          [
+            349,
+            185
+          ],
+          [
+            346,
+            169
+          ],
+          [
+            340,
+            152
+          ],
+          [
+            338,
+            132
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        1141,
+        634
+      ],
+      "targetAnchor": [
+        71,
+        24
+      ],
+      "scaleX": 0.315,
+      "scaleY": 0.3,
+      "nativeBounds": {
+        "x": 22.805,
+        "y": 22.5,
+        "width": 96.075,
+        "height": 57.3
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/capybara-sea-braid-back.png",
+        "width": 192,
+        "height": 115,
+        "bytes": 9385,
+        "alphaLevels": 94,
+        "transparentPixels": 12884
+      },
+      "pixelCount": 23761
+    },
+    {
+      "species": "mushroom",
+      "id": "acorn-bob",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/mushroom-hair-reference-v1.png",
+      "sourceCrop": [
+        120,
+        269,
+        213,
+        101
+      ],
+      "cellOrigin": [
+        0,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            122,
+            350
+          ],
+          [
+            131,
+            318
+          ],
+          [
+            147,
+            298
+          ],
+          [
+            169,
+            282
+          ],
+          [
+            199,
+            273
+          ],
+          [
+            227,
+            271
+          ],
+          [
+            254,
+            273
+          ],
+          [
+            278,
+            281
+          ],
+          [
+            299,
+            296
+          ],
+          [
+            316,
+            320
+          ],
+          [
+            331,
+            349
+          ],
+          [
+            327,
+            368
+          ],
+          [
+            316,
+            364
+          ],
+          [
+            307,
+            338
+          ],
+          [
+            295,
+            317
+          ],
+          [
+            275,
+            302
+          ],
+          [
+            254,
+            301
+          ],
+          [
+            238,
+            292
+          ],
+          [
+            228,
+            279
+          ],
+          [
+            217,
+            291
+          ],
+          [
+            200,
+            300
+          ],
+          [
+            180,
+            303
+          ],
+          [
+            160,
+            315
+          ],
+          [
+            148,
+            338
+          ],
+          [
+            139,
+            365
+          ],
+          [
+            128,
+            367
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        229,
+        274
+      ],
+      "targetAnchor": [
+        66,
+        101
+      ],
+      "scaleX": 0.255,
+      "scaleY": 0.22,
+      "nativeBounds": {
+        "x": 38.205,
+        "y": 99.9,
+        "width": 54.315,
+        "height": 22.22
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/mushroom-acorn-bob-front.png",
+        "width": 109,
+        "height": 44,
+        "bytes": 2610,
+        "alphaLevels": 126,
+        "transparentPixels": 3431
+      },
+      "pixelCount": 5647
+    },
+    {
+      "species": "mushroom",
+      "id": "acorn-bob",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/mushroom-hair-reference-v1.png",
+      "sourceCrop": [
+        141,
+        854,
+        180,
+        57
+      ],
+      "cellOrigin": [
+        0,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            143,
+            289
+          ],
+          [
+            164,
+            286
+          ],
+          [
+            191,
+            285
+          ],
+          [
+            222,
+            285
+          ],
+          [
+            250,
+            284
+          ],
+          [
+            279,
+            286
+          ],
+          [
+            304,
+            289
+          ],
+          [
+            319,
+            300
+          ],
+          [
+            313,
+            320
+          ],
+          [
+            294,
+            331
+          ],
+          [
+            271,
+            335
+          ],
+          [
+            244,
+            336
+          ],
+          [
+            217,
+            337
+          ],
+          [
+            190,
+            334
+          ],
+          [
+            170,
+            330
+          ],
+          [
+            153,
+            321
+          ],
+          [
+            143,
+            307
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        228,
+        854
+      ],
+      "targetAnchor": [
+        66,
+        119
+      ],
+      "scaleX": 0.255,
+      "scaleY": 0.19,
+      "nativeBounds": {
+        "x": 43.815,
+        "y": 119,
+        "width": 45.9,
+        "height": 10.83
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/mushroom-acorn-bob-back.png",
+        "width": 92,
+        "height": 22,
+        "bytes": 2510,
+        "alphaLevels": 123,
+        "transparentPixels": 399
+      },
+      "pixelCount": 7755
+    },
+    {
+      "species": "mushroom",
+      "id": "cloud-bun",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/mushroom-hair-reference-v1.png",
+      "sourceCrop": [
+        577,
+        269,
+        241,
+        140
+      ],
+      "cellOrigin": [
+        458,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            120.9,
+            350
+          ],
+          [
+            129.9,
+            318
+          ],
+          [
+            145.9,
+            298
+          ],
+          [
+            167.9,
+            282
+          ],
+          [
+            197.9,
+            273
+          ],
+          [
+            225.9,
+            271
+          ],
+          [
+            252.9,
+            273
+          ],
+          [
+            276.9,
+            281
+          ],
+          [
+            297.9,
+            296
+          ],
+          [
+            314.9,
+            320
+          ],
+          [
+            329.9,
+            349
+          ],
+          [
+            325.9,
+            368
+          ],
+          [
+            314.9,
+            364
+          ],
+          [
+            305.9,
+            338
+          ],
+          [
+            293.9,
+            317
+          ],
+          [
+            273.9,
+            302
+          ],
+          [
+            252.9,
+            301
+          ],
+          [
+            236.9,
+            292
+          ],
+          [
+            226.9,
+            279
+          ],
+          [
+            215.9,
+            291
+          ],
+          [
+            198.9,
+            300
+          ],
+          [
+            178.9,
+            303
+          ],
+          [
+            158.9,
+            315
+          ],
+          [
+            146.9,
+            338
+          ],
+          [
+            137.9,
+            365
+          ],
+          [
+            126.9,
+            367
+          ]
+        ],
+        [
+          [
+            357.9,
+            380
+          ],
+          [
+            357.3318376190789,
+            385.6136156520795
+          ],
+          [
+            355.6521818987076,
+            390.9818893630466
+          ],
+          [
+            352.9344418537486,
+            395.8702018118968
+          ],
+          [
+            349.2973957653303,
+            400.06491028788963
+          ],
+          [
+            344.9,
+            403.38268590217984
+          ],
+          [
+            339.93444185374864,
+            405.6785259399691
+          ],
+          [
+            334.61774004495896,
+            406.8520911749434
+          ],
+          [
+            329.182259955041,
+            406.8520911749434
+          ],
+          [
+            323.8655581462514,
+            405.6785259399692
+          ],
+          [
+            318.9,
+            403.38268590217984
+          ],
+          [
+            314.50260423466966,
+            400.06491028788963
+          ],
+          [
+            310.8655581462514,
+            395.8702018118968
+          ],
+          [
+            308.14781810129233,
+            390.9818893630466
+          ],
+          [
+            306.46816238092106,
+            385.6136156520795
+          ],
+          [
+            305.9,
+            380
+          ],
+          [
+            306.46816238092106,
+            374.3863843479205
+          ],
+          [
+            308.14781810129233,
+            369.0181106369534
+          ],
+          [
+            310.8655581462514,
+            364.1297981881032
+          ],
+          [
+            314.50260423466966,
+            359.93508971211037
+          ],
+          [
+            318.9,
+            356.61731409782016
+          ],
+          [
+            323.8655581462513,
+            354.3214740600309
+          ],
+          [
+            329.182259955041,
+            353.1479088250566
+          ],
+          [
+            334.61774004495896,
+            353.1479088250566
+          ],
+          [
+            339.9344418537486,
+            354.3214740600308
+          ],
+          [
+            344.9,
+            356.61731409782016
+          ],
+          [
+            349.2973957653303,
+            359.93508971211037
+          ],
+          [
+            352.9344418537486,
+            364.1297981881032
+          ],
+          [
+            355.6521818987076,
+            369.0181106369534
+          ],
+          [
+            357.3318376190789,
+            374.3863843479205
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        685.9,
+        274
+      ],
+      "targetAnchor": [
+        66,
+        101
+      ],
+      "scaleX": 0.255,
+      "scaleY": 0.22,
+      "nativeBounds": {
+        "x": 38.23,
+        "y": 99.9,
+        "width": 61.455,
+        "height": 30.8
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/mushroom-cloud-bun-front.png",
+        "width": 123,
+        "height": 62,
+        "bytes": 3115,
+        "alphaLevels": 118,
+        "transparentPixels": 5778
+      },
+      "pixelCount": 7657
+    },
+    {
+      "species": "mushroom",
+      "id": "cloud-bun",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/mushroom-hair-reference-v1.png",
+      "sourceCrop": [
+        597,
+        854,
+        179,
+        80
+      ],
+      "cellOrigin": [
+        458,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            140.5,
+            289
+          ],
+          [
+            161.5,
+            286
+          ],
+          [
+            188.5,
+            285
+          ],
+          [
+            219.5,
+            285
+          ],
+          [
+            247.5,
+            284
+          ],
+          [
+            276.5,
+            286
+          ],
+          [
+            301.5,
+            289
+          ],
+          [
+            316.5,
+            300
+          ],
+          [
+            310.5,
+            320
+          ],
+          [
+            291.5,
+            331
+          ],
+          [
+            268.5,
+            335
+          ],
+          [
+            241.5,
+            336
+          ],
+          [
+            214.5,
+            337
+          ],
+          [
+            187.5,
+            334
+          ],
+          [
+            167.5,
+            330
+          ],
+          [
+            150.5,
+            321
+          ],
+          [
+            140.5,
+            307
+          ]
+        ],
+        [
+          [
+            250.5,
+            335
+          ],
+          [
+            249.90998521981277,
+            340.197792270444
+          ],
+          [
+            248.16572735635023,
+            345.168416076895
+          ],
+          [
+            245.3434588481236,
+            349.69463130731185
+          ],
+          [
+            241.56652637168918,
+            353.57862063693483
+          ],
+          [
+            237,
+            356.65063509461095
+          ],
+          [
+            231.8434588481236,
+            358.7764129073788
+          ],
+          [
+            226.32226850822664,
+            359.8630473842068
+          ],
+          [
+            220.67773149177336,
+            359.8630473842068
+          ],
+          [
+            215.1565411518764,
+            358.7764129073788
+          ],
+          [
+            210,
+            356.65063509461095
+          ],
+          [
+            205.43347362831082,
+            353.5786206369349
+          ],
+          [
+            201.6565411518764,
+            349.69463130731185
+          ],
+          [
+            198.83427264364977,
+            345.168416076895
+          ],
+          [
+            197.09001478018723,
+            340.197792270444
+          ],
+          [
+            196.5,
+            335
+          ],
+          [
+            197.09001478018723,
+            329.802207729556
+          ],
+          [
+            198.83427264364977,
+            324.83158392310503
+          ],
+          [
+            201.6565411518764,
+            320.30536869268815
+          ],
+          [
+            205.43347362831082,
+            316.42137936306517
+          ],
+          [
+            210,
+            313.34936490538905
+          ],
+          [
+            215.1565411518764,
+            311.2235870926212
+          ],
+          [
+            220.67773149177333,
+            310.1369526157932
+          ],
+          [
+            226.32226850822664,
+            310.1369526157932
+          ],
+          [
+            231.8434588481236,
+            311.2235870926212
+          ],
+          [
+            237,
+            313.34936490538905
+          ],
+          [
+            241.56652637168918,
+            316.42137936306517
+          ],
+          [
+            245.3434588481236,
+            320.30536869268815
+          ],
+          [
+            248.16572735635023,
+            324.831583923105
+          ],
+          [
+            249.90998521981274,
+            329.802207729556
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        683.5,
+        854
+      ],
+      "targetAnchor": [
+        66,
+        119
+      ],
+      "scaleX": 0.255,
+      "scaleY": 0.19,
+      "nativeBounds": {
+        "x": 43.942,
+        "y": 119,
+        "width": 45.645,
+        "height": 15.2
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/mushroom-cloud-bun-back.png",
+        "width": 91,
+        "height": 30,
+        "bytes": 2773,
+        "alphaLevels": 129,
+        "transparentPixels": 980
+      },
+      "pixelCount": 8698
+    },
+    {
+      "species": "mushroom",
+      "id": "sea-braid",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/mushroom-hair-reference-v1.png",
+      "sourceCrop": [
+        1025,
+        269,
+        235,
+        157
+      ],
+      "cellOrigin": [
+        916,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            117.7,
+            350
+          ],
+          [
+            126.7,
+            318
+          ],
+          [
+            142.7,
+            298
+          ],
+          [
+            164.7,
+            282
+          ],
+          [
+            194.7,
+            273
+          ],
+          [
+            222.7,
+            271
+          ],
+          [
+            249.7,
+            273
+          ],
+          [
+            273.7,
+            281
+          ],
+          [
+            294.7,
+            296
+          ],
+          [
+            311.7,
+            320
+          ],
+          [
+            326.7,
+            349
+          ],
+          [
+            322.7,
+            368
+          ],
+          [
+            311.7,
+            364
+          ],
+          [
+            302.7,
+            338
+          ],
+          [
+            290.7,
+            317
+          ],
+          [
+            270.7,
+            302
+          ],
+          [
+            249.7,
+            301
+          ],
+          [
+            233.7,
+            292
+          ],
+          [
+            223.7,
+            279
+          ],
+          [
+            212.7,
+            291
+          ],
+          [
+            195.7,
+            300
+          ],
+          [
+            175.7,
+            303
+          ],
+          [
+            155.7,
+            315
+          ],
+          [
+            143.7,
+            338
+          ],
+          [
+            134.7,
+            365
+          ],
+          [
+            123.7,
+            367
+          ]
+        ],
+        [
+          [
+            124.7,
+            323
+          ],
+          [
+            141.7,
+            323
+          ],
+          [
+            145.7,
+            344
+          ],
+          [
+            139.7,
+            366
+          ],
+          [
+            134.7,
+            385
+          ],
+          [
+            140.7,
+            402
+          ],
+          [
+            130.7,
+            423
+          ],
+          [
+            112.7,
+            420
+          ],
+          [
+            110.7,
+            402
+          ],
+          [
+            115.7,
+            383
+          ],
+          [
+            112.7,
+            362
+          ]
+        ],
+        [
+          [
+            306.7,
+            323
+          ],
+          [
+            324.7,
+            325
+          ],
+          [
+            333.7,
+            348
+          ],
+          [
+            328.7,
+            370
+          ],
+          [
+            333.7,
+            389
+          ],
+          [
+            342.7,
+            406
+          ],
+          [
+            333.7,
+            424
+          ],
+          [
+            315.7,
+            424
+          ],
+          [
+            309.7,
+            407
+          ],
+          [
+            314.7,
+            387
+          ],
+          [
+            307.7,
+            366
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        1140.7,
+        274
+      ],
+      "targetAnchor": [
+        66,
+        101
+      ],
+      "scaleX": 0.255,
+      "scaleY": 0.22,
+      "nativeBounds": {
+        "x": 36.496,
+        "y": 99.9,
+        "width": 59.925,
+        "height": 34.54
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/mushroom-sea-braid-front.png",
+        "width": 120,
+        "height": 69,
+        "bytes": 3382,
+        "alphaLevels": 127,
+        "transparentPixels": 6234
+      },
+      "pixelCount": 8429
+    },
+    {
+      "species": "mushroom",
+      "id": "sea-braid",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/mushroom-hair-reference-v1.png",
+      "sourceCrop": [
+        1044,
+        854,
+        199,
+        107
+      ],
+      "cellOrigin": [
+        916,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            142.5,
+            289
+          ],
+          [
+            163.5,
+            286
+          ],
+          [
+            190.5,
+            285
+          ],
+          [
+            221.5,
+            285
+          ],
+          [
+            249.5,
+            284
+          ],
+          [
+            278.5,
+            286
+          ],
+          [
+            303.5,
+            289
+          ],
+          [
+            318.5,
+            300
+          ],
+          [
+            312.5,
+            320
+          ],
+          [
+            293.5,
+            331
+          ],
+          [
+            270.5,
+            335
+          ],
+          [
+            243.5,
+            336
+          ],
+          [
+            216.5,
+            337
+          ],
+          [
+            189.5,
+            334
+          ],
+          [
+            169.5,
+            330
+          ],
+          [
+            152.5,
+            321
+          ],
+          [
+            142.5,
+            307
+          ]
+        ],
+        [
+          [
+            143.5,
+            291
+          ],
+          [
+            163.5,
+            296
+          ],
+          [
+            171.5,
+            318
+          ],
+          [
+            167.5,
+            339
+          ],
+          [
+            159.5,
+            357
+          ],
+          [
+            158.5,
+            375
+          ],
+          [
+            143.5,
+            386
+          ],
+          [
+            129.5,
+            375
+          ],
+          [
+            129.5,
+            356
+          ],
+          [
+            138.5,
+            337
+          ],
+          [
+            138.5,
+            316
+          ]
+        ],
+        [
+          [
+            297.5,
+            292
+          ],
+          [
+            315.5,
+            295
+          ],
+          [
+            321.5,
+            315
+          ],
+          [
+            317.5,
+            337
+          ],
+          [
+            326.5,
+            356
+          ],
+          [
+            324.5,
+            376
+          ],
+          [
+            311.5,
+            387
+          ],
+          [
+            297.5,
+            379
+          ],
+          [
+            294.5,
+            360
+          ],
+          [
+            300.5,
+            339
+          ],
+          [
+            293.5,
+            318
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        1143.5,
+        854
+      ],
+      "targetAnchor": [
+        66,
+        119
+      ],
+      "scaleX": 0.255,
+      "scaleY": 0.19,
+      "nativeBounds": {
+        "x": 40.627,
+        "y": 119,
+        "width": 50.745,
+        "height": 20.33
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/mushroom-sea-braid-back.png",
+        "width": 101,
+        "height": 41,
+        "bytes": 3276,
+        "alphaLevels": 124,
+        "transparentPixels": 1906
+      },
+      "pixelCount": 10898
+    },
+    {
+      "species": "squirrel",
+      "id": "acorn-bob",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/squirrel-hair-reference-v1.png",
+      "sourceCrop": [
+        193,
+        168,
+        245,
+        137
+      ],
+      "cellOrigin": [
+        0,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            195,
+            291
+          ],
+          [
+            207,
+            255
+          ],
+          [
+            225,
+            223
+          ],
+          [
+            250,
+            201
+          ],
+          [
+            276,
+            185
+          ],
+          [
+            300,
+            177
+          ],
+          [
+            327,
+            170
+          ],
+          [
+            352,
+            173
+          ],
+          [
+            372,
+            182
+          ],
+          [
+            389,
+            196
+          ],
+          [
+            406,
+            218
+          ],
+          [
+            421,
+            251
+          ],
+          [
+            434,
+            277
+          ],
+          [
+            436,
+            303
+          ],
+          [
+            424,
+            301
+          ],
+          [
+            411,
+            280
+          ],
+          [
+            395,
+            263
+          ],
+          [
+            377,
+            254
+          ],
+          [
+            361,
+            242
+          ],
+          [
+            352,
+            231
+          ],
+          [
+            344,
+            246
+          ],
+          [
+            327,
+            258
+          ],
+          [
+            310,
+            259
+          ],
+          [
+            295,
+            255
+          ],
+          [
+            286,
+            244
+          ],
+          [
+            273,
+            254
+          ],
+          [
+            258,
+            257
+          ],
+          [
+            245,
+            269
+          ],
+          [
+            228,
+            281
+          ],
+          [
+            208,
+            294
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        331,
+        177
+      ],
+      "targetAnchor": [
+        99,
+        64
+      ],
+      "scaleX": 0.325,
+      "scaleY": 0.325,
+      "nativeBounds": {
+        "x": 54.15,
+        "y": 61.075,
+        "width": 79.625,
+        "height": 44.525
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/squirrel-acorn-bob-front.png",
+        "width": 159,
+        "height": 89,
+        "bytes": 6941,
+        "alphaLevels": 86,
+        "transparentPixels": 7838
+      },
+      "pixelCount": 14605
+    },
+    {
+      "species": "squirrel",
+      "id": "acorn-bob",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/squirrel-hair-reference-v1.png",
+      "sourceCrop": [
+        240,
+        717,
+        198,
+        184
+      ],
+      "cellOrigin": [
+        0,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            246,
+            219
+          ],
+          [
+            242,
+            197
+          ],
+          [
+            254,
+            175
+          ],
+          [
+            279,
+            155
+          ],
+          [
+            312,
+            149
+          ],
+          [
+            334,
+            147
+          ],
+          [
+            356,
+            155
+          ],
+          [
+            377,
+            172
+          ],
+          [
+            397,
+            197
+          ],
+          [
+            412,
+            224
+          ],
+          [
+            426,
+            260
+          ],
+          [
+            436,
+            287
+          ],
+          [
+            435,
+            304
+          ],
+          [
+            420,
+            315
+          ],
+          [
+            397,
+            322
+          ],
+          [
+            366,
+            327
+          ],
+          [
+            335,
+            324
+          ],
+          [
+            302,
+            320
+          ],
+          [
+            277,
+            314
+          ],
+          [
+            260,
+            299
+          ],
+          [
+            250,
+            277
+          ],
+          [
+            245,
+            250
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        331,
+        719
+      ],
+      "targetAnchor": [
+        99,
+        64
+      ],
+      "scaleX": 0.325,
+      "scaleY": 0.267,
+      "nativeBounds": {
+        "x": 69.425,
+        "y": 63.466,
+        "width": 64.35,
+        "height": 49.128
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/squirrel-acorn-bob-back.png",
+        "width": 129,
+        "height": 98,
+        "bytes": 9020,
+        "alphaLevels": 77,
+        "transparentPixels": 3366
+      },
+      "pixelCount": 26235
+    },
+    {
+      "species": "squirrel",
+      "id": "cloud-bun",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/squirrel-hair-reference-v1.png",
+      "sourceCrop": [
+        640,
+        168,
+        276,
+        174
+      ],
+      "cellOrigin": [
+        458,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            181.7,
+            291
+          ],
+          [
+            193.7,
+            255
+          ],
+          [
+            211.7,
+            223
+          ],
+          [
+            236.7,
+            201
+          ],
+          [
+            262.7,
+            185
+          ],
+          [
+            286.7,
+            177
+          ],
+          [
+            313.7,
+            170
+          ],
+          [
+            338.7,
+            173
+          ],
+          [
+            358.7,
+            182
+          ],
+          [
+            375.7,
+            196
+          ],
+          [
+            392.7,
+            218
+          ],
+          [
+            407.7,
+            251
+          ],
+          [
+            420.7,
+            277
+          ],
+          [
+            422.7,
+            303
+          ],
+          [
+            410.7,
+            301
+          ],
+          [
+            397.7,
+            280
+          ],
+          [
+            381.7,
+            263
+          ],
+          [
+            363.7,
+            254
+          ],
+          [
+            347.7,
+            242
+          ],
+          [
+            338.7,
+            231
+          ],
+          [
+            330.7,
+            246
+          ],
+          [
+            313.7,
+            258
+          ],
+          [
+            296.7,
+            259
+          ],
+          [
+            281.7,
+            255
+          ],
+          [
+            272.7,
+            244
+          ],
+          [
+            259.7,
+            254
+          ],
+          [
+            244.7,
+            257
+          ],
+          [
+            231.7,
+            269
+          ],
+          [
+            214.7,
+            281
+          ],
+          [
+            194.7,
+            294
+          ]
+        ],
+        [
+          [
+            467.7,
+            307
+          ],
+          [
+            467.022575622748,
+            314.0689974878038
+          ],
+          [
+            465.01990918692064,
+            320.8290458645772
+          ],
+          [
+            461.77952682562335,
+            326.9846985779441
+          ],
+          [
+            457.4430487971246,
+            332.2669240662314
+          ],
+          [
+            452.2,
+            336.4448637286709
+          ],
+          [
+            446.27952682562335,
+            339.3359215540352
+          ],
+          [
+            439.9403823612972,
+            340.8137444425213
+          ],
+          [
+            433.45961763870275,
+            340.8137444425213
+          ],
+          [
+            427.1204731743766,
+            339.3359215540352
+          ],
+          [
+            421.2,
+            336.4448637286709
+          ],
+          [
+            415.9569512028754,
+            332.2669240662314
+          ],
+          [
+            411.6204731743766,
+            326.9846985779441
+          ],
+          [
+            408.38009081307933,
+            320.8290458645772
+          ],
+          [
+            406.377424377252,
+            314.0689974878038
+          ],
+          [
+            405.7,
+            307
+          ],
+          [
+            406.377424377252,
+            299.9310025121962
+          ],
+          [
+            408.38009081307933,
+            293.1709541354228
+          ],
+          [
+            411.6204731743766,
+            287.0153014220559
+          ],
+          [
+            415.95695120287536,
+            281.7330759337686
+          ],
+          [
+            421.2,
+            277.5551362713291
+          ],
+          [
+            427.1204731743766,
+            274.6640784459648
+          ],
+          [
+            433.4596176387027,
+            273.1862555574787
+          ],
+          [
+            439.9403823612973,
+            273.1862555574787
+          ],
+          [
+            446.27952682562335,
+            274.6640784459648
+          ],
+          [
+            452.2,
+            277.5551362713291
+          ],
+          [
+            457.4430487971246,
+            281.7330759337686
+          ],
+          [
+            461.77952682562335,
+            287.0153014220559
+          ],
+          [
+            465.01990918692064,
+            293.1709541354228
+          ],
+          [
+            467.022575622748,
+            299.9310025121962
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        775.7,
+        177
+      ],
+      "targetAnchor": [
+        99,
+        64
+      ],
+      "scaleX": 0.325,
+      "scaleY": 0.325,
+      "nativeBounds": {
+        "x": 54.898,
+        "y": 61.075,
+        "width": 89.7,
+        "height": 56.55
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/squirrel-cloud-bun-front.png",
+        "width": 179,
+        "height": 113,
+        "bytes": 7485,
+        "alphaLevels": 91,
+        "transparentPixels": 13318
+      },
+      "pixelCount": 16051
+    },
+    {
+      "species": "squirrel",
+      "id": "cloud-bun",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/squirrel-hair-reference-v1.png",
+      "sourceCrop": [
+        689,
+        717,
+        227,
+        188
+      ],
+      "cellOrigin": [
+        458,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            236.5,
+            219
+          ],
+          [
+            232.5,
+            197
+          ],
+          [
+            244.5,
+            175
+          ],
+          [
+            269.5,
+            155
+          ],
+          [
+            302.5,
+            149
+          ],
+          [
+            324.5,
+            147
+          ],
+          [
+            346.5,
+            155
+          ],
+          [
+            367.5,
+            172
+          ],
+          [
+            387.5,
+            197
+          ],
+          [
+            402.5,
+            224
+          ],
+          [
+            416.5,
+            260
+          ],
+          [
+            426.5,
+            287
+          ],
+          [
+            425.5,
+            304
+          ],
+          [
+            410.5,
+            315
+          ],
+          [
+            387.5,
+            322
+          ],
+          [
+            356.5,
+            327
+          ],
+          [
+            325.5,
+            324
+          ],
+          [
+            292.5,
+            320
+          ],
+          [
+            267.5,
+            314
+          ],
+          [
+            250.5,
+            299
+          ],
+          [
+            240.5,
+            277
+          ],
+          [
+            235.5,
+            250
+          ]
+        ],
+        [
+          [
+            469.5,
+            319
+          ],
+          [
+            468.8007232234818,
+            326.27690917862157
+          ],
+          [
+            466.7334546445632,
+            333.235782507653
+          ],
+          [
+            463.3885438199983,
+            339.57248383023654
+          ],
+          [
+            458.9121794034835,
+            345.0100688917088
+          ],
+          [
+            453.5,
+            349.3108891324554
+          ],
+          [
+            447.3885438199983,
+            352.28697807033035
+          ],
+          [
+            440.8449108245649,
+            353.80826633788956
+          ],
+          [
+            434.1550891754351,
+            353.80826633788956
+          ],
+          [
+            427.6114561800017,
+            352.2869780703304
+          ],
+          [
+            421.5,
+            349.3108891324554
+          ],
+          [
+            416.08782059651656,
+            345.0100688917088
+          ],
+          [
+            411.6114561800017,
+            339.5724838302366
+          ],
+          [
+            408.2665453554368,
+            333.235782507653
+          ],
+          [
+            406.1992767765182,
+            326.27690917862157
+          ],
+          [
+            405.5,
+            319
+          ],
+          [
+            406.1992767765182,
+            311.72309082137843
+          ],
+          [
+            408.2665453554368,
+            304.76421749234703
+          ],
+          [
+            411.6114561800017,
+            298.42751616976346
+          ],
+          [
+            416.0878205965165,
+            292.9899311082912
+          ],
+          [
+            421.5,
+            288.6891108675446
+          ],
+          [
+            427.61145618000165,
+            285.71302192966965
+          ],
+          [
+            434.1550891754351,
+            284.19173366211044
+          ],
+          [
+            440.8449108245649,
+            284.19173366211044
+          ],
+          [
+            447.3885438199983,
+            285.7130219296696
+          ],
+          [
+            453.5,
+            288.6891108675446
+          ],
+          [
+            458.9121794034835,
+            292.9899311082912
+          ],
+          [
+            463.3885438199983,
+            298.4275161697634
+          ],
+          [
+            466.7334546445632,
+            304.764217492347
+          ],
+          [
+            468.8007232234818,
+            311.7230908213784
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        779.5,
+        719
+      ],
+      "targetAnchor": [
+        99,
+        64
+      ],
+      "scaleX": 0.325,
+      "scaleY": 0.267,
+      "nativeBounds": {
+        "x": 69.588,
+        "y": 63.466,
+        "width": 73.775,
+        "height": 50.196
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/squirrel-cloud-bun-back.png",
+        "width": 148,
+        "height": 100,
+        "bytes": 9381,
+        "alphaLevels": 95,
+        "transparentPixels": 5373
+      },
+      "pixelCount": 26608
+    },
+    {
+      "species": "squirrel",
+      "id": "sea-braid",
+      "view": "front",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/squirrel-hair-reference-v1.png",
+      "sourceCrop": [
+        1096,
+        168,
+        260,
+        201
+      ],
+      "cellOrigin": [
+        916,
+        0
+      ],
+      "extractionPolygons": [
+        [
+          [
+            181.75,
+            291
+          ],
+          [
+            193.75,
+            255
+          ],
+          [
+            211.75,
+            223
+          ],
+          [
+            236.75,
+            201
+          ],
+          [
+            262.75,
+            185
+          ],
+          [
+            286.75,
+            177
+          ],
+          [
+            313.75,
+            170
+          ],
+          [
+            338.75,
+            173
+          ],
+          [
+            358.75,
+            182
+          ],
+          [
+            375.75,
+            196
+          ],
+          [
+            392.75,
+            218
+          ],
+          [
+            407.75,
+            251
+          ],
+          [
+            420.75,
+            277
+          ],
+          [
+            422.75,
+            303
+          ],
+          [
+            410.75,
+            301
+          ],
+          [
+            397.75,
+            280
+          ],
+          [
+            381.75,
+            263
+          ],
+          [
+            363.75,
+            254
+          ],
+          [
+            347.75,
+            242
+          ],
+          [
+            338.75,
+            231
+          ],
+          [
+            330.75,
+            246
+          ],
+          [
+            313.75,
+            258
+          ],
+          [
+            296.75,
+            259
+          ],
+          [
+            281.75,
+            255
+          ],
+          [
+            272.75,
+            244
+          ],
+          [
+            259.75,
+            254
+          ],
+          [
+            244.75,
+            257
+          ],
+          [
+            231.75,
+            269
+          ],
+          [
+            214.75,
+            281
+          ],
+          [
+            194.75,
+            294
+          ]
+        ],
+        [
+          [
+            197.75,
+            246
+          ],
+          [
+            218.75,
+            257
+          ],
+          [
+            219.75,
+            280
+          ],
+          [
+            211.75,
+            303
+          ],
+          [
+            213.75,
+            325
+          ],
+          [
+            225.75,
+            347
+          ],
+          [
+            216.75,
+            367
+          ],
+          [
+            198.75,
+            365
+          ],
+          [
+            191.75,
+            344
+          ],
+          [
+            195.75,
+            325
+          ],
+          [
+            190.75,
+            304
+          ],
+          [
+            191.75,
+            278
+          ]
+        ],
+        [
+          [
+            398.75,
+            245
+          ],
+          [
+            418.75,
+            254
+          ],
+          [
+            429.75,
+            277
+          ],
+          [
+            425.75,
+            301
+          ],
+          [
+            431.75,
+            325
+          ],
+          [
+            439.75,
+            345
+          ],
+          [
+            431.75,
+            368
+          ],
+          [
+            413.75,
+            369
+          ],
+          [
+            405.75,
+            348
+          ],
+          [
+            409.75,
+            327
+          ],
+          [
+            403.75,
+            303
+          ],
+          [
+            406.75,
+            280
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        1233.75,
+        177
+      ],
+      "targetAnchor": [
+        99,
+        64
+      ],
+      "scaleX": 0.325,
+      "scaleY": 0.325,
+      "nativeBounds": {
+        "x": 54.231,
+        "y": 61.075,
+        "width": 84.5,
+        "height": 65.325
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/squirrel-sea-braid-front.png",
+        "width": 169,
+        "height": 131,
+        "bytes": 8271,
+        "alphaLevels": 101,
+        "transparentPixels": 14428
+      },
+      "pixelCount": 17708
+    },
+    {
+      "species": "squirrel",
+      "id": "sea-braid",
+      "view": "back",
+      "source": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/natural-hair-art/squirrel-hair-reference-v1.png",
+      "sourceCrop": [
+        1134,
+        717,
+        211,
+        215
+      ],
+      "cellOrigin": [
+        916,
+        572
+      ],
+      "extractionPolygons": [
+        [
+          [
+            229,
+            219
+          ],
+          [
+            225,
+            197
+          ],
+          [
+            237,
+            175
+          ],
+          [
+            262,
+            155
+          ],
+          [
+            295,
+            149
+          ],
+          [
+            317,
+            147
+          ],
+          [
+            339,
+            155
+          ],
+          [
+            360,
+            172
+          ],
+          [
+            380,
+            197
+          ],
+          [
+            395,
+            224
+          ],
+          [
+            409,
+            260
+          ],
+          [
+            419,
+            287
+          ],
+          [
+            418,
+            304
+          ],
+          [
+            403,
+            315
+          ],
+          [
+            380,
+            322
+          ],
+          [
+            349,
+            327
+          ],
+          [
+            318,
+            324
+          ],
+          [
+            285,
+            320
+          ],
+          [
+            260,
+            314
+          ],
+          [
+            243,
+            299
+          ],
+          [
+            233,
+            277
+          ],
+          [
+            228,
+            250
+          ]
+        ],
+        [
+          [
+            223,
+            272
+          ],
+          [
+            244,
+            277
+          ],
+          [
+            252,
+            293
+          ],
+          [
+            253,
+            309
+          ],
+          [
+            246,
+            323
+          ],
+          [
+            250,
+            337
+          ],
+          [
+            248,
+            351
+          ],
+          [
+            235,
+            358
+          ],
+          [
+            222,
+            351
+          ],
+          [
+            220,
+            339
+          ],
+          [
+            224,
+            326
+          ],
+          [
+            220,
+            312
+          ],
+          [
+            221,
+            292
+          ]
+        ],
+        [
+          [
+            395,
+            270
+          ],
+          [
+            411,
+            274
+          ],
+          [
+            420,
+            290
+          ],
+          [
+            425,
+            307
+          ],
+          [
+            422,
+            320
+          ],
+          [
+            429,
+            334
+          ],
+          [
+            426,
+            349
+          ],
+          [
+            414,
+            357
+          ],
+          [
+            401,
+            350
+          ],
+          [
+            398,
+            337
+          ],
+          [
+            402,
+            325
+          ],
+          [
+            396,
+            311
+          ],
+          [
+            395,
+            291
+          ]
+        ]
+      ],
+      "threshold": "Warm brown: smooth r-g 4..12, g-b 1..7, max G225..242 B195..216; pink-ear exclusion (g-b)/(r-g) .20...31. Blue ties only sea-braid g-r-10..2, b-r1..8 and b-g0..5. 1.65 source px feather; capybara rear nape additionally follows an uneven scalp arc with a 19-source-px gradual fade (original RGB retained); alpha<5 removed; components<45 source px removed.",
+      "sourceAnchor": [
+        1230,
+        719
+      ],
+      "targetAnchor": [
+        99,
+        64
+      ],
+      "scaleX": 0.325,
+      "scaleY": 0.267,
+      "nativeBounds": {
+        "x": 67.8,
+        "y": 63.466,
+        "width": 68.575,
+        "height": 57.405
+      },
+      "output": {
+        "path": "D:/团队项目/group-project/src/static/pets/fitted/squirrel-sea-braid-back.png",
+        "width": 137,
+        "height": 115,
+        "bytes": 9750,
+        "alphaLevels": 86,
+        "transparentPixels": 5660
+      },
+      "pixelCount": 28388
+    }
+  ]
+}

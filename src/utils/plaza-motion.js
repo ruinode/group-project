@@ -1,5 +1,5 @@
 // 背景中的闭合步道；坐标独立于屏幕尺寸，避开四栋建筑和中心树岛。
-const road = [
+export const PLAZA_ROAD = [
   { x: 0.43, y: 0.36 },
   { x: 0.59, y: 0.39 },
   { x: 0.68, y: 0.45 },
@@ -10,6 +10,7 @@ const road = [
   { x: 0.33, y: 0.5 },
   { x: 0.37, y: 0.43 }
 ]
+const road = PLAZA_ROAD
 const aspect = 801 / 1280
 let perimeter = 0
 const segments = road.map((start, index) => {

@@ -7,6 +7,26 @@
     "owner": "B",
     "methods": ["getProfile", "updateProfile", "listPublicContent"]
   },
+  "pet": {
+    "owner": "A",
+    "methods": ["get", "save"]
+  },
+  "bulletin": {
+    "owner": "A",
+    "methods": ["list"]
+  },
+  "fishing": {
+    "owner": "A",
+    "methods": ["getState", "cast", "hook", "land", "equip"]
+  },
+  "wardrobe": {
+    "owner": "A",
+    "methods": ["getState", "equip", "redeem"]
+  },
+  "dive": {
+    "owner": "A",
+    "methods": ["getState", "start", "finish"]
+  },
   "upload": {
     "owner": "B",
     "methods": ["create", "confirm"]

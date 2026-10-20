@@ -1,0 +1,18 @@
+{
+  "file": "D:/团队项目/group-project/src/static/pets/fitted/rabbit-cloud-bun-front.png",
+  "originalBytes": 9806,
+  "finalBytes": 9608,
+  "byteDelta": -198,
+  "width": 226,
+  "height": 150,
+  "method": "8-connected component at [210,104], alpha>=32; plus only existing alpha<32 fringe within radius2. Ear rim artifact removed; remaining RGBA pixels losslessly preserved; placement unchanged.",
+  "corePixels": 123,
+  "changedVisiblePixels": 156,
+  "changedOutsideMask": 0,
+  "fragmentBounds": [
+    200,
+    100,
+    25,
+    11
+  ]
+}

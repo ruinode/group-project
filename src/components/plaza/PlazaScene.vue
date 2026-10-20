@@ -1,6 +1,23 @@
 <template>
-  <view class="plaza-scene">
-    <view class="scene-map" @tap="movePlayer">
+  <view
+    class="plaza-scene"
+    :class="{ 'is-overview': overview, 'is-dragging': dragging }"
+    @tap="movePlayer"
+    @touchstart="touchStart"
+    @touchmove.stop.prevent="touchMove"
+    @touchend="touchEnd"
+    @touchcancel="cancelGesture"
+    @mousedown="mouseDown"
+    @mousemove="mouseMove"
+    @mouseup="mouseUp"
+    @mouseleave="mouseUp"
+  >
+    <image
+      class="scene-surround"
+      src="/static/plaza/world-phase-one.webp"
+      mode="aspectFill"
+    />
+    <view class="scene-map" :style="worldStyle">
       <image
         class="scene-art"
         src="/static/plaza/world-phase-one.webp"
@@ -8,117 +25,193 @@
         @error="imageError = true"
         @load="imageError = false"
       />
-      <view v-if="imageError" class="scene-image-error">
-        场景图片暂未加载，仍可点招牌进入。
-      </view>
+      <PlazaLeisure />
+      <button
+        v-for="house in PLAZA_HOUSES"
+        :key="'building-' + house.id"
+        class="building-hotspot"
+        :class="'building-' + house.id"
+        :style="buildingStyle(house.id)"
+        :aria-label="'走到' + house.name + '门口'"
+        @tap.stop="chooseHouse(house.id)"
+      ></button>
       <view
         v-if="player.target"
         class="destination"
         :style="locate(player.target)"
       ></view>
       <view
-        v-for="person in people"
+        v-for="person in visiblePeople"
         :key="person.id"
         class="town-person"
         :class="{ 'town-player': person.id === 'self' }"
-        :style="locate(person.position)"
+        :style="personStyle(person)"
       >
-        <view v-if="person.id === 'self'" class="player-label">你</view>
-        <PlazaBean
-          :skin="person.skin"
-          :walking="person.moving && !paused"
-          :facing="person.facing"
+        <view v-if="person.id === 'self'" class="player-ground-mark"></view>
+        <PetAvatar
+          :appearance="person.id === 'self' ? appearance : person.appearance"
+          :walking="person.moving && (person.id === 'self' || !reducedMotion)"
+          :facing="
+            person.id === 'self' && appearance.species === 'custom'
+              ? 1
+              : person.facing
+          "
+          :view="avatarView(person)"
+          :ornament="person.id === 'self' ? ornament : ''"
+          :wardrobe="person.id === 'self' ? wardrobe : null"
         />
       </view>
       <button
-        v-for="house in houses"
+        v-for="house in PLAZA_HOUSES"
         :key="house.id"
         class="entrance"
-        :class="'entrance-' + house.id"
+        :class="[
+          'entrance-' + house.id,
+          { 'is-target': player.entering === house.id }
+        ]"
         :style="locate(house)"
-        :aria-label="'进入' + house.name"
-        @tap.stop="emit('enter', house)"
+        :aria-label="'走到' + house.name + '门口'"
+        @tap.stop="chooseHouse(house.id)"
       >
-        <view class="entrance-mark"></view>
-        <text>{{ house.name }}</text>
-        <text class="entrance-arrow">›</text>
+        <view class="sign-bracket"></view>
+        <view class="sign-rope rope-left"></view>
+        <view class="sign-rope rope-right"></view>
+        <view class="entrance-sign">
+          <view class="sign-icon" :class="'icon-' + house.id">
+            <view class="icon-part part-one"></view>
+            <view class="icon-part part-two"></view>
+          </view>
+          <text>{{ house.name }}</text>
+        </view>
+      </button>
+      <button
+        v-for="area in PLAZA_AREAS"
+        :key="area.id"
+        class="area-hotspot"
+        :class="[
+          'area-' + area.id,
+          { 'is-target': player.entering === area.id }
+        ]"
+        :style="locate(area)"
+        :aria-label="'走到' + area.name"
+        @tap.stop="chooseArea(area.id)"
+      >
+        <view class="area-sign">
+          <view class="area-dot"></view>
+          <text>{{ area.name }}</text>
+        </view>
+      </button>
+      <button
+        class="board-hotspot"
+        :style="locate({ x: 0.563, y: 0.54 })"
+        aria-label="查看广场公告"
+        @tap.stop="openBoard"
+      >
+        <text class="board-label">公告</text>
       </button>
     </view>
-    <view class="scene-toolbar">
-      <view class="scene-instruction">
-        <view class="player-dot"></view>
-        <text>
-          {{
-            paused
-              ? '已暂停，点步道继续'
-              : player.moving
-                ? '豆豆正在沿步道走过去'
-                : '点步道，让豆豆出发'
-          }}
-        </text>
-      </view>
-      <view class="scene-controls">
-        <button
-          class="scene-control"
-          :aria-pressed="paused"
-          @tap="toggleMotion"
-        >
-          {{ paused ? '开启走动' : '暂停走动' }}
-        </button>
-        <button class="scene-control" @tap="reset">回到起点</button>
-      </view>
+    <view v-if="imageError" class="scene-image-error">
+      场景图片暂未加载，请稍后重试。
     </view>
+    <view v-if="preparing" class="scene-preparing">伙伴正赶来广场…</view>
   </view>
 </template>
+
 <script setup>
 import {
   computed,
   getCurrentInstance,
+  nextTick,
   onMounted,
   onUnmounted,
   ref,
   watch
 } from 'vue'
-import PlazaBean from './PlazaBean.vue'
+import PetAvatar from '../pet/PetAvatar.vue'
+import PlazaLeisure from './PlazaLeisure.vue'
+import { defaultPet } from '../../utils/pet-appearance.js'
 import { createPlazaWalker } from '../../utils/plaza-motion.js'
-const props = defineProps({ active: { type: Boolean, default: true } })
-const emit = defineEmits(['enter'])
+import {
+  createPlazaNavigator,
+  PLAZA_HOUSES,
+  PLAZA_AREAS
+} from '../../utils/plaza-navigation.js'
+
+const props = defineProps({
+  active: { type: Boolean, default: true },
+  preparing: { type: Boolean, default: false },
+  appearance: { type: Object, default: null },
+  overview: { type: Boolean, default: false },
+  ornament: { type: String, default: '' },
+  wardrobe: { type: Object, default: null }
+})
+const emit = defineEmits(['enter', 'board', 'busy', 'pond', 'pavilion'])
 const instance = getCurrentInstance()
-const houses = [
-  {
-    id: 'partner',
-    name: '找搭子',
-    x: 0.28,
-    y: 0.44,
-    url: '/pages/partner/index'
-  },
-  { id: 'lost', name: '失物招领', x: 0.73, y: 0.39, url: '/pages/lost/index' },
-  {
-    id: 'market',
-    name: '二手集市',
-    x: 0.25,
-    y: 0.79,
-    url: '/pages/market/index'
-  },
-  {
-    id: 'home',
-    name: '自己的家',
-    x: 0.81,
-    y: 0.79,
-    url: '/pages/home/index',
-    tab: true
-  }
-]
+const navigator = createPlazaNavigator()
+const player = ref(navigator.getState())
+const viewport = ref({ width: 390, height: 760, left: 0, top: 0 })
+const camera = ref({ x: 0, y: 0 })
+const dragging = ref(false)
+const imageError = ref(false)
+const reducedMotion = ref(false)
+const people = ref([])
+const world = computed(() => {
+  const ratios = [viewport.value.width / 1280, viewport.value.height / 801]
+  const scale = props.overview ? Math.min(...ratios) : Math.max(...ratios)
+  return { width: 1280 * scale, height: 801 * scale, scale }
+})
+const actorWidth = computed(() =>
+  Math.max(28, Math.min(50, 43 * world.value.scale))
+)
+const worldStyle = computed(() => ({
+  width: `${world.value.width}px`,
+  height: `${world.value.height}px`,
+  left: `${camera.value.x}px`,
+  top: `${camera.value.y}px`,
+  '--actor-width': `${actorWidth.value}px`,
+  '--actor-height': `${actorWidth.value * 1.13}px`
+}))
+const visiblePeople = computed(() => [
+  ...(props.appearance ? [{ id: 'self', ...player.value }] : []),
+  ...people.value
+])
+const hasCustomBack = computed(() => {
+  const frame = props.appearance?.art?.back
+  return Boolean(
+    frame &&
+      (frame.type === 'png' || frame.pixels?.some((color) => color !== null))
+  )
+})
+function avatarView(person) {
+  if (person.id === 'self' && props.appearance?.species === 'custom')
+    return person.view === 'back' && hasCustomBack.value ? 'back' : 'front'
+  return person.view || 'front'
+}
+const buildingBounds = {
+  partner: { x: 0.125, y: 0.17, width: 0.27, height: 0.28 },
+  lost: { x: 0.59, y: 0.095, width: 0.345, height: 0.335 },
+  market: { x: 0.07, y: 0.555, width: 0.31, height: 0.27 },
+  home: { x: 0.7, y: 0.51, width: 0.285, height: 0.32 }
+}
 const residents = [
-  { id: 'self', skin: 'sprout', position: { x: 0.46, y: 0.68 }, speed: 0.12 },
-  { id: 'peach', skin: 'peach', position: { x: 0.59, y: 0.39 }, speed: 0.022 },
   {
-    id: 'purple',
-    skin: 'purple',
+    id: 'capybara',
+    appearance: defaultPet('capybara'),
+    position: { x: 0.59, y: 0.39 },
+    speed: 0.022
+  },
+  {
+    id: 'squirrel',
+    appearance: defaultPet('squirrel'),
     position: { x: 0.67, y: 0.55 },
     speed: 0.019
   },
-  { id: 'mint', skin: 'mint', position: { x: 0.34, y: 0.6 }, speed: 0.025 }
+  {
+    id: 'mushroom',
+    appearance: defaultPet('mushroom'),
+    position: { x: 0.34, y: 0.6 },
+    speed: 0.025
+  }
 ]
 const stops = [
   { x: 0.43, y: 0.36 },
@@ -126,246 +219,642 @@ const stops = [
   { x: 0.46, y: 0.68 },
   { x: 0.33, y: 0.5 }
 ]
-let walkers = [],
-  timer = null,
-  previousTime = 0
-let stopIndexes = [0, 1, 2, 3]
-const people = ref([]),
-  paused = ref(false),
-  imageError = ref(false)
-const player = computed(
-  () => people.value[0] || { moving: false, target: null }
-)
+const walkers = residents.map(createPlazaWalker)
+const stopIndexes = [0, 1, 2]
+let timer = null,
+  previousTime = 0,
+  mounted = false
+let followPlayer = true,
+  entryLocked = false,
+  lastBusy = false
+let gesture = null,
+  suppressTapUntil = 0,
+  ignoreMouseUntil = 0
+
 const locate = (point) => ({
   left: `${point.x * 100}%`,
   top: `${point.y * 100}%`
 })
+function buildingStyle(id) {
+  const bounds = buildingBounds[id]
+  return {
+    ...locate(bounds),
+    width: `${bounds.width * 100}%`,
+    height: `${bounds.height * 100}%`
+  }
+}
+const personStyle = (person) => ({
+  ...locate(person.position),
+  zIndex: Math.round(person.position.y * 1000) + 100
+})
 function refreshPeople() {
-  people.value = walkers.map((walker, i) => ({
-    id: residents[i].id,
-    skin: residents[i].skin,
+  player.value = navigator.getState()
+  people.value = walkers.map((walker, index) => ({
+    ...residents[index],
     ...walker.getState()
   }))
+  const busy = Boolean(player.value.entering || entryLocked)
+  if (busy !== lastBusy) {
+    lastBusy = busy
+    emit('busy', busy)
+  }
 }
-function reset() {
-  walkers = residents.map((resident) => createPlazaWalker(resident))
-  stopIndexes = [0, 1, 2, 3]
+function clampCamera(point) {
+  const axis = (value, screen, scene) =>
+    scene <= screen
+      ? (screen - scene) / 2
+      : Math.min(0, Math.max(screen - scene, value))
+  return {
+    x: axis(point.x, viewport.value.width, world.value.width),
+    y: axis(point.y, viewport.value.height, world.value.height)
+  }
+}
+function playerCamera() {
+  return clampCamera({
+    x: viewport.value.width / 2 - player.value.position.x * world.value.width,
+    y:
+      viewport.value.height * 0.57 -
+      player.value.position.y * world.value.height
+  })
+}
+function updateCamera(immediate = false) {
+  if (props.overview) {
+    camera.value = clampCamera({ x: 0, y: 0 })
+    return
+  }
+  if (!followPlayer || dragging.value) return
+  const target = playerCamera()
+  camera.value = immediate
+    ? target
+    : {
+        x: camera.value.x + (target.x - camera.value.x) * 0.2,
+        y: camera.value.y + (target.y - camera.value.y) * 0.2
+      }
+}
+function measureScene() {
+  if (!mounted) return
+  uni
+    .createSelectorQuery()
+    .in(instance.proxy)
+    .select('.plaza-scene')
+    .boundingClientRect((bounds) => {
+      if (!bounds?.width || !bounds?.height || !mounted) return
+      viewport.value = {
+        width: bounds.width,
+        height: bounds.height,
+        left: bounds.left,
+        top: bounds.top
+      }
+      camera.value = clampCamera(camera.value)
+      updateCamera(true)
+    })
+    .exec()
+}
+function centerPlayer() {
+  followPlayer = true
+  updateCamera(true)
+}
+function settleEntry() {
+  const entry = navigator.consumeEntry()
+  if (!entry || entryLocked || !props.active) return
+  if (entry.kind === 'area') {
+    refreshPeople()
+    emit(entry.id)
+    return
+  }
+  entryLocked = true
+  refreshPeople()
+  emit('enter', entry)
+}
+function walkToHouse(id) {
+  if (!props.active || !props.appearance || entryLocked) return false
+  navigator.enterHouse(id)
+  followPlayer = true
+  refreshPeople()
+  settleEntry()
+  return true
+}
+function releaseEntry() {
+  entryLocked = false
+  navigator.cancelEntry()
   refreshPeople()
 }
-reset()
+function walkToArea(id) {
+  if (!props.active || !props.appearance || entryLocked) return false
+  navigator.enterArea(id)
+  followPlayer = true
+  refreshPeople()
+  settleEntry()
+  return true
+}
+function chooseArea(id) {
+  if (Date.now() < suppressTapUntil || dragging.value) return
+  walkToArea(id)
+}
+function chooseHouse(id) {
+  if (Date.now() < suppressTapUntil || dragging.value) return
+  walkToHouse(id)
+}
+function openBoard() {
+  if (Date.now() < suppressTapUntil || dragging.value || entryLocked) return
+  navigator.cancelEntry()
+  refreshPeople()
+  emit('board')
+}
+function eventPoint(event) {
+  const point = event.changedTouches?.[0] || event.touches?.[0] || event
+  const x = point.clientX ?? point.pageX ?? event.detail?.x
+  const y = point.clientY ?? point.pageY ?? event.detail?.y
+  return Number.isFinite(x) && Number.isFinite(y) ? { x, y } : null
+}
+function movePlayer(event) {
+  if (
+    !props.active ||
+    !props.appearance ||
+    entryLocked ||
+    dragging.value ||
+    Date.now() < suppressTapUntil
+  )
+    return
+  const point = eventPoint(event)
+  if (!point) return
+  const x = (point.x - viewport.value.left - camera.value.x) / world.value.width
+  const y = (point.y - viewport.value.top - camera.value.y) / world.value.height
+  if (x < 0 || x > 1 || y < 0 || y > 1) return
+  navigator.moveTo({ x, y })
+  followPlayer = true
+  refreshPeople()
+  settleEntry()
+}
+function startGesture(event) {
+  if (!props.active || props.overview) return
+  const point = eventPoint(event)
+  if (!point) return
+  gesture = { point, camera: { ...camera.value }, moved: false }
+}
+function moveGesture(event) {
+  if (!gesture) return
+  const point = eventPoint(event)
+  if (!point) return
+  const dx = point.x - gesture.point.x,
+    dy = point.y - gesture.point.y
+  if (!gesture.moved && Math.hypot(dx, dy) < 6) return
+  gesture.moved = true
+  dragging.value = true
+  followPlayer = false
+  camera.value = clampCamera({
+    x: gesture.camera.x + dx,
+    y: gesture.camera.y + dy
+  })
+}
+function endGesture() {
+  if (gesture?.moved) suppressTapUntil = Date.now() + 300
+  gesture = null
+  dragging.value = false
+}
+function cancelGesture() {
+  endGesture()
+}
+function touchStart(event) {
+  ignoreMouseUntil = Date.now() + 700
+  startGesture(event)
+}
+function touchMove(event) {
+  moveGesture(event)
+}
+function touchEnd() {
+  endGesture()
+}
+function mouseDown(event) {
+  if (
+    Date.now() < ignoreMouseUntil ||
+    (event.button !== undefined && event.button !== 0)
+  )
+    return
+  startGesture(event)
+}
+function mouseMove(event) {
+  if (Date.now() < ignoreMouseUntil) return
+  moveGesture(event)
+}
+function mouseUp() {
+  if (Date.now() < ignoreMouseUntil) return
+  endGesture()
+}
 function stopClock() {
   if (timer) clearInterval(timer)
   timer = null
 }
 function startClock() {
   stopClock()
-  if (!props.active || paused.value) return
+  if (!mounted || !props.active) return
   previousTime = Date.now()
   timer = setInterval(() => {
     const now = Date.now(),
       elapsed = Math.min(0.1, (now - previousTime) / 1000)
     previousTime = now
-    walkers.forEach((walker, index) => {
-      if (index && !walker.getState().moving) {
-        stopIndexes[index] = (stopIndexes[index] + 1) % stops.length
-        walker.moveTo(stops[stopIndexes[index]])
-      }
-      walker.advance(elapsed)
-    })
+    navigator.advance(elapsed)
+    if (!reducedMotion.value)
+      walkers.forEach((walker, index) => {
+        if (!walker.getState().moving) {
+          stopIndexes[index] = (stopIndexes[index] + 1) % stops.length
+          walker.moveTo(stops[stopIndexes[index]])
+        }
+        walker.advance(elapsed)
+      })
     refreshPeople()
-  }, 50)
+    updateCamera()
+    settleEntry()
+  }, 33)
 }
-function toggleMotion() {
-  paused.value = !paused.value
-}
-function movePlayer(event) {
-  const touch = event.changedTouches?.[0] || event.touches?.[0]
-  const clientPoint = touch || (Number.isFinite(event.clientX) ? event : null)
-  const x = clientPoint?.clientX ?? event.detail?.x,
-    y = clientPoint?.clientY ?? event.detail?.y
-  if (!Number.isFinite(x) || !Number.isFinite(y)) return
-  const query = uni.createSelectorQuery().in(instance.proxy)
-  query.select('.scene-map').boundingClientRect()
-  query.selectViewport().scrollOffset()
-  query.exec(([bounds, scroll]) => {
-    if (!bounds?.width || !bounds?.height || !props.active) return
-    const scrollLeft = clientPoint ? 0 : scroll?.scrollLeft || 0,
-      scrollTop = clientPoint ? 0 : scroll?.scrollTop || 0
-    walkers[0].moveTo({
-      x: (x - bounds.left - scrollLeft) / bounds.width,
-      y: (y - bounds.top - scrollTop) / bounds.height
-    })
-    paused.value = false
-    refreshPeople()
-  })
-}
-watch([() => props.active, paused], startClock)
+refreshPeople()
+watch(
+  () => props.overview,
+  () => {
+    cancelGesture()
+    nextTick(measureScene)
+  }
+)
+watch(
+  () => props.active,
+  (active) => {
+    if (active) {
+      nextTick(measureScene)
+      startClock()
+    } else {
+      stopClock()
+      cancelGesture()
+      releaseEntry()
+    }
+  }
+)
 onMounted(() => {
+  mounted = true
   // #ifdef H5
-  paused.value = Boolean(
+  reducedMotion.value = Boolean(
     globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches
   )
   // #endif
+  nextTick(measureScene)
+  uni.onWindowResize?.(measureScene)
   startClock()
 })
-onUnmounted(stopClock)
+onUnmounted(() => {
+  mounted = false
+  stopClock()
+  navigator.cancelEntry()
+  uni.offWindowResize?.(measureScene)
+})
+defineExpose({ walkToHouse, walkToArea, centerPlayer, releaseEntry })
 </script>
+
 <style scoped>
 .plaza-scene {
-  margin-top: 30rpx;
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #b5c995;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+.is-dragging {
+  cursor: grabbing;
+}
+.scene-surround {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  filter: blur(10px);
+  transform: scale(1.04);
+  pointer-events: none;
 }
 .scene-map {
-  position: relative;
-  width: 100%;
-  padding-top: 62.578125%;
-  overflow: hidden;
-  border-radius: 24rpx;
-  background: #dfe9c8;
-  border: 2rpx solid #c5d2b9;
-  box-shadow: 0 8rpx 0 #e0e6d5;
+  position: absolute;
 }
 .scene-art {
   position: absolute;
-  left: 0;
-  top: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
 }
-.scene-image-error {
+.building-hotspot,
+.entrance,
+.board-hotspot,
+.area-hotspot {
   position: absolute;
-  top: 5%;
-  left: 10%;
-  width: 80%;
-  padding: 10rpx;
-  text-align: center;
-  color: #304a3a;
-  font-size: 23rpx;
-  background: #fffef8;
-  border-radius: 10rpx;
-}
-.entrance {
-  position: absolute;
-  z-index: 30;
-  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8rpx;
-  width: 176rpx;
-  min-width: 88px;
-  height: 44px;
-  min-height: 44px;
-  padding: 8rpx 15rpx;
-  white-space: nowrap;
-  font-size: 24rpx;
-  line-height: 1.35;
-  font-weight: 650;
-  color: #304a3a;
-  background: #fffef8f5;
-  border: 2rpx solid #d3dfc7;
-  border-radius: 18rpx;
-  box-shadow: 0 5rpx 0 #304a3a24;
+  padding: 0;
+  margin: 0;
+  min-height: 0;
+  line-height: 1.2;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
 }
-.entrance text,
-.entrance-mark {
-  flex-shrink: 0;
-  white-space: nowrap;
+.building-hotspot {
+  z-index: 2;
 }
+.building-hotspot::after,
 .entrance::after,
-.scene-control::after {
+.board-hotspot::after,
+.area-hotspot::after {
   border: 0;
 }
-.entrance-arrow {
-  color: #7d8b75;
-  font-size: 30rpx;
+.entrance {
+  --sign-accent: #8c79a5;
+  --sign-soft: #e0d6ea;
+  z-index: 1400;
+  width: 106px;
+  height: 52px;
+  transform: translate(-50%, -50%);
+  overflow: visible;
 }
-.entrance-mark {
-  width: 14rpx;
-  height: 14rpx;
-  border-radius: 3rpx;
-  background: #9b86b7;
-  transform: rotate(-8deg);
+.entrance-sign {
+  position: absolute;
+  bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 1px 9px;
+  overflow: hidden;
+  color: #51452e;
+  background: #f8efd8;
+  border: 1px solid #96825b;
+  border-radius: 3px 3px 6px 6px;
+  box-shadow:
+    inset 0 -3px 0 #e8d9b6,
+    0 2px 0 #6b594640;
+  font-size: 11px;
+  font-weight: 650;
+  white-space: nowrap;
 }
-.entrance-lost .entrance-mark {
-  background: #b57c58;
+.entrance-sign::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--sign-accent);
 }
-.entrance-market .entrance-mark {
-  background: #c79b57;
+.sign-bracket {
+  position: absolute;
+  left: 16%;
+  top: 7px;
+  width: 68%;
+  height: 3px;
+  border-radius: 2px;
+  background: #8e7954;
+  box-shadow: 0 1px 0 #cfb891;
 }
-.entrance-home .entrance-mark {
-  background: #6e987a;
+.sign-rope {
+  position: absolute;
+  top: 8px;
+  width: 2px;
+  height: 11px;
+  background: #bc9a63;
 }
-.entrance:active {
-  background: #edf4e4;
-  box-shadow: 0 2rpx 0 #304a3a24;
+.rope-left {
+  left: 25%;
+}
+.rope-right {
+  right: 25%;
+}
+.sign-icon {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+.icon-part {
+  position: absolute;
+}
+.icon-partner .part-one,
+.icon-partner .part-two {
+  top: 3px;
+  width: 7px;
+  height: 11px;
+  border-radius: 80% 15% 75% 15%;
+  border: 1px solid #7a6b8f;
+  background: #b9a7ca;
+}
+.icon-partner .part-one {
+  left: 1px;
+  transform: rotate(-25deg);
+}
+.icon-partner .part-two {
+  right: 1px;
+  transform: rotate(62deg);
+  background: #d2c3df;
+}
+.entrance-lost {
+  --sign-accent: #bc7d59;
+  --sign-soft: #efd3b7;
+}
+.icon-lost .part-one {
+  left: 1px;
+  top: 1px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #aa7956;
+  border-radius: 50%;
+  background: #f1e2c1;
+}
+.icon-lost .part-two {
+  left: 10px;
+  top: 11px;
+  width: 7px;
+  height: 3px;
+  border-radius: 2px;
+  background: #aa7956;
+  transform: rotate(47deg);
+}
+.entrance-market {
+  --sign-accent: #bd9660;
+  --sign-soft: #f0dfb6;
+}
+.icon-market .part-one {
+  left: 2px;
+  top: 6px;
+  width: 13px;
+  height: 10px;
+  border: 1px solid #a2854e;
+  border-radius: 1px 1px 3px 3px;
+  background: #dcc48f;
+}
+.icon-market .part-two {
+  left: 6px;
+  top: 1px;
+  width: 5px;
+  height: 8px;
+  border: 1px solid #a2854e;
+  border-bottom: 0;
+  border-radius: 4px 4px 0 0;
+}
+.entrance-home {
+  --sign-accent: #6e9478;
+  --sign-soft: #d9e6cc;
+}
+.icon-home .part-one {
+  left: 3px;
+  top: 2px;
+  width: 10px;
+  height: 10px;
+  background: #6e9478;
+  transform: rotate(45deg);
+  border-radius: 1px;
+}
+.icon-home .part-two {
+  left: 3px;
+  top: 7px;
+  width: 10px;
+  height: 9px;
+  border: 1px solid #62876b;
+  background: #bdceb0;
+}
+.icon-home .part-two::after {
+  content: '';
+  position: absolute;
+  left: 3px;
+  bottom: 0;
+  width: 3px;
+  height: 5px;
+  background: #6e9478;
+  border-radius: 2px 2px 0 0;
+}
+.is-target .entrance-sign {
+  color: #395936;
+  background: #f1f3d9;
+  border-color: #7b9867;
+}
+.area-hotspot {
+  z-index: 1300;
+  width: 100px;
+  height: 44px;
+  transform: translate(-50%, -50%);
+  overflow: visible;
+}
+.area-sign {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #526747;
+  background: #f7efd9ee;
+  border: 1px solid #a6af84;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 1px 0 #6c7f5040;
+}
+.area-dot {
+  width: 9px;
+  height: 6px;
+  border: 1px solid #789e98;
+  border-radius: 50%;
+  background: #c5e0d5;
+}
+.area-pavilion .area-dot {
+  height: 8px;
+  border-color: #829364;
+  background: #b4c18e;
+  border-radius: 3px 3px 0 0;
+}
+.is-target .area-sign {
+  color: #294f3e;
+  border-color: #597f60;
+  background: #ecf2d7;
+}
+.is-overview .entrance {
+  width: 98px;
+  height: 48px;
+}
+.is-overview .entrance-sign {
+  height: 24px;
+  padding: 1px 7px;
+  gap: 4px;
+  font-size: 10px;
+}
+.is-overview .sign-bracket {
+  top: 6px;
+}
+.is-overview .sign-rope {
+  top: 7px;
+}
+.is-overview .sign-icon {
+  transform: scale(0.88);
+}
+.board-hotspot {
+  z-index: 1100;
+  width: 65px;
+  height: 70px;
+  transform: translate(-50%, -50%);
+  align-items: flex-end;
+  overflow: visible;
+}
+.board-label {
+  margin-bottom: -5px;
+  padding: 3px 7px;
+  border: 1px solid #8e7652;
+  border-radius: 4px;
+  color: #5e4b32;
+  background: #fff4dcef;
+  font-size: 11px;
 }
 .town-person {
   position: absolute;
-  z-index: 12;
-  width: 58rpx;
-  height: 76rpx;
-  transform: translate(-50%, -83%);
+  width: var(--actor-width);
+  height: var(--actor-height);
+  transform: translate(-50%, -92%);
   pointer-events: none;
 }
-.town-player {
-  z-index: 14;
-}
-.player-label {
+.player-ground-mark {
   position: absolute;
-  left: 50%;
-  top: -19rpx;
-  transform: translateX(-50%);
-  padding: 2rpx 9rpx;
-  border-radius: 12rpx;
-  background: #304a3a;
-  color: #fffef8;
-  font-size: 19rpx;
-  line-height: 1.5;
+  left: 8%;
+  bottom: 0;
+  width: 84%;
+  height: 16%;
+  border-radius: 50%;
+  border: 1px solid #fff5cf;
+  background: #fff5cf47;
 }
 .destination {
   position: absolute;
-  z-index: 10;
-  width: 25rpx;
-  height: 15rpx;
-  border: 3rpx solid #fffef8;
-  box-shadow: 0 0 0 3rpx #45695788;
+  z-index: 4;
+  width: 19px;
+  height: 10px;
+  border: 2px solid #fff4d2;
+  box-shadow: 0 0 0 1px #45695791;
+  border-radius: 50%;
   transform: translate(-50%, -50%);
-  border-radius: 50%;
+  pointer-events: none;
 }
-.scene-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12rpx;
-  flex-wrap: wrap;
-  padding: 24rpx 0 0;
-}
-.scene-instruction {
-  display: flex;
-  align-items: center;
-  gap: 10rpx;
-  color: #65765f;
-  font-size: 23rpx;
-}
-.player-dot {
-  width: 12rpx;
-  height: 12rpx;
-  background: #99b87b;
-  border-radius: 50%;
-}
-.scene-controls {
-  display: flex;
-  gap: 10rpx;
-}
-.scene-control {
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 8rpx 12rpx;
-  font-size: 23rpx;
-  line-height: 1.4;
-  color: #456957;
-  background: #e9eedf;
+.scene-image-error,
+.scene-preparing {
+  position: absolute;
+  left: 50%;
+  bottom: 24%;
+  z-index: 1700;
+  max-width: 80%;
+  transform: translateX(-50%);
+  padding: 7px 12px;
+  color: #493e2d;
+  background: #fff4dcef;
+  border-radius: 5px;
+  font-size: 13px;
+  text-align: center;
+  pointer-events: none;
 }
 </style>

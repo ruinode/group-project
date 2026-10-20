@@ -1,0 +1,1106 @@
+[
+  {
+    "species": "rabbit",
+    "item": "rain-boots",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/rabbit-rain-boots-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 105,
+      "y": 448,
+      "width": 101,
+      "height": 91
+    },
+    "width": 101,
+    "height": 91,
+    "bytes": 7369,
+    "bounds": {
+      "x": 23.5,
+      "y": 146.67326732673268,
+      "width": 27,
+      "height": 24.32673267326733
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "rain-boots",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/rabbit-rain-boots-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 235,
+      "y": 448,
+      "width": 99,
+      "height": 91
+    },
+    "width": 99,
+    "height": 91,
+    "bytes": 7337,
+    "bounds": {
+      "x": 64.5,
+      "y": 145.26262626262627,
+      "width": 28,
+      "height": 25.737373737373737
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "shell-shoes",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/rabbit-shell-shoes-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 588,
+      "y": 449,
+      "width": 111,
+      "height": 90
+    },
+    "width": 111,
+    "height": 90,
+    "bytes": 8622,
+    "bounds": {
+      "x": 23.5,
+      "y": 149.1081081081081,
+      "width": 27,
+      "height": 21.891891891891895
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "shell-shoes",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/rabbit-shell-shoes-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 711,
+      "y": 449,
+      "width": 110,
+      "height": 90
+    },
+    "width": 110,
+    "height": 90,
+    "bytes": 8415,
+    "bounds": {
+      "x": 64.5,
+      "y": 148.0909090909091,
+      "width": 28,
+      "height": 22.909090909090907
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "leaf-slippers",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/rabbit-leaf-slippers-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 1042,
+      "y": 449,
+      "width": 110,
+      "height": 90
+    },
+    "width": 110,
+    "height": 90,
+    "bytes": 8266,
+    "bounds": {
+      "x": 23.5,
+      "y": 148.9090909090909,
+      "width": 27,
+      "height": 22.09090909090909
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "leaf-slippers",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/rabbit-leaf-slippers-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 1166,
+      "y": 449,
+      "width": 108,
+      "height": 91
+    },
+    "width": 108,
+    "height": 91,
+    "bytes": 8086,
+    "bounds": {
+      "x": 64.5,
+      "y": 147.40740740740742,
+      "width": 28,
+      "height": 23.59259259259259
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "rain-boots",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/rabbit-rain-boots-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 104,
+      "y": 995,
+      "width": 102,
+      "height": 78
+    },
+    "width": 102,
+    "height": 78,
+    "bytes": 6920,
+    "bounds": {
+      "x": 22.5,
+      "y": 150.35294117647058,
+      "width": 27,
+      "height": 20.647058823529413
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "rain-boots",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/rabbit-rain-boots-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 235,
+      "y": 995,
+      "width": 94,
+      "height": 78
+    },
+    "width": 94,
+    "height": 78,
+    "bytes": 6726,
+    "bounds": {
+      "x": 63.5,
+      "y": 147.7659574468085,
+      "width": 28,
+      "height": 23.23404255319149
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "shell-shoes",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/rabbit-shell-shoes-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 589,
+      "y": 995,
+      "width": 110,
+      "height": 78
+    },
+    "width": 110,
+    "height": 78,
+    "bytes": 7391,
+    "bounds": {
+      "x": 22.5,
+      "y": 151.85454545454544,
+      "width": 27,
+      "height": 19.145454545454545
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "shell-shoes",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/rabbit-shell-shoes-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 711,
+      "y": 995,
+      "width": 109,
+      "height": 79
+    },
+    "width": 109,
+    "height": 79,
+    "bytes": 7487,
+    "bounds": {
+      "x": 63.5,
+      "y": 150.70642201834863,
+      "width": 28,
+      "height": 20.293577981651378
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "leaf-slippers",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/rabbit-leaf-slippers-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 1042,
+      "y": 995,
+      "width": 110,
+      "height": 77
+    },
+    "width": 110,
+    "height": 77,
+    "bytes": 7556,
+    "bounds": {
+      "x": 22.5,
+      "y": 152.1,
+      "width": 27,
+      "height": 18.9
+    }
+  },
+  {
+    "species": "rabbit",
+    "item": "leaf-slippers",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/rabbit-leaf-slippers-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/rabbit-shoes-reference-v1.png",
+    "crop": {
+      "x": 1167,
+      "y": 995,
+      "width": 102,
+      "height": 79
+    },
+    "width": 102,
+    "height": 79,
+    "bytes": 7460,
+    "bounds": {
+      "x": 63.5,
+      "y": 149.31372549019608,
+      "width": 28,
+      "height": 21.686274509803923
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "rain-boots",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/capybara-rain-boots-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 152,
+      "y": 422,
+      "width": 108,
+      "height": 77
+    },
+    "width": 108,
+    "height": 77,
+    "bytes": 7079,
+    "bounds": {
+      "x": 26.5,
+      "y": 148.1851851851852,
+      "width": 32,
+      "height": 22.814814814814813
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "rain-boots",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/capybara-rain-boots-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 349,
+      "y": 422,
+      "width": 102,
+      "height": 77
+    },
+    "width": 102,
+    "height": 77,
+    "bytes": 6982,
+    "bounds": {
+      "x": 83.5,
+      "y": 146.84313725490196,
+      "width": 32,
+      "height": 24.15686274509804
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "shell-shoes",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/capybara-shell-shoes-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 621,
+      "y": 424,
+      "width": 112,
+      "height": 76
+    },
+    "width": 112,
+    "height": 76,
+    "bytes": 8166,
+    "bounds": {
+      "x": 26.5,
+      "y": 149.28571428571428,
+      "width": 32,
+      "height": 21.71428571428571
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "shell-shoes",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/capybara-shell-shoes-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 799,
+      "y": 424,
+      "width": 112,
+      "height": 76
+    },
+    "width": 112,
+    "height": 76,
+    "bytes": 7961,
+    "bounds": {
+      "x": 83.5,
+      "y": 149.28571428571428,
+      "width": 32,
+      "height": 21.71428571428571
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "leaf-slippers",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/capybara-leaf-slippers-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 1076,
+      "y": 424,
+      "width": 115,
+      "height": 76
+    },
+    "width": 115,
+    "height": 76,
+    "bytes": 8075,
+    "bounds": {
+      "x": 26.5,
+      "y": 149.8521739130435,
+      "width": 32,
+      "height": 21.14782608695652
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "leaf-slippers",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/capybara-leaf-slippers-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 1250,
+      "y": 424,
+      "width": 119,
+      "height": 76
+    },
+    "width": 119,
+    "height": 76,
+    "bytes": 8269,
+    "bounds": {
+      "x": 83.5,
+      "y": 150.56302521008405,
+      "width": 32,
+      "height": 20.436974789915965
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "rain-boots",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/capybara-rain-boots-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 153,
+      "y": 902,
+      "width": 107,
+      "height": 83
+    },
+    "width": 107,
+    "height": 83,
+    "bytes": 7554,
+    "bounds": {
+      "x": 26.5,
+      "y": 146.17757009345794,
+      "width": 32,
+      "height": 24.822429906542055
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "rain-boots",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/capybara-rain-boots-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 355,
+      "y": 902,
+      "width": 99,
+      "height": 83
+    },
+    "width": 99,
+    "height": 83,
+    "bytes": 7218,
+    "bounds": {
+      "x": 83.5,
+      "y": 144.17171717171718,
+      "width": 32,
+      "height": 26.82828282828283
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "shell-shoes",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/capybara-shell-shoes-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 621,
+      "y": 903,
+      "width": 112,
+      "height": 81
+    },
+    "width": 112,
+    "height": 81,
+    "bytes": 7881,
+    "bounds": {
+      "x": 26.5,
+      "y": 147.85714285714286,
+      "width": 32,
+      "height": 23.142857142857142
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "shell-shoes",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/capybara-shell-shoes-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 800,
+      "y": 903,
+      "width": 113,
+      "height": 81
+    },
+    "width": 113,
+    "height": 81,
+    "bytes": 8044,
+    "bounds": {
+      "x": 83.5,
+      "y": 148.06194690265488,
+      "width": 32,
+      "height": 22.938053097345133
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "leaf-slippers",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/capybara-leaf-slippers-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 1074,
+      "y": 902,
+      "width": 117,
+      "height": 83
+    },
+    "width": 117,
+    "height": 83,
+    "bytes": 8042,
+    "bounds": {
+      "x": 26.5,
+      "y": 148.2991452991453,
+      "width": 32,
+      "height": 22.700854700854702
+    }
+  },
+  {
+    "species": "capybara",
+    "item": "leaf-slippers",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/capybara-leaf-slippers-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/capybara-shoes-reference-v1.png",
+    "crop": {
+      "x": 1254,
+      "y": 902,
+      "width": 118,
+      "height": 83
+    },
+    "width": 118,
+    "height": 83,
+    "bytes": 8317,
+    "bounds": {
+      "x": 83.5,
+      "y": 148.4915254237288,
+      "width": 32,
+      "height": 22.508474576271187
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "rain-boots",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/mushroom-rain-boots-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 166,
+      "y": 413,
+      "width": 96,
+      "height": 81
+    },
+    "width": 96,
+    "height": 81,
+    "bytes": 6594,
+    "bounds": {
+      "x": 37.5,
+      "y": 150.75,
+      "width": 24,
+      "height": 20.25
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "rain-boots",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/mushroom-rain-boots-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 278,
+      "y": 413,
+      "width": 91,
+      "height": 82
+    },
+    "width": 91,
+    "height": 82,
+    "bytes": 6483,
+    "bounds": {
+      "x": 69.5,
+      "y": 150.27472527472528,
+      "width": 23,
+      "height": 20.725274725274723
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "shell-shoes",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/mushroom-shell-shoes-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 655,
+      "y": 413,
+      "width": 98,
+      "height": 82
+    },
+    "width": 98,
+    "height": 82,
+    "bytes": 7298,
+    "bounds": {
+      "x": 37.5,
+      "y": 150.91836734693877,
+      "width": 24,
+      "height": 20.081632653061224
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "shell-shoes",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/mushroom-shell-shoes-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 769,
+      "y": 413,
+      "width": 95,
+      "height": 82
+    },
+    "width": 95,
+    "height": 82,
+    "bytes": 7154,
+    "bounds": {
+      "x": 69.5,
+      "y": 151.14736842105265,
+      "width": 23,
+      "height": 19.852631578947367
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "leaf-slippers",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/mushroom-leaf-slippers-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 1153,
+      "y": 414,
+      "width": 97,
+      "height": 81
+    },
+    "width": 97,
+    "height": 81,
+    "bytes": 7298,
+    "bounds": {
+      "x": 37.5,
+      "y": 150.95876288659792,
+      "width": 24,
+      "height": 20.04123711340206
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "leaf-slippers",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/mushroom-leaf-slippers-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 1269,
+      "y": 414,
+      "width": 90,
+      "height": 81
+    },
+    "width": 90,
+    "height": 81,
+    "bytes": 7068,
+    "bounds": {
+      "x": 69.5,
+      "y": 150.3,
+      "width": 23,
+      "height": 20.7
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "rain-boots",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/mushroom-rain-boots-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 168,
+      "y": 898,
+      "width": 95,
+      "height": 81
+    },
+    "width": 95,
+    "height": 81,
+    "bytes": 6749,
+    "bounds": {
+      "x": 37.5,
+      "y": 150.53684210526316,
+      "width": 24,
+      "height": 20.46315789473684
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "rain-boots",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/mushroom-rain-boots-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 278,
+      "y": 898,
+      "width": 87,
+      "height": 81
+    },
+    "width": 87,
+    "height": 81,
+    "bytes": 6445,
+    "bounds": {
+      "x": 69.5,
+      "y": 149.58620689655172,
+      "width": 23,
+      "height": 21.413793103448278
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "shell-shoes",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/mushroom-shell-shoes-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 660,
+      "y": 898,
+      "width": 93,
+      "height": 81
+    },
+    "width": 93,
+    "height": 81,
+    "bytes": 6900,
+    "bounds": {
+      "x": 37.5,
+      "y": 150.09677419354838,
+      "width": 24,
+      "height": 20.903225806451612
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "shell-shoes",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/mushroom-shell-shoes-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 769,
+      "y": 898,
+      "width": 89,
+      "height": 81
+    },
+    "width": 89,
+    "height": 81,
+    "bytes": 6867,
+    "bounds": {
+      "x": 69.5,
+      "y": 150.06741573033707,
+      "width": 23,
+      "height": 20.93258426966292
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "leaf-slippers",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/mushroom-leaf-slippers-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 1158,
+      "y": 898,
+      "width": 93,
+      "height": 81
+    },
+    "width": 93,
+    "height": 81,
+    "bytes": 7209,
+    "bounds": {
+      "x": 37.5,
+      "y": 150.09677419354838,
+      "width": 24,
+      "height": 20.903225806451612
+    }
+  },
+  {
+    "species": "mushroom",
+    "item": "leaf-slippers",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/mushroom-leaf-slippers-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/mushroom-shoes-reference-v1.png",
+    "crop": {
+      "x": 1269,
+      "y": 898,
+      "width": 92,
+      "height": 81
+    },
+    "width": 92,
+    "height": 81,
+    "bytes": 7098,
+    "bounds": {
+      "x": 69.5,
+      "y": 150.75,
+      "width": 23,
+      "height": 20.25
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "rain-boots",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/squirrel-rain-boots-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 204,
+      "y": 408,
+      "width": 98,
+      "height": 74
+    },
+    "width": 98,
+    "height": 74,
+    "bytes": 6058,
+    "bounds": {
+      "x": 58.5,
+      "y": 149.85714285714286,
+      "width": 28,
+      "height": 21.142857142857142
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "rain-boots",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/squirrel-rain-boots-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 354,
+      "y": 408,
+      "width": 97,
+      "height": 71
+    },
+    "width": 97,
+    "height": 71,
+    "bytes": 5785,
+    "bounds": {
+      "x": 102.5,
+      "y": 149.77319587628867,
+      "width": 29,
+      "height": 21.22680412371134
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "shell-shoes",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/squirrel-shell-shoes-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 697,
+      "y": 408,
+      "width": 103,
+      "height": 73
+    },
+    "width": 103,
+    "height": 73,
+    "bytes": 6890,
+    "bounds": {
+      "x": 58.5,
+      "y": 151.15533980582524,
+      "width": 28,
+      "height": 19.844660194174757
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "shell-shoes",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/squirrel-shell-shoes-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 847,
+      "y": 408,
+      "width": 97,
+      "height": 72
+    },
+    "width": 97,
+    "height": 72,
+    "bytes": 6536,
+    "bounds": {
+      "x": 102.5,
+      "y": 149.4742268041237,
+      "width": 29,
+      "height": 21.525773195876287
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "leaf-slippers",
+    "view": "front",
+    "side": "left",
+    "source": "/static/pets/fitted/squirrel-leaf-slippers-front-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 1196,
+      "y": 408,
+      "width": 108,
+      "height": 73
+    },
+    "width": 108,
+    "height": 73,
+    "bytes": 7189,
+    "bounds": {
+      "x": 58.5,
+      "y": 152.07407407407408,
+      "width": 28,
+      "height": 18.925925925925924
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "leaf-slippers",
+    "view": "front",
+    "side": "right",
+    "source": "/static/pets/fitted/squirrel-leaf-slippers-front-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 1340,
+      "y": 408,
+      "width": 106,
+      "height": 72
+    },
+    "width": 106,
+    "height": 72,
+    "bytes": 6795,
+    "bounds": {
+      "x": 102.5,
+      "y": 151.30188679245282,
+      "width": 29,
+      "height": 19.69811320754717
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "rain-boots",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/squirrel-rain-boots-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 215,
+      "y": 914,
+      "width": 100,
+      "height": 72
+    },
+    "width": 100,
+    "height": 72,
+    "bytes": 6305,
+    "bounds": {
+      "x": 58.5,
+      "y": 150.84,
+      "width": 28,
+      "height": 20.160000000000004
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "rain-boots",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/squirrel-rain-boots-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 357,
+      "y": 914,
+      "width": 92,
+      "height": 72
+    },
+    "width": 92,
+    "height": 72,
+    "bytes": 5922,
+    "bounds": {
+      "x": 102.5,
+      "y": 148.30434782608697,
+      "width": 29,
+      "height": 22.695652173913043
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "shell-shoes",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/squirrel-shell-shoes-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 714,
+      "y": 914,
+      "width": 103,
+      "height": 71
+    },
+    "width": 103,
+    "height": 71,
+    "bytes": 6405,
+    "bounds": {
+      "x": 58.5,
+      "y": 151.6990291262136,
+      "width": 28,
+      "height": 19.300970873786408
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "shell-shoes",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/squirrel-shell-shoes-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 855,
+      "y": 914,
+      "width": 92,
+      "height": 71
+    },
+    "width": 92,
+    "height": 71,
+    "bytes": 6147,
+    "bounds": {
+      "x": 102.5,
+      "y": 148.6195652173913,
+      "width": 29,
+      "height": 22.380434782608695
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "leaf-slippers",
+    "view": "back",
+    "side": "left",
+    "source": "/static/pets/fitted/squirrel-leaf-slippers-back-left.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 1214,
+      "y": 914,
+      "width": 102,
+      "height": 71
+    },
+    "width": 102,
+    "height": 71,
+    "bytes": 6519,
+    "bounds": {
+      "x": 58.5,
+      "y": 151.50980392156862,
+      "width": 28,
+      "height": 19.490196078431374
+    }
+  },
+  {
+    "species": "squirrel",
+    "item": "leaf-slippers",
+    "view": "back",
+    "side": "right",
+    "source": "/static/pets/fitted/squirrel-leaf-slippers-back-right.png",
+    "reference": "C:/Users/Lenovo/.codex/visualizations/2026/10/14/01a13a25-b0e8-7d03-8a72-e82e9b21fd33/phase-one-preview/fitted-shoes-art/squirrel-shoes-reference-v1.png",
+    "crop": {
+      "x": 1355,
+      "y": 914,
+      "width": 91,
+      "height": 71
+    },
+    "width": 91,
+    "height": 71,
+    "bytes": 6184,
+    "bounds": {
+      "x": 102.5,
+      "y": 148.37362637362637,
+      "width": 29,
+      "height": 22.626373626373624
+    }
+  }
+]

@@ -1,0 +1,1672 @@
+<template>
+  <view class="dive-overlay">
+    <view
+      class="dive-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-label="泡泡潜水冒险"
+      :class="{ 'less-motion': reducedMotion }"
+    >
+      <view class="dive-header">
+        <view>
+          <view class="dive-title">泡泡潜水冒险</view>
+          <text class="dive-subtitle">带上伙伴，去水下捡一束星光。</text>
+        </view>
+        <button class="shore-button" @tap="askClose">回岸边</button>
+      </view>
+      <view v-if="error" class="dive-error" role="alert">
+        {{ error }}
+        <button :disabled="Boolean(busy)" @tap="retryRequest">重试</button>
+      </view>
+
+      <scroll-view v-if="!gameState" class="level-scroll" scroll-y>
+        <view class="dive-intro">
+          <view v-if="appearance" class="intro-pet">
+            <PetAvatar :appearance="appearance" :wardrobe="equipment" />
+          </view>
+          <view>
+            <view class="intro-title">小小冒险，慢慢探索</view>
+            <text>躲开珊瑚，用泡泡推开怪鱼。捡齐珍珠，就能打开出口。</text>
+          </view>
+        </view>
+        <view class="level-list">
+          <button
+            v-for="level in DIVE_LEVELS"
+            :key="level.id"
+            class="level-card"
+            :class="'level-' + level.id"
+            :disabled="
+              Boolean(busy) || !progress || level.id > progress.unlockedLevel
+            "
+            @tap="startLevel(level.id)"
+          >
+            <view class="level-icon" aria-hidden="true">
+              <view></view>
+              <view></view>
+              <view></view>
+            </view>
+            <view class="level-copy">
+              <view class="level-name">{{ level.name }}</view>
+              <view class="level-target">
+                {{ level.requiredPearls }} 颗珍珠 ·
+                {{ level.oxygenSeconds }} 秒氧气
+              </view>
+              <view class="level-prize">
+                {{
+                  progress?.clearedLevels.includes(level.id)
+                    ? '已通关 · 重游 ' + replayPearls[level.id] + ' 珍珠'
+                    : firstPrizes[level.id]
+                }}
+              </view>
+            </view>
+            <text class="level-state">
+              {{
+                !progress
+                  ? '读取中'
+                  : level.id > progress.unlockedLevel
+                    ? '待解锁'
+                    : busy === 'start' && selectedLevel === level.id
+                      ? '准备中'
+                      : '出发'
+              }}
+            </text>
+          </button>
+        </view>
+        <view class="adventure-rules">
+          每关 3
+          颗爱心。失败会安全回岸，已有装扮不会减少。首通装扮固定赠送，珍珠可去衣柜自选兑换。
+        </view>
+      </scroll-view>
+
+      <template v-else>
+        <view class="dive-hud">
+          <view
+            class="heart-group"
+            :aria-label="gameState.player.hearts + '颗爱心'"
+          >
+            <text
+              v-for="heart in [1, 2, 3]"
+              :key="heart"
+              :class="{ empty: heart > gameState.player.hearts }"
+            >
+              ♥
+            </text>
+          </view>
+          <view class="oxygen-group">
+            <text>氧气 {{ Math.ceil(gameState.oxygenTicks / 20) }}秒</text>
+            <view class="oxygen-track">
+              <view :style="{ width: oxygenPercent + '%' }"></view>
+            </view>
+          </view>
+          <view class="pearl-count">
+            珍珠 {{ gameState.pearlsCollected }}/{{ gameState.requiredPearls }}
+          </view>
+          <button
+            class="pause-button"
+            :disabled="Boolean(busy) || gameState.status !== 'playing'"
+            @tap="togglePause"
+          >
+            {{ paused ? '继续' : '暂停' }}
+          </button>
+        </view>
+        <view class="play-layout">
+          <view class="board-wrap">
+            <view
+              class="dive-water"
+              :class="'depth-' + gameState.levelId"
+              :style="{ width: boardWidth + 'px' }"
+              @touchstart.stop.prevent="beginDrag"
+              @touchmove.stop.prevent="dragSwim"
+              @touchend.stop.prevent="endDrag"
+              @touchcancel.stop.prevent="endDrag"
+              @mousedown.prevent="beginMouseDrag"
+              @mousemove="mouseDrag"
+              @mouseup="endDrag"
+              @mouseleave="endDrag"
+            >
+              <view class="water-ratio">
+                <view class="water-light light-one"></view>
+                <view class="water-light light-two"></view>
+                <view class="seaweed weed-one">
+                  <view></view>
+                  <view></view>
+                  <view></view>
+                </view>
+                <view class="seaweed weed-two">
+                  <view></view>
+                  <view></view>
+                  <view></view>
+                </view>
+                <view
+                  v-for="wall in gameState.obstacles"
+                  :key="wall.id"
+                  class="dive-coral"
+                  :data-id="wall.id"
+                  :style="wallStyle(wall)"
+                >
+                  <view></view>
+                  <view></view>
+                </view>
+                <view
+                  v-for="pearl in gameState.pearls.filter(
+                    (item) => !item.collected
+                  )"
+                  :key="pearl.id"
+                  class="dive-pearl"
+                  :data-id="pearl.id"
+                  :style="entityStyle(pearl, 3.4)"
+                >
+                  <view></view>
+                </view>
+                <view
+                  class="dive-exit"
+                  :class="{
+                    'is-open':
+                      gameState.pearlsCollected === gameState.requiredPearls
+                  }"
+                  :style="entityStyle(gameState.exit, 10)"
+                >
+                  <view></view>
+                  <text>出口</text>
+                </view>
+                <view
+                  v-for="enemy in gameState.enemies"
+                  :key="enemy.id"
+                  class="dive-enemy"
+                  :class="[
+                    'enemy-' + enemy.type,
+                    { 'is-stunned': enemy.stunnedTicks > 0 }
+                  ]"
+                  :data-id="enemy.id"
+                  :style="entityStyle(enemy, enemy.radius * 2.2)"
+                >
+                  <view class="enemy-eye eye-left"></view>
+                  <view class="enemy-eye eye-right"></view>
+                  <view class="enemy-mouth"></view>
+                  <view class="enemy-tail"></view>
+                  <text v-if="enemy.stunnedTicks">○</text>
+                </view>
+                <view
+                  v-for="bubble in gameState.bubbles"
+                  :key="bubble.id"
+                  class="dive-bubble"
+                  :style="entityStyle(bubble, 3)"
+                ></view>
+                <view
+                  class="dive-player"
+                  :class="{
+                    'is-invulnerable': gameState.player.invulnerableTicks > 0
+                  }"
+                  :data-x="gameState.player.x"
+                  :data-y="gameState.player.y"
+                  :style="{
+                    left: gameState.player.x + '%',
+                    top: (gameState.player.y / 64) * 100 + '%'
+                  }"
+                >
+                  <PetAvatar
+                    v-if="appearance"
+                    :appearance="appearance"
+                    :wardrobe="equipment"
+                    :facing="
+                      appearance.species === 'custom'
+                        ? 1
+                        : gameState.player.facing
+                    "
+                  />
+                  <view class="player-air-bubble"></view>
+                </view>
+                <view
+                  v-if="paused && gameState.status === 'playing'"
+                  class="water-cover"
+                >
+                  <view class="pause-caption">在水里歇一会儿</view>
+                  <text>氧气暂停消耗，准备好再继续。</text>
+                  <button :disabled="Boolean(busy) || !active" @tap="resume">
+                    继续探索
+                  </button>
+                  <button
+                    class="quiet-water-button"
+                    :disabled="Boolean(busy)"
+                    @tap="backToLevels"
+                  >
+                    选择关卡
+                  </button>
+                </view>
+                <view
+                  v-if="gameState.status !== 'playing'"
+                  class="water-cover result-cover"
+                  role="status"
+                  aria-live="polite"
+                >
+                  <view class="result-symbol">
+                    {{ gameState.status === 'cleared' ? '✦' : '♡' }}
+                  </view>
+                  <view class="pause-caption">
+                    {{
+                      gameState.status === 'cleared'
+                        ? '找到出口啦！'
+                        : '已经安全回岸啦'
+                    }}
+                  </view>
+                  <text>
+                    {{
+                      gameState.status === 'failed'
+                        ? gameState.reason
+                        : busy === 'finish'
+                          ? '正在收好这次冒险的收获…'
+                          : settled?.reward
+                            ? '+' + settled.reward.pearls + ' 珍珠'
+                            : '收获需读取成功后才会保存'
+                    }}
+                  </text>
+                  <view
+                    v-if="settled?.reward?.items.length"
+                    class="earned-items"
+                  >
+                    首通礼物：{{ earnedNames }}
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view v-if="gameState.status === 'playing'" class="game-controls">
+            <view class="direction-pad" aria-label="按住方向游动">
+              <button
+                v-for="direction in directions"
+                :key="direction.id"
+                :class="'direction-' + direction.id"
+                :aria-label="direction.label"
+                :disabled="!canPlay"
+                @touchstart.stop.prevent="pressDirection(direction.id)"
+                @touchend.stop.prevent="releaseDirection(direction.id)"
+                @touchcancel.stop.prevent="releaseDirection(direction.id)"
+                @mousedown.prevent="pressDirection(direction.id)"
+                @mouseup="releaseDirection(direction.id)"
+                @mouseleave="releaseDirection(direction.id)"
+              >
+                {{ direction.symbol }}
+              </button>
+              <view class="pad-center"></view>
+            </view>
+            <button
+              class="bubble-button"
+              :disabled="!canPlay"
+              @touchstart.stop.prevent="pressFire"
+              @touchend.stop.prevent="releaseFire"
+              @touchcancel.stop.prevent="releaseFire"
+              @mousedown.prevent="pressFire"
+              @mouseup="releaseFire"
+              @mouseleave="releaseFire"
+              @tap="pulseFire"
+            >
+              <view></view>
+              <text>发射泡泡</text>
+            </button>
+          </view>
+          <view v-else class="result-actions">
+            <button
+              class="dive-primary"
+              :disabled="Boolean(busy)"
+              @tap="startLevel(selectedLevel)"
+            >
+              再试一次
+            </button>
+            <button
+              v-if="settled?.status === 'cleared' && selectedLevel < 3"
+              class="dive-primary"
+              :disabled="Boolean(busy)"
+              @tap="startLevel(selectedLevel + 1)"
+            >
+              去下一关
+            </button>
+            <button
+              class="dive-secondary"
+              :disabled="Boolean(busy)"
+              @tap="backToLevels"
+            >
+              选择关卡
+            </button>
+          </view>
+        </view>
+        <view class="control-hint">
+          按住方向或拖动水面游动，面向小怪发泡泡。捡齐珍珠后去出口。
+          <text class="keyboard-hint">方向键 / WASD，空格发泡泡。</text>
+        </view>
+      </template>
+      <view class="dive-footnote">
+        {{
+          config.apiMode === 'mock'
+            ? '本机演示 · 收获只保存在当前演示身份'
+            : '奖励由当前账号服务核验后保存'
+        }}
+      </view>
+    </view>
+  </view>
+</template>
+
+<script setup>
+import {
+  computed,
+  getCurrentInstance,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  ref
+} from 'vue'
+import { onHide, onShow } from '@dcloudio/uni-app'
+import { dive } from '../../services/index.js'
+import { config } from '../../config/index.js'
+import { errorText } from '../../utils/errors.js'
+import {
+  createDiveGame,
+  DIVE_LEVELS,
+  DIVE_STEP_MS
+} from '../../utils/dive-game.js'
+import { WARDROBE_ITEMS } from '../../utils/wardrobe-catalog.js'
+import PetAvatar from '../pet/PetAvatar.vue'
+
+const props = defineProps({
+  appearance: { type: Object, default: null },
+  wardrobe: { type: Object, default: null }
+})
+const emit = defineEmits(['close', 'reward'])
+const instance = getCurrentInstance()
+const progress = ref(null),
+  gameState = ref(null),
+  selectedLevel = ref(1),
+  paused = ref(false),
+  busy = ref(''),
+  error = ref(''),
+  active = ref(true),
+  settled = ref(null),
+  viewport = ref({ width: 390, height: 760 }),
+  reducedMotion = ref(false)
+const equipment = computed(() => props.wardrobe?.equipped || props.wardrobe)
+const canPlay = computed(
+  () =>
+    active.value &&
+    !paused.value &&
+    !busy.value &&
+    gameState.value?.status === 'playing'
+)
+const oxygenPercent = computed(() =>
+  gameState.value
+    ? (gameState.value.oxygenTicks /
+        (DIVE_LEVELS[selectedLevel.value - 1].oxygenSeconds * 20)) *
+      100
+    : 100
+)
+const boardWidth = computed(() => {
+  const { width, height } = viewport.value
+  return Math.max(
+    180,
+    width >= 620 && width > height
+      ? Math.min(width - 240, ((height - 176) * 100) / 64, 900)
+      : Math.min(width - 32, ((height - 310) * 100) / 64, 700)
+  )
+})
+const prizeLabel = (ids, pearls) =>
+  `首通：${ids.map((id) => WARDROBE_ITEMS.find((item) => item.id === id)?.name || id).join('、')} ＋${pearls}珍珠`
+const firstPrizes = {
+  1: prizeLabel(['sailor-shirt', 'shell-shoes'], 30),
+  2: prizeLabel(['cloud-bun', 'shell-pouch'], 45),
+  3: prizeLabel(['shell-crown', 'star-wand', 'pearl-badge'], 60)
+}
+const replayPearls = { 1: 8, 2: 12, 3: 18 }
+const earnedNames = computed(() =>
+  (settled.value?.reward?.items || [])
+    .map(
+      (id) =>
+        settled.value.wardrobe.catalog.find((item) => item.id === id)?.name ||
+        id
+    )
+    .join('、')
+)
+const directions = [
+  { id: 'up', label: '向上游', symbol: '↑' },
+  { id: 'left', label: '向左游', symbol: '←' },
+  { id: 'right', label: '向右游', symbol: '→' },
+  { id: 'down', label: '向下游', symbol: '↓' }
+]
+let game = null,
+  issued = null,
+  trace = [],
+  lastInput = { dx: 0, dy: 0, fire: false },
+  clock = null,
+  revision = 0,
+  mounted = false,
+  closed = false,
+  heldDirection = '',
+  heldFire = false,
+  firePulse = 0,
+  dragPoint = null,
+  boardRect = null,
+  mouseHeld = false
+const heldKeys = new Set()
+const entityStyle = (point, diameter) => ({
+  left: `${point.x}%`,
+  top: `${(point.y / 64) * 100}%`,
+  width: `${diameter}%`,
+  height: `${(diameter / 64) * 100}%`
+})
+const wallStyle = (wall) => ({
+  left: `${wall.x}%`,
+  top: `${(wall.y / 64) * 100}%`,
+  width: `${wall.width}%`,
+  height: `${(wall.height / 64) * 100}%`
+})
+
+function stopClock() {
+  if (clock !== null) clearInterval(clock)
+  clock = null
+}
+function clearInput() {
+  heldKeys.clear()
+  heldDirection = ''
+  heldFire = false
+  firePulse = 0
+  dragPoint = null
+  mouseHeld = false
+}
+function pause() {
+  paused.value = true
+  stopClock()
+  clearInput()
+}
+async function request(kind, action, apply) {
+  if (busy.value || !active.value || closed) return
+  const current = ++revision
+  busy.value = kind
+  error.value = ''
+  try {
+    const value = await action()
+    if (current === revision && mounted && !closed && active.value) apply(value)
+  } catch (failure) {
+    if (current === revision && mounted && !closed && active.value)
+      error.value = errorText(failure)
+  } finally {
+    if (current === revision) busy.value = ''
+  }
+}
+function loadProgress() {
+  return request(
+    'loading',
+    () => dive.getState(),
+    (value) => {
+      progress.value = value
+    }
+  )
+}
+function startLevel(levelId) {
+  if (busy.value || !progress.value || levelId > progress.value.unlockedLevel)
+    return
+  pause()
+  selectedLevel.value = levelId
+  return request(
+    'start',
+    () => dive.start({ levelId }),
+    (run) => {
+      issued = run
+      game = createDiveGame(levelId, { seed: run.seed })
+      gameState.value = game.getState()
+      trace = []
+      lastInput = { dx: 0, dy: 0, fire: false }
+      settled.value = null
+      paused.value = false
+      nextTick(() => {
+        measureBoard()
+        startClock()
+      })
+    }
+  )
+}
+function currentInput() {
+  let dx =
+    (heldKeys.has('arrowright') ||
+    heldKeys.has('d') ||
+    heldDirection === 'right'
+      ? 1
+      : 0) -
+    (heldKeys.has('arrowleft') || heldKeys.has('a') || heldDirection === 'left'
+      ? 1
+      : 0)
+  let dy =
+    (heldKeys.has('arrowdown') || heldKeys.has('s') || heldDirection === 'down'
+      ? 1
+      : 0) -
+    (heldKeys.has('arrowup') || heldKeys.has('w') || heldDirection === 'up'
+      ? 1
+      : 0)
+  if (dragPoint && gameState.value) {
+    dx =
+      Math.abs(dragPoint.x - gameState.value.player.x) > 0.7
+        ? Math.sign(dragPoint.x - gameState.value.player.x)
+        : 0
+    dy =
+      Math.abs(dragPoint.y - gameState.value.player.y) > 0.7
+        ? Math.sign(dragPoint.y - gameState.value.player.y)
+        : 0
+  }
+  const fire = heldFire || heldKeys.has(' ') || firePulse > 0
+  if (firePulse > 0) firePulse--
+  return { dx, dy, fire }
+}
+function startClock() {
+  stopClock()
+  if (
+    !mounted ||
+    closed ||
+    !active.value ||
+    paused.value ||
+    !game ||
+    gameState.value?.status !== 'playing'
+  )
+    return
+  clock = setInterval(() => {
+    if (!canPlay.value) return
+    const input = currentInput()
+    if (
+      input.dx !== lastInput.dx ||
+      input.dy !== lastInput.dy ||
+      input.fire !== lastInput.fire
+    )
+      trace.push({ tick: gameState.value.tick, ...input })
+    lastInput = input
+    game.setInput(input)
+    gameState.value = game.step()
+    if (gameState.value.status !== 'playing') {
+      stopClock()
+      clearInput()
+      finishRun()
+    }
+  }, DIVE_STEP_MS)
+}
+function finishRun() {
+  if (!issued || !gameState.value || gameState.value.status === 'playing')
+    return
+  const proof = {
+    runId: issued.id,
+    ticks: gameState.value.tick,
+    trace: trace.map((item) => ({ ...item }))
+  }
+  return request(
+    'finish',
+    () => dive.finish(proof),
+    (value) => {
+      settled.value = value
+      progress.value = value.state
+      emit('reward', value.wardrobe)
+    }
+  )
+}
+function retryRequest() {
+  return gameState.value?.status && gameState.value.status !== 'playing'
+    ? finishRun()
+    : gameState.value
+      ? startLevel(selectedLevel.value)
+      : loadProgress()
+}
+function resume() {
+  if (!active.value || busy.value) return
+  if (!issued || Date.now() > issued.expiresAt) {
+    error.value = '这次潜水已经过期，请重新出发'
+    return
+  }
+  paused.value = false
+  error.value = ''
+  measureBoard()
+  startClock()
+}
+function togglePause() {
+  if (!gameState.value || gameState.value.status !== 'playing') return
+  paused.value ? resume() : pause()
+}
+function backToLevels() {
+  pause()
+  game = null
+  issued = null
+  gameState.value = null
+  settled.value = null
+  error.value = ''
+  loadProgress()
+}
+function close() {
+  closed = true
+  revision++
+  stopClock()
+  clearInput()
+  emit('close')
+}
+function askClose() {
+  if (!gameState.value || gameState.value.status !== 'playing') return close()
+  const wasPaused = paused.value
+  pause()
+  const current = revision
+  uni.showModal({
+    title: '先回岸边吗？',
+    content: '本局未完成不计奖励，已经拥有的装扮都会保留。',
+    confirmText: '回岸边',
+    cancelText: '继续探索',
+    success(result) {
+      if (closed || !mounted || current !== revision) return
+      if (result.confirm) close()
+      else if (!wasPaused && active.value) resume()
+    }
+  })
+}
+function pressDirection(direction) {
+  if (canPlay.value) heldDirection = direction
+}
+function releaseDirection(direction) {
+  if (heldDirection === direction) heldDirection = ''
+}
+function pressFire() {
+  if (canPlay.value) {
+    heldFire = true
+    firePulse = 2
+  }
+}
+function releaseFire() {
+  heldFire = false
+}
+function pulseFire() {
+  if (canPlay.value) firePulse = 2
+}
+function measureBoard() {
+  if (!mounted || !gameState.value) return
+  uni
+    .createSelectorQuery()
+    .in(instance.proxy)
+    .select('.dive-water')
+    .boundingClientRect((rect) => {
+      if (mounted && rect?.width > 0) boardRect = rect
+    })
+    .exec()
+}
+function pointer(event) {
+  const point = event.touches?.[0] || event.changedTouches?.[0] || event
+  const x = point.clientX ?? point.pageX,
+    y = point.clientY ?? point.pageY
+  if (!boardRect || !Number.isFinite(x) || !Number.isFinite(y)) return null
+  return {
+    x: Math.max(
+      0,
+      Math.min(100, ((x - boardRect.left) / boardRect.width) * 100)
+    ),
+    y: Math.max(0, Math.min(64, ((y - boardRect.top) / boardRect.height) * 64))
+  }
+}
+function beginDrag(event) {
+  if (!canPlay.value) return
+  measureBoard()
+  dragPoint = pointer(event)
+}
+function dragSwim(event) {
+  if (canPlay.value) dragPoint = pointer(event)
+}
+function endDrag() {
+  dragPoint = null
+  mouseHeld = false
+}
+function beginMouseDrag(event) {
+  if ((event.button == null || event.button === 0) && canPlay.value) {
+    mouseHeld = true
+    beginDrag(event)
+  }
+}
+function mouseDrag(event) {
+  if (mouseHeld) dragSwim(event)
+}
+function readViewport() {
+  const info =
+    typeof uni.getWindowInfo === 'function'
+      ? uni.getWindowInfo()
+      : uni.getSystemInfoSync()
+  viewport.value = { width: info.windowWidth, height: info.windowHeight }
+  nextTick(measureBoard)
+}
+// #ifdef H5
+function keyDown(event) {
+  const key = event.key.toLowerCase()
+  if (key === 'escape') {
+    event.preventDefault()
+    togglePause()
+    return
+  }
+  if (
+    !canPlay.value ||
+    ![
+      'arrowup',
+      'arrowdown',
+      'arrowleft',
+      'arrowright',
+      'w',
+      'a',
+      's',
+      'd',
+      ' '
+    ].includes(key) ||
+    /^(INPUT|TEXTAREA)$/.test(event.target?.tagName)
+  )
+    return
+  event.preventDefault()
+  heldKeys.add(key)
+}
+function keyUp(event) {
+  heldKeys.delete(event.key.toLowerCase())
+}
+function blur() {
+  if (gameState.value?.status === 'playing') pause()
+  clearInput()
+}
+function visibility() {
+  if (globalThis.document.hidden) blur()
+}
+// #endif
+onMounted(() => {
+  mounted = true
+  readViewport()
+  uni.onWindowResize?.(readViewport)
+  // #ifdef H5
+  reducedMotion.value = Boolean(
+    globalThis.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+  )
+  globalThis.addEventListener('keydown', keyDown)
+  globalThis.addEventListener('keyup', keyUp)
+  globalThis.addEventListener('blur', blur)
+  globalThis.document.addEventListener('visibilitychange', visibility)
+  // #endif
+  loadProgress()
+})
+onHide(() => {
+  active.value = false
+  revision++
+  busy.value = ''
+  pause()
+})
+onShow(() => {
+  if (!mounted || closed) return
+  active.value = true
+  readViewport()
+  loadProgress()
+})
+onUnmounted(() => {
+  mounted = false
+  closed = true
+  revision++
+  stopClock()
+  clearInput()
+  uni.offWindowResize?.(readViewport)
+  // #ifdef H5
+  globalThis.removeEventListener('keydown', keyDown)
+  globalThis.removeEventListener('keyup', keyUp)
+  globalThis.removeEventListener('blur', blur)
+  globalThis.document.removeEventListener('visibilitychange', visibility)
+  // #endif
+})
+</script>
+
+<style scoped>
+.dive-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  color: #ebf4dc;
+  background: #102e47df;
+}
+.dive-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  max-width: 1160px;
+  max-height: 860px;
+  border: 3px solid #78b8b2;
+  border-radius: 22px;
+  background: #1b4e62;
+  overflow: hidden;
+  box-shadow: 0 16px 60px #071e3c77;
+}
+button {
+  min-height: 44px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+button::after {
+  border: 0;
+}
+button[disabled] {
+  opacity: 0.5;
+}
+button:focus-visible {
+  outline: 3px solid #ffe7ad;
+  outline-offset: 3px;
+}
+.dive-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px 10px;
+  flex-shrink: 0;
+}
+.dive-title {
+  font-size: 23px;
+  font-weight: 700;
+}
+.dive-subtitle {
+  display: block;
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: 4px;
+  color: #b8d9cc;
+}
+.shore-button {
+  color: #e4f1d9;
+  background: #366b77;
+  padding: 10px 14px;
+  border-radius: 22px;
+  flex-shrink: 0;
+}
+.level-scroll {
+  height: 0;
+  flex: 1;
+  min-height: 0;
+}
+.dive-intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background: #215d6d;
+}
+.intro-pet {
+  width: 85px;
+  height: 95px;
+  flex-shrink: 0;
+}
+.intro-title {
+  font-size: 18px;
+  font-weight: 650;
+  margin-bottom: 8px;
+}
+.dive-intro text {
+  display: block;
+  max-width: 330px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #beddd0;
+}
+.level-list {
+  display: flex;
+  gap: 14px;
+  padding: 24px 20px;
+}
+.level-card {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 12px 18px;
+  color: #ecf6df;
+  background: #2c6c76;
+  border: 1px solid #58918e;
+  border-radius: 16px;
+  text-align: center;
+}
+.level-2 {
+  background: #38687a;
+}
+.level-3 {
+  background: #4b6280;
+}
+.level-name {
+  font-size: 19px;
+  font-weight: 650;
+}
+.level-target {
+  font-size: 12px;
+  color: #bcdace;
+  margin: 6px 0;
+}
+.level-prize {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #ecdfb8;
+}
+.level-state {
+  padding: 7px 24px;
+  border-radius: 20px;
+  color: #284c57;
+  background: #d9e8c6;
+  font-size: 13px;
+}
+.level-icon {
+  position: relative;
+  width: 64px;
+  height: 52px;
+  border-radius: 50%;
+  background: #22576b;
+}
+.level-icon view {
+  position: absolute;
+  bottom: 10px;
+  width: 9px;
+  height: 27px;
+  border-radius: 10px 10px 3px 3px;
+  background: #a7c9a1;
+  transform: rotate(-18deg);
+}
+.level-icon view:first-child {
+  left: 14px;
+}
+.level-icon view:nth-child(2) {
+  left: 29px;
+  height: 38px;
+  transform: rotate(9deg);
+  background: #c5d5ac;
+}
+.level-icon view:nth-child(3) {
+  right: 13px;
+  height: 23px;
+  transform: rotate(22deg);
+}
+.level-2 .level-icon view {
+  background: #d6a4a0;
+}
+.level-3 .level-icon view {
+  background: #abafe0;
+}
+.adventure-rules {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 20px 20px;
+  color: #b9d5cd;
+  font-size: 12px;
+  line-height: 1.9;
+  text-align: center;
+}
+.dive-footnote {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 8px 12px 11px;
+  color: #a3c7c1;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.dive-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 16px 8px;
+  padding: 7px 12px;
+  border: 1px solid #d3a99b;
+  border-radius: 10px;
+  color: #ffe1cb;
+  background: #685c65;
+  font-size: 12px;
+  line-height: 1.7;
+  flex-shrink: 0;
+}
+.dive-error button {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  color: #fff2d5;
+  background: #8b7372;
+}
+.dive-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 20px 10px;
+  flex-shrink: 0;
+}
+.heart-group {
+  display: flex;
+  gap: 3px;
+  font-size: 22px;
+  color: #f2b6ae;
+}
+.heart-group .empty {
+  color: #668d93;
+}
+.oxygen-group {
+  flex: 1;
+  max-width: 200px;
+  font-size: 11px;
+  color: #c6e3d7;
+}
+.oxygen-track {
+  height: 5px;
+  margin-top: 4px;
+  border-radius: 3px;
+  background: #346d7b;
+  overflow: hidden;
+}
+.oxygen-track view {
+  height: 100%;
+  background: #c1dec0;
+}
+.pearl-count {
+  font-size: 12px;
+  white-space: nowrap;
+}
+.pause-button {
+  min-width: 52px;
+  padding: 8px;
+  border-radius: 10px;
+  color: #deecd6;
+  background: #366c79;
+}
+.play-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex: 1;
+  min-height: 0;
+  padding: 0 14px;
+}
+.board-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+}
+.dive-water {
+  position: relative;
+  max-width: 100%;
+  border: 3px solid #88bdb5;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #367e92;
+  box-shadow: inset 0 -20px 0 #2b7185;
+  touch-action: none;
+  user-select: none;
+}
+.depth-2 {
+  background: #326c89;
+}
+.depth-3 {
+  background: #354e7c;
+}
+.water-ratio {
+  position: relative;
+  height: 0;
+  padding-bottom: 64%;
+}
+.water-light {
+  position: absolute;
+  top: -10%;
+  width: 12%;
+  height: 100%;
+  transform: rotate(20deg);
+  background: #d0e7ce0c;
+  pointer-events: none;
+}
+.light-one {
+  left: 15%;
+}
+.light-two {
+  left: 62%;
+  width: 22%;
+}
+.seaweed {
+  position: absolute;
+  bottom: 0;
+  width: 12%;
+  height: 22%;
+  pointer-events: none;
+}
+.weed-one {
+  left: 6%;
+}
+.weed-two {
+  right: 9%;
+  height: 16%;
+  transform: scaleX(-1);
+}
+.seaweed view {
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  width: 10%;
+  height: 70%;
+  background: #5caa9a;
+  border-radius: 80% 10% 0 0;
+  transform: rotate(-15deg);
+}
+.seaweed view:nth-child(2) {
+  left: 50%;
+  height: 100%;
+  transform: rotate(10deg);
+  background: #75b5a1;
+}
+.seaweed view:nth-child(3) {
+  left: 70%;
+  height: 45%;
+  transform: rotate(20deg);
+}
+.dive-coral {
+  position: absolute;
+  z-index: 2;
+  border: 2px solid #ddad9e;
+  border-radius: 18% 20% 8% 8%;
+  background: #c18d91;
+  box-shadow: inset -4px 0 0 #9c7d8a;
+}
+.dive-coral view {
+  position: absolute;
+  top: 15%;
+  width: 32%;
+  height: 13%;
+  border-radius: 8px;
+  background: #e0b1a6;
+}
+.dive-coral view:first-child {
+  left: -15%;
+}
+.dive-coral view:nth-child(2) {
+  right: -15%;
+  top: 54%;
+}
+.depth-3 .dive-coral {
+  background: #9891b8;
+  border-color: #b4acce;
+}
+.dive-pearl,
+.dive-exit,
+.dive-enemy,
+.dive-bubble {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+.dive-pearl {
+  z-index: 3;
+  border-radius: 50%;
+  background: #fff0c8;
+  border: 2px solid #d8cfad;
+  box-shadow: 0 0 8px #fff8ce66;
+}
+.dive-pearl view {
+  position: absolute;
+  width: 25%;
+  height: 25%;
+  left: 20%;
+  top: 15%;
+  border-radius: 50%;
+  background: #fffaf0;
+}
+.dive-exit {
+  z-index: 2;
+  border-radius: 50%;
+  border: 3px solid #8dbbb1;
+  background: #24647888;
+  opacity: 0.6;
+}
+.dive-exit.is-open {
+  opacity: 1;
+  border-color: #fff0c0;
+  box-shadow:
+    0 0 0 4px #ccddad33,
+    inset 0 0 15px #cae6c422;
+}
+.dive-exit text {
+  position: absolute;
+  left: -20%;
+  width: 140%;
+  bottom: -17px;
+  color: #e4f2d7;
+  font-size: 10px;
+  text-align: center;
+}
+.dive-enemy {
+  z-index: 4;
+  border-radius: 50%;
+  background: #dfbf7d;
+  border: 1px solid #b99664;
+}
+.enemy-tail {
+  position: absolute;
+  right: -24%;
+  top: 25%;
+  width: 35%;
+  height: 50%;
+  transform: rotate(45deg);
+  border-radius: 2px;
+  background: #d5ab70;
+}
+.enemy-urchin {
+  background: #ae9cc6;
+  border: 2px dashed #d8bee4;
+  box-shadow: 0 0 0 2px #a58eb7;
+}
+.enemy-urchin .enemy-tail {
+  display: none;
+}
+.enemy-eye {
+  position: absolute;
+  z-index: 2;
+  width: 10%;
+  height: 15%;
+  top: 33%;
+  border-radius: 50%;
+  background: #516375;
+}
+.enemy-eye.eye-left {
+  left: 25%;
+}
+.enemy-eye.eye-right {
+  right: 25%;
+}
+.enemy-mouth {
+  position: absolute;
+  width: 18%;
+  height: 12%;
+  border-bottom: 1px solid #65717b;
+  left: 41%;
+  top: 55%;
+  border-radius: 0 0 50% 50%;
+}
+.dive-enemy.is-stunned {
+  opacity: 0.45;
+}
+.dive-enemy text {
+  position: absolute;
+  bottom: 100%;
+  color: #d9efda;
+  font-size: 12px;
+}
+.dive-bubble {
+  z-index: 5;
+  border-radius: 50%;
+  border: 1px solid #d8f5ef;
+  box-shadow: inset 2px 2px 0 #e7fff166;
+  background: #c0f4ec33;
+}
+.dive-player {
+  position: absolute;
+  z-index: 6;
+  width: 8%;
+  height: 15%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.player-air-bubble {
+  position: absolute;
+  z-index: 5;
+  left: -4%;
+  top: 3%;
+  width: 108%;
+  height: 80%;
+  border: 1px solid #d5f4e87a;
+  border-radius: 50%;
+  box-shadow: inset 2px 2px 0 #e0f7e52b;
+}
+.dive-player.is-invulnerable {
+  opacity: 0.55;
+}
+.water-cover {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  background: #183d60df;
+  text-align: center;
+}
+.pause-caption {
+  font-size: 19px;
+  font-weight: 650;
+  color: #f1edcf;
+}
+.water-cover text {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #bddbd3;
+}
+.water-cover button {
+  min-width: 120px;
+  padding: 9px 16px;
+  border-radius: 12px;
+  color: #254e60;
+  background: #d7e7c7;
+}
+.water-cover .quiet-water-button {
+  color: #c6e2d6;
+  background: transparent;
+  min-height: 36px;
+}
+.result-symbol {
+  color: #ead8a3;
+  font-size: 32px;
+  line-height: 1.1;
+}
+.earned-items {
+  max-width: 95%;
+  color: #ebdcb9;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.game-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+  flex-shrink: 0;
+}
+.direction-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 44px);
+  grid-template-rows: repeat(3, 44px);
+  gap: 4px;
+}
+.direction-pad button {
+  padding: 0;
+  min-width: 44px;
+  color: #dcebd6;
+  background: #397382;
+  border: 1px solid #61979b;
+  border-radius: 12px;
+  font-size: 25px;
+}
+.direction-up {
+  grid-column: 2;
+  grid-row: 1;
+}
+.direction-left {
+  grid-column: 1;
+  grid-row: 2;
+}
+.direction-right {
+  grid-column: 3;
+  grid-row: 2;
+}
+.direction-down {
+  grid-column: 2;
+  grid-row: 3;
+}
+.pad-center {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 12px;
+  border-radius: 50%;
+  border: 1px solid #7eaba7;
+  background: #4d858c;
+}
+.bubble-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 86px;
+  height: 86px;
+  padding: 10px;
+  border-radius: 50%;
+  background: #99c9bb;
+  color: #2d5d65;
+  border: 3px solid #d2e6c6;
+  box-shadow: 0 4px 0 #2d6875;
+  font-size: 12px;
+}
+.bubble-button view {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #edf4d6;
+  background: #b8e1d333;
+  box-shadow: inset 3px 2px 0 #e4f3d9aa;
+}
+.control-hint {
+  padding: 10px 16px 0;
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
+  color: #bed7cd;
+  flex-shrink: 0;
+}
+.keyboard-hint {
+  display: block;
+}
+.result-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.dive-primary,
+.dive-secondary {
+  padding: 10px 16px;
+  border-radius: 12px;
+  color: #294f5d;
+  background: #d7e7c7;
+}
+.dive-secondary {
+  color: #d2e7db;
+  background: #3a7480;
+}
+@media (max-width: 560px) {
+  .dive-overlay {
+    padding: 0;
+  }
+  .dive-panel {
+    max-height: 100%;
+    border: 0;
+    border-radius: 0;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .dive-header {
+    padding: 14px 16px 10px;
+  }
+  .dive-title {
+    font-size: 21px;
+  }
+  .dive-subtitle {
+    font-size: 11px;
+  }
+  .dive-intro {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  .intro-pet {
+    width: 65px;
+    height: 75px;
+  }
+  .intro-title {
+    font-size: 16px;
+  }
+  .dive-intro text {
+    font-size: 12px;
+  }
+  .level-list {
+    flex-direction: column;
+    padding: 16px;
+    gap: 11px;
+  }
+  .level-card {
+    flex-direction: row;
+    text-align: left;
+    padding: 13px;
+    gap: 12px;
+  }
+  .level-icon {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+  }
+  .level-copy {
+    flex: 1;
+  }
+  .level-name {
+    font-size: 16px;
+  }
+  .level-prize {
+    font-size: 10px;
+  }
+  .level-state {
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+  .level-icon view:first-child {
+    left: 8px;
+  }
+  .level-icon view:nth-child(2) {
+    left: 20px;
+  }
+  .level-icon view:nth-child(3) {
+    right: 4px;
+  }
+  .dive-hud {
+    gap: 8px;
+    padding: 0 12px 8px;
+  }
+  .heart-group {
+    font-size: 18px;
+  }
+  .oxygen-group {
+    max-width: 90px;
+  }
+  .pearl-count {
+    font-size: 11px;
+  }
+  .pause-button {
+    min-width: 44px;
+    font-size: 12px;
+  }
+  .play-layout {
+    gap: 12px;
+    padding: 0 12px;
+  }
+  .pause-caption {
+    font-size: 17px;
+  }
+  .water-cover {
+    gap: 4px;
+  }
+  .water-cover text {
+    font-size: 11px;
+  }
+  .earned-items {
+    font-size: 10px;
+  }
+  .result-symbol {
+    font-size: 26px;
+  }
+  .control-hint {
+    font-size: 10px;
+  }
+  .keyboard-hint {
+    display: none;
+  }
+}
+@media (min-width: 620px) and (max-height: 620px) {
+  .dive-overlay {
+    padding: 8px;
+  }
+  .dive-panel {
+    border-width: 2px;
+    border-radius: 16px;
+  }
+  .dive-header {
+    padding: 8px 16px 4px;
+  }
+  .dive-title {
+    font-size: 20px;
+  }
+  .dive-subtitle {
+    display: none;
+  }
+  .dive-hud {
+    padding: 0 16px 6px;
+  }
+  .play-layout {
+    flex-direction: row;
+    gap: 20px;
+  }
+  .board-wrap {
+    flex: 1;
+  }
+  .game-controls {
+    flex-direction: column;
+    gap: 12px;
+    width: 160px;
+  }
+  .direction-pad {
+    grid-template-columns: repeat(3, 44px);
+    grid-template-rows: repeat(3, 44px);
+  }
+  .bubble-button {
+    width: 78px;
+    height: 78px;
+  }
+  .control-hint {
+    padding-top: 7px;
+  }
+  .keyboard-hint {
+    display: inline;
+    margin-left: 8px;
+  }
+  .dive-footnote {
+    padding: 5px 12px;
+  }
+  .dive-intro {
+    padding: 8px 20px;
+  }
+  .intro-pet {
+    width: 58px;
+    height: 65px;
+  }
+  .level-list {
+    padding: 14px 20px;
+  }
+  .level-card {
+    gap: 8px;
+    padding: 12px;
+  }
+  .level-icon {
+    width: 45px;
+    height: 35px;
+  }
+  .level-name {
+    font-size: 16px;
+  }
+  .level-target {
+    font-size: 11px;
+  }
+  .level-prize {
+    font-size: 10px;
+  }
+  .result-actions {
+    flex-direction: column;
+    width: 150px;
+  }
+  .adventure-rules {
+    padding-bottom: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dive-water * {
+    animation: none !important;
+  }
+}
+</style>
