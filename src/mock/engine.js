@@ -36,7 +36,14 @@ export function dispatch(db, method, p = {}) {
   const user = (id) => {
     const u = db.users.find((x) => x.id === id)
     requireThat(u, 'NOT_FOUND', '找不到同学资料')
-    return clone(u)
+    const result = clone(u)
+    if (result.avatarImageId) {
+      const img = (db.uploads || []).find(
+        (x) => x.imageId === result.avatarImageId
+      )
+      result.avatarUrl = img?.url || ''
+    }
+    return result
   }
   const list = (items, params = p) => {
     const size = Math.min(50, Math.max(1, Number(params.pageSize) || 20))
@@ -46,7 +53,18 @@ export function dispatch(db, method, p = {}) {
       nextCursor: start + size < items.length ? String(start + size) : null
     }
   }
-  const summarize = (item) => ({ ...clone(item), owner: user(item.ownerId) })
+  const resolveImages = (item) => {
+    if (!Array.isArray(item.imageIds)) return item.images || []
+    const uploads = db.uploads || []
+    return item.imageIds
+      .map((id) => uploads.find((u) => u.imageId === id)?.url)
+      .filter(Boolean)
+  }
+  const summarize = (item) => ({
+    ...clone(item),
+    images: resolveImages(item),
+    owner: user(item.ownerId)
+  })
   const all = () => Object.values(db.contents).flat()
   const note = (recipientId, title, type, id) =>
     db.notifications.unshift({
@@ -78,11 +96,30 @@ export function dispatch(db, method, p = {}) {
     db.idempotency[key] = { fingerprint, data: clone(data) }
     return data
   }
-  if (method === 'auth.login')
-    throw new ServiceError(
-      'NOT_IMPLEMENTED',
-      '演示模式仅切换虚构身份；真实登录请接入后端'
+  if (method === 'auth.login') {
+    if (p.type === 'wechat')
+      throw new ServiceError(
+        'NOT_IMPLEMENTED',
+        '微信登录待群里确认后接入'
+      )
+    requireThat(p.type === 'h5', 'INVALID_ARGUMENT', '暂仅支持 h5 学号密码登录')
+    requireThat(
+      typeof p.studentId === 'string' && p.studentId.trim(),
+      'INVALID_ARGUMENT',
+      '请输入学号'
     )
+    requireThat(
+      typeof p.password === 'string' && p.password,
+      'INVALID_ARGUMENT',
+      '请输入密码'
+    )
+    const loggedIn = db.users[0]
+    db.currentUserId = loggedIn.id
+    return {
+      token: `mock_${loggedIn.id}_${Date.now()}`,
+      user: clone(loggedIn)
+    }
+  }
   me()
   if (method.startsWith('wardrobe.'))
     return dispatchWardrobe(db, me().id, method.slice(9), p)
@@ -93,10 +130,68 @@ export function dispatch(db, method, p = {}) {
   if (method === 'bulletin.list') return list(listDemoBulletins())
   if (method === 'pet.get') return getPet(db, me().id, p)
   if (method === 'pet.save') return savePet(db, me().id, p)
+  if (method === 'upload.create') {
+    requireThat(
+      ['content', 'avatar'].includes(p.usage),
+      'INVALID_ARGUMENT',
+      '请指定图片用途（content / avatar）'
+    )
+    requireThat(p.data, 'INVALID_ARGUMENT', '请选择图片')
+    db.uploads = db.uploads || []
+    const image = {
+      imageId: makeId('img'),
+      ownerId: me().id,
+      usage: p.usage,
+      url: p.data,
+      status: 'pending',
+      createdAt: new Date().toISOString()
+    }
+    db.uploads.unshift(image)
+    return { imageId: image.imageId, url: image.url }
+  }
+  if (method === 'upload.confirm') {
+    const img = (db.uploads || []).find((u) => u.imageId === p.imageId)
+    requireThat(img, 'NOT_FOUND', '图片不存在')
+    requireThat(img.ownerId === me().id, 'FORBIDDEN', '无权操作此图片')
+    img.status = 'confirmed'
+    if (p.contentType) img.contentType = p.contentType
+    if (p.contentId) img.contentId = p.contentId
+    return { imageId: img.imageId, status: 'confirmed' }
+  }
   if (method === 'user.getProfile') return user(p.userId || me().id)
   if (method === 'user.updateProfile') {
     const u = me()
-    for (const key of ['nickname', 'bio', 'skillTags'])
+    if (p.nickname !== undefined)
+      requireThat(
+        typeof p.nickname === 'string' &&
+          p.nickname.trim().length >= 1 &&
+          p.nickname.length <= 12,
+        'INVALID_ARGUMENT',
+        '昵称需为 1～12 个字'
+      )
+    if (p.bio !== undefined)
+      requireThat(
+        typeof p.bio === 'string' && p.bio.length <= 200,
+        'INVALID_ARGUMENT',
+        '简介最多 200 个字'
+      )
+    if (p.skillTags !== undefined)
+      requireThat(
+        Array.isArray(p.skillTags) && p.skillTags.length <= 10,
+        'INVALID_ARGUMENT',
+        '技能标签最多 10 个'
+      )
+    if (p.avatarImageId !== undefined && p.avatarImageId) {
+      const img = (db.uploads || []).find(
+        (x) => x.imageId === p.avatarImageId
+      )
+      requireThat(
+        img && img.ownerId === u.id,
+        'FORBIDDEN',
+        '头像图片不属于当前账号'
+      )
+    }
+    for (const key of ['nickname', 'bio', 'skillTags', 'avatarImageId'])
       if (p[key] !== undefined) u[key] = p[key]
     return user(u.id)
   }
@@ -141,6 +236,8 @@ export function dispatch(db, method, p = {}) {
               (c.visibility === 'public' || c.ownerId === me().id) &&
               (!p.keyword || `${c.title} ${c.body}`.includes(p.keyword)) &&
               (!p.category || c.category === p.category) &&
+              (!p.campusId || c.campusId === p.campusId) &&
+              (!p.marketType || c.marketType === p.marketType) &&
               (!p.ownerId || c.ownerId === p.ownerId) &&
               (!p.status || c.status === p.status)
           )
@@ -199,15 +296,65 @@ export function dispatch(db, method, p = {}) {
             '容量不能少于现有成员'
           )
       }
-      if (type === 'market')
+      if (type === 'market') {
         requireThat(
-          Number.isInteger(p.priceCents) && p.priceCents >= 0,
+          ['sell', 'buy'].includes(p.marketType),
           'INVALID_ARGUMENT',
-          '价格应为非负整数分'
+          '请选择发布类型（闲置 / 求购）'
         )
-      const allowed = ['title', 'body', 'category', 'location', 'images']
+        if (p.marketType === 'sell') {
+          requireThat(
+            Number.isInteger(p.priceCents) && p.priceCents >= 0,
+            'INVALID_ARGUMENT',
+            '价格应为非负整数分'
+          )
+          requireThat(
+            typeof p.condition === 'string' && p.condition.trim(),
+            'INVALID_ARGUMENT',
+            '请填写成色'
+          )
+        } else {
+          requireThat(
+            Number.isInteger(p.budgetCents) && p.budgetCents >= 0,
+            'INVALID_ARGUMENT',
+            '预算应为非负整数分'
+          )
+          requireThat(
+            typeof p.keywords === 'string' && p.keywords.trim(),
+            'INVALID_ARGUMENT',
+            '请填写关键词'
+          )
+        }
+        if (p.imageIds !== undefined) {
+          requireThat(
+            Array.isArray(p.imageIds) && p.imageIds.length <= 3,
+            'INVALID_ARGUMENT',
+            '图片最多 3 张'
+          )
+          const uploads = db.uploads || []
+          for (const imageId of p.imageIds) {
+            const img = uploads.find((u) => u.imageId === imageId)
+            requireThat(
+              img && img.ownerId === me().id,
+              'FORBIDDEN',
+              '存在不属于当前账号的图片'
+            )
+          }
+        }
+      }
+      const allowed = ['title', 'body', 'category', 'location']
+      if (type !== 'market') allowed.push('images')
       if (type === 'plan') allowed.push('startAt', 'endAt', 'capacity')
-      if (type === 'market') allowed.push('priceCents')
+      if (type === 'market')
+        allowed.push(
+          'priceCents',
+          'marketType',
+          'condition',
+          'handoverCampus',
+          'keywords',
+          'budgetCents',
+          'imageIds'
+        )
       const fields = {}
       for (const key of allowed)
         if (p[key] !== undefined) fields[key] = clone(p[key])
@@ -244,6 +391,47 @@ export function dispatch(db, method, p = {}) {
           ? 'closed'
           : 'completed'
     return summarize(item)
+  }
+  if (method === 'market.reserve') {
+    db.reservations = db.reservations || []
+    const item = content('market', p.id)
+    requireThat(
+      item.ownerId !== me().id,
+      'INVALID_ARGUMENT',
+      '不能预约自己的商品'
+    )
+    requireThat(
+      item.status === 'active',
+      'CONFLICT',
+      '该商品当前不可预约'
+    )
+    requireThat(
+      !db.reservations.some(
+        (r) => r.contentId === item.id && r.status === 'pending'
+      ),
+      'CONFLICT',
+      '该商品已有进行中的预约'
+    )
+    const r = {
+      id: makeId('res'),
+      contentId: item.id,
+      buyerId: me().id,
+      sellerId: item.ownerId,
+      status: 'pending',
+      createdAt: new Date().toISOString()
+    }
+    db.reservations.unshift(r)
+    return clone(r)
+  }
+  if (method === 'market.getCandidates') {
+    db.reservations = db.reservations || []
+    const item = content('market', p.id)
+    owned(item)
+    return list(
+      db.reservations
+        .filter((r) => r.contentId === item.id && r.status === 'pending')
+        .map(clone)
+    )
   }
   if (method === 'plan.getCandidates') {
     const plan = content('plan', p.planId)

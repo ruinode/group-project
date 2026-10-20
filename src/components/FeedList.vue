@@ -8,6 +8,17 @@
       </view>
       <button class="primary" @tap="publish">发布</button>
     </view>
+    <view v-if="marketTypeOptions.length" class="content-switcher">
+      <button
+        v-for="opt in marketTypeOptions"
+        :key="opt.value"
+        class="content-tab"
+        :class="{ selected: marketType === opt.value }"
+        @tap="setMarketType(opt.value)"
+      >
+        {{ opt.label }}
+      </button>
+    </view>
     <view v-if="showFilters" class="content-switcher">
       <button
         class="content-tab"
@@ -34,6 +45,22 @@
         confirm-type="search"
         @confirm="load(true)"
       />
+      <view v-if="campusOptions.length" class="filter-fields">
+        <view class="category-field">
+          <text class="filter-label">交接校区</text>
+          <picker
+            :range="campusOptions"
+            range-key="label"
+            :value="campusIndex"
+            @change="chooseCampus"
+          >
+            <view class="input status-value">
+              {{ campusOptions[campusIndex]?.label || '全部校区' }}
+              <text>⌄</text>
+            </view>
+          </picker>
+        </view>
+      </view>
       <template v-if="showFilters">
         <view class="filter-shortcuts">
           <button
@@ -136,7 +163,9 @@ const props = defineProps({
   subtitle: { default: '' },
   showFilters: { type: Boolean, default: false },
   categoryOptions: { type: Array, default: () => [] },
-  statusOptions: { type: Array, default: () => [] }
+  statusOptions: { type: Array, default: () => [] },
+  marketTypeOptions: { type: Array, default: () => [] },
+  campusOptions: { type: Array, default: () => [] }
 })
 const items = ref([]),
   keyword = ref(''),
@@ -144,11 +173,19 @@ const items = ref([]),
   loading = ref(false),
   cursor = ref(null),
   category = ref(''),
-  status = ref('')
+  status = ref(''),
+  marketType = ref(''),
+  campusId = ref('')
 const statusIndex = computed(() =>
   Math.max(
     0,
     props.statusOptions.findIndex((option) => option.value === status.value)
+  )
+)
+const campusIndex = computed(() =>
+  Math.max(
+    0,
+    props.campusOptions.findIndex((option) => option.value === campusId.value)
   )
 )
 let revision = 0
@@ -165,6 +202,8 @@ async function load(reset) {
     cursor.value = null
     appliedFilters = {
       keyword: keyword.value.trim(),
+      marketType: marketType.value || undefined,
+      campusId: campusId.value || undefined,
       ...(props.showFilters
         ? { category: category.value.trim(), status: status.value }
         : {})
@@ -191,10 +230,20 @@ function clear() {
   keyword.value = ''
   category.value = ''
   status.value = ''
+  marketType.value = ''
+  campusId.value = ''
   load(true)
 }
 function chooseCategory(value) {
   category.value = value
+  load(true)
+}
+function setMarketType(value) {
+  marketType.value = value
+  load(true)
+}
+function chooseCampus(event) {
+  campusId.value = props.campusOptions[Number(event.detail.value)]?.value || ''
   load(true)
 }
 function chooseStatus(event) {

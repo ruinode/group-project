@@ -51,18 +51,66 @@
         <input class="input" v-model="capacity" type="number" />
       </template>
       <template v-if="type === 'market'">
-        <text class="label">价格（元）</text>
+        <text class="label">发布类型</text>
+        <view class="content-switcher">
+          <button
+            class="content-tab"
+            :class="{ selected: marketType === 'sell' }"
+            @tap="marketType = 'sell'"
+          >
+            闲置出售
+          </button>
+          <button
+            class="content-tab"
+            :class="{ selected: marketType === 'buy' }"
+            @tap="marketType = 'buy'"
+          >
+            求购
+          </button>
+        </view>
+        <text class="label">类别</text>
         <input
           class="input"
-          v-model="price"
-          type="digit"
-          placeholder="如 35.00"
+          v-model="form.category"
+          placeholder="如教材、生活用品、数码"
         />
+        <template v-if="marketType === 'sell'">
+          <text class="label">价格（元）</text>
+          <input
+            class="input"
+            v-model="price"
+            type="digit"
+            placeholder="如 35.00"
+          />
+          <text class="label">成色</text>
+          <input class="input" v-model="form.condition" placeholder="如 九成新" />
+          <text class="label">交接校区</text>
+          <input
+            class="input"
+            v-model="form.handoverCampus"
+            placeholder="如 主校区图书馆"
+          />
+        </template>
+        <template v-else>
+          <text class="label">预算（元）</text>
+          <input
+            class="input"
+            v-model="budget"
+            type="digit"
+            placeholder="如 50.00"
+          />
+          <text class="label">关键词</text>
+          <input
+            class="input"
+            v-model="form.keywords"
+            placeholder="如 高等数学、同济七版"
+          />
+        </template>
       </template>
-      <text class="label">图片</text>
+      <text class="label">图片（最多 3 张）</text>
       <view class="actions">
         <image
-          v-for="(image, index) in form.images"
+          v-for="(image, index) in previews"
           :key="index"
           :src="image"
           mode="aspectFill"
@@ -94,7 +142,6 @@ import {
   contentUrl,
   localToIso
 } from '../../utils/routes.js'
-import { config } from '../../config/index.js'
 import { errorText } from '../../utils/errors.js'
 const type = ref('plan'),
   form = reactive({
@@ -102,13 +149,20 @@ const type = ref('plan'),
     body: '',
     category: '',
     location: '',
-    images: []
+    images: [],
+    condition: '',
+    handoverCampus: '',
+    keywords: ''
   }),
   date = ref(''),
   startTime = ref('09:00'),
   endTime = ref('12:00'),
   capacity = ref('2'),
   price = ref(''),
+  budget = ref(''),
+  marketType = ref('sell'),
+  previews = ref([]),
+  imageIds = ref([]),
   error = ref(''),
   saving = ref(false)
 onLoad((options) => {
@@ -118,19 +172,39 @@ onLoad((options) => {
     .slice(0, 10)
 })
 function chooseImages() {
-  if (config.apiMode !== 'mock') {
-    error.value = '请由 B 接入 upload.create/confirm 和真实存储后启用上传'
-    return
-  }
-  if (form.images.length >= 3) return
+  const count =
+    type.value === 'market' ? imageIds.value.length : form.images.length
+  if (count >= 3) return
   uni.chooseImage({
-    count: 3 - form.images.length,
+    count: 3 - count,
     sizeType: ['compressed'],
-    success: (r) => form.images.push(...r.tempFilePaths)
+    success: async (r) => {
+      if (type.value === 'market') {
+        for (const path of r.tempFilePaths) {
+          try {
+            const result = await api.upload.create({
+              usage: 'content',
+              data: path
+            })
+            imageIds.value.push(result.imageId)
+            previews.value.push(result.url)
+          } catch (e) {
+            error.value = errorText(e)
+          }
+        }
+      } else {
+        form.images.push(...r.tempFilePaths)
+      }
+    }
   })
 }
 function removeImage(index) {
-  form.images.splice(index, 1)
+  if (type.value === 'market') {
+    imageIds.value.splice(index, 1)
+    previews.value.splice(index, 1)
+  } else {
+    form.images.splice(index, 1)
+  }
 }
 async function save() {
   if (saving.value) return
@@ -148,9 +222,21 @@ async function save() {
         capacity: Number(capacity.value)
       })
     if (type.value === 'market') {
-      if (!/^\d+(\.\d{1,2})?$/.test(price.value))
-        throw new Error('请填写最多两位小数的非负价格')
-      params.priceCents = Math.round(Number(price.value) * 100)
+      params.marketType = marketType.value
+      params.category = form.category.trim()
+      params.imageIds = [...imageIds.value]
+      if (marketType.value === 'sell') {
+        if (!/^\d+(\.\d{1,2})?$/.test(price.value))
+          throw new Error('请填写最多两位小数的非负价格')
+        params.priceCents = Math.round(Number(price.value) * 100)
+        params.condition = form.condition.trim()
+        params.handoverCampus = form.handoverCampus.trim()
+      } else {
+        if (!/^\d+(\.\d{1,2})?$/.test(budget.value))
+          throw new Error('请填写最多两位小数的非负预算')
+        params.budgetCents = Math.round(Number(budget.value) * 100)
+        params.keywords = form.keywords.trim()
+      }
     }
     const service = api[type.value === 'lost_found' ? 'lostFound' : type.value]
     const item = await service.create(params)

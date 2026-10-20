@@ -75,7 +75,7 @@
 
 contentType 为 plan / help / market / lost_found / event。当前 content/detail 只支持前四项；event 在第二周实现对应入口再开放通知。
 
-内容共有 id/type/ownerId/title/body/category/location/campusId/campusName/images/visibility/status/createdAt；列表和详情附公开 owner 摘要。图片演示为本机临时地址，真实服务需返回可访问图片地址或经授权解析的 fileID，禁止把私人临时地址当永久图片。
+内容共有 id/type/ownerId/title/body/category/location/campusId/campusName/imageIds/visibility/status/createdAt；列表和详情附公开 owner 摘要。图片通过 upload.create 取得 imageId，create/update 传 imageIds 数组（≤3），服务校验每张图片 ownerId 归属当前账号；详情返回 images 为服务解析出的可访问地址数组（待群里确认）。
 
 Plan 增加 startAt/endAt/capacity/memberIds；Market 增加 priceCents。时间使用 ISO 8601；前端输入和活动日期按北京时间 +08 判断，存储可用 UTC。价格为整数分。
 
@@ -83,11 +83,22 @@ Plan 增加 startAt/endAt/capacity/memberIds；Market 增加 priceCents。时间
 
 | 模块 | 输入要点 | data |
 | --- | --- | --- |
-| auth.login | 真实凭证（B 定义微信与 H5 两种方式） | `{ token, user }`；token 不记录到日志 |
-| user.getProfile | `{userId?}`；省略取本人 | 公开 User：id/nickname/campusId/campusName/skillTags/bio |
+| auth.login | `{ type: 'h5', studentId, password }`（学号密码 mock 已实现）；`{ type: 'wechat', code }` 待群里确认 | `{ token, user }`；token 不记录到日志 |
+| user.getProfile | `{userId?}`；省略取本人 | 公开 User：id/nickname/campusId/campusName/skillTags/bio/avatarImageId/avatarUrl（avatarUrl 由服务解析 upload 返回，待群里确认） |
+| user.updateProfile | `{nickname?, bio?, skillTags?, avatarImageId?}` | 保存后的 User；服务校验昵称 1～12 字、简介 ≤200、标签 ≤10、头像归属当前账号（待群里确认） |
 | user.listPublicContent | `{userId,cursor?,pageSize?}` | 该用户公开发布分页；不包含私有内容 |
+| upload.create | `{ usage: 'content'|'avatar', data }` | `{ imageId, url }`；data 为图片数据，服务校验类型/大小并生成可访问地址（待群里确认） |
+| upload.confirm | `{ imageId, contentType?, contentId? }` | `{ imageId, status: 'confirmed' }`；确认图片归属当前账号与业务内容（待群里确认） |
+| market.create | `{ marketType:'sell'|'buy', title, body, category, imageIds?, priceCents?, condition?, handoverCampus?, budgetCents?, keywords? }` | 保存后的二手内容；闲置需 priceCents/condition，求购需 budgetCents/keywords；imageIds 服务校验归属与 ≤3 张 |
+| market.update | `{ id, ...可更新字段 }` | 仅发布者可改，已完成/已下架不可改；imageIds 同 create 校验 |
+| market.get | `{ id }` | 二手详情，images 为服务解析出的可访问地址数组 |
+| market.list | `{ keyword?, category?, campusId?, marketType?, status?, cursor?, pageSize? }` | 二手列表分页，pageSize 默认 20 上限 50 |
+| market.close | `{ id }` | 发布者下架，status=closed |
+| market.complete | `{ id }` | 发布者标记交易完成，status=completed；完成后不可预约/修改 |
+| market.reserve | `{ id }` | 非发布者预约交接，status=active 才可预约；同商品不可重复预约，冲突返回 CONFLICT |
+| market.getCandidates | `{ id }` | 发布者查看该商品的待处理预约列表 |
 | myContent.list | `{contentType?,status?,cursor?,pageSize?}` | 当前用户发布分页；身份取后端会话 |
-| plan/help/market/lostFound.list | `{keyword?,category?,ownerId?,status?,cursor?,pageSize?}` | Content 分页 |
+| plan/help/market/lostFound.list | `{keyword?,category?,campusId?,marketType?,ownerId?,status?,cursor?,pageSize?}` | Content 分页；marketType/campusId 仅 market 生效 |
 | 模块.get | `{id}` | 单条内容与公开作者摘要 |
 | 模块.create/update | 内容字段；update 含 id | 保存后的 Content；作者与校区由后端确定 |
 | plan.getCandidates | `{planId,cursor?,pageSize?}` | `{items:[{candidatePlanId,ownerId,owner,plan,overlap,reasons}],nextCursor}` |
@@ -103,7 +114,7 @@ Plan 增加 startAt/endAt/capacity/memberIds；Market 增加 priceCents。时间
 | favorite.set/list | `{contentType,contentId,selected}` / 分页 | `{selected}` / 收藏分页 |
 | report.create | `{contentType,contentId,reason}` | 举报编号与状态 |
 
-所有预留的方法名称及维护人见 src/contracts/catalog.json；未实现项见 docs/status.md。market.reserve、reservation、upload、event、appraisal 和服务器订阅发送只留调用位置，不伪造成功。
+所有预留的方法名称及维护人见 src/contracts/catalog.json；未实现项见 docs/status.md。reservation、event、appraisal 和服务器订阅发送只留调用位置，不伪造成功。
 
 ## 推荐与邀请规则
 
