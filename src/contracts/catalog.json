@@ -87,7 +87,6 @@
       "get",
       "list",
       "close",
-      "complete",
       "reserve",
       "getCandidates"
     ]
