@@ -98,7 +98,11 @@ export function createSeed(now = new Date()) {
           title: '闲置护眼台灯',
           body: '使用半年，灯光正常，校内当面查看。',
           category: '生活用品',
+          marketType: 'sell',
           priceCents: 3500,
+          condition: '九成新',
+          handoverCampus: '主校区',
+          imageIds: [],
           location: '图书馆门口',
           status: 'active'
         }
@@ -162,6 +166,8 @@ export function createSeed(now = new Date()) {
     notifications: [],
     favorites: [],
     reports: [],
+    uploads: [],
+    reservations: [],
     idempotency: {}
   }
 }
