@@ -15,6 +15,7 @@ const clone = (value) => JSON.parse(JSON.stringify(value))
 const makeId = (prefix) =>
   `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`
 export function dispatch(db, method, p = {}) {
+  db.comments ||= []
   const me = () => {
     const user = db.users.find((u) => u.id === db.currentUserId)
     requireThat(user, 'UNAUTHENTICATED', '请先登录')
@@ -98,10 +99,7 @@ export function dispatch(db, method, p = {}) {
   }
   if (method === 'auth.login') {
     if (p.type === 'wechat')
-      throw new ServiceError(
-        'NOT_IMPLEMENTED',
-        '微信登录待群里确认后接入'
-      )
+      throw new ServiceError('NOT_IMPLEMENTED', '微信登录待群里确认后接入')
     requireThat(p.type === 'h5', 'INVALID_ARGUMENT', '暂仅支持 h5 学号密码登录')
     requireThat(
       typeof p.studentId === 'string' && p.studentId.trim(),
@@ -182,9 +180,7 @@ export function dispatch(db, method, p = {}) {
         '技能标签最多 10 个'
       )
     if (p.avatarImageId !== undefined && p.avatarImageId) {
-      const img = (db.uploads || []).find(
-        (x) => x.imageId === p.avatarImageId
-      )
+      const img = (db.uploads || []).find((x) => x.imageId === p.avatarImageId)
       requireThat(
         img && img.ownerId === u.id,
         'FORBIDDEN',
@@ -236,8 +232,13 @@ export function dispatch(db, method, p = {}) {
               (c.visibility === 'public' || c.ownerId === me().id) &&
               (!p.keyword || `${c.title} ${c.body}`.includes(p.keyword)) &&
               (!p.category || c.category === p.category) &&
-              (!p.campusId || c.campusId === p.campusId) &&
-              (!p.marketType || c.marketType === p.marketType) &&
+              (type !== 'market' || !p.campusId || c.campusId === p.campusId) &&
+              (type !== 'market' ||
+                !p.marketType ||
+                c.marketType === p.marketType) &&
+              (type !== 'lost_found' ||
+                !p.lostKind ||
+                c.lostKind === p.lostKind) &&
               (!p.ownerId || c.ownerId === p.ownerId) &&
               (!p.status || c.status === p.status)
           )
@@ -342,6 +343,25 @@ export function dispatch(db, method, p = {}) {
           }
         }
       }
+      if (type === 'lost_found') {
+        requireThat(
+          ['lost', 'found'].includes(p.lostKind),
+          'INVALID_ARGUMENT',
+          '请选择丢失或拾获'
+        )
+        requireThat(
+          ['card', 'key', 'misc'].includes(p.category),
+          'INVALID_ARGUMENT',
+          '请选择卡片、钥匙或杂物'
+        )
+        requireThat(
+          Array.isArray(p.images) &&
+            p.images.length >= 1 &&
+            p.images.length <= 3,
+          'INVALID_ARGUMENT',
+          '请上传 1～3 张物品照片'
+        )
+      }
       const allowed = ['title', 'body', 'category', 'location']
       if (type !== 'market') allowed.push('images')
       if (type === 'plan') allowed.push('startAt', 'endAt', 'capacity')
@@ -355,6 +375,7 @@ export function dispatch(db, method, p = {}) {
           'budgetCents',
           'imageIds'
         )
+      if (type === 'lost_found') allowed.push('lostKind')
       const fields = {}
       for (const key of allowed)
         if (p[key] !== undefined) fields[key] = clone(p[key])
@@ -400,11 +421,7 @@ export function dispatch(db, method, p = {}) {
       'INVALID_ARGUMENT',
       '不能预约自己的商品'
     )
-    requireThat(
-      item.status === 'active',
-      'CONFLICT',
-      '该商品当前不可预约'
-    )
+    requireThat(item.status === 'active', 'CONFLICT', '该商品当前不可预约')
     requireThat(
       !db.reservations.some(
         (r) => r.contentId === item.id && r.status === 'pending'
@@ -571,7 +588,16 @@ export function dispatch(db, method, p = {}) {
   }
   if (method === 'conversation.list')
     return list(
-      db.conversations.filter((c) => c.participantIds.includes(me().id))
+      db.conversations
+        .filter((c) => c.participantIds.includes(me().id))
+        .map((conversation) => ({
+          ...conversation,
+          peer: user(conversation.participantIds.find((id) => id !== me().id)),
+          lastMessage:
+            db.messages
+              .filter((message) => message.conversationId === conversation.id)
+              .slice(-1)[0] || null
+        }))
     )
   if (method === 'message.list' || method === 'message.send') {
     const c = db.conversations.find((c) => c.id === p.conversationId)
@@ -609,6 +635,49 @@ export function dispatch(db, method, p = {}) {
           note(id, '收到一条联系消息', c.contentType, c.contentId)
       return clone(message)
     })
+  }
+  if (method === 'comment.list') {
+    const item = content(p.contentType, p.contentId)
+    visible(item)
+    return list(
+      db.comments
+        .filter(
+          (comment) =>
+            comment.contentType === p.contentType &&
+            comment.contentId === p.contentId
+        )
+        .slice()
+        .reverse()
+        .map((comment) => ({ ...comment, author: user(comment.authorId) }))
+    )
+  }
+  if (method === 'comment.create') {
+    const item = content(p.contentType, p.contentId)
+    visible(item)
+    requireThat(
+      p.contentType === 'lost_found',
+      'INVALID_ARGUMENT',
+      '当前仅失物招领开放评论'
+    )
+    requireThat(
+      typeof p.body === 'string' &&
+        p.body.trim().length > 0 &&
+        p.body.trim().length <= 500,
+      'INVALID_ARGUMENT',
+      '评论需为 1～500 个字'
+    )
+    const comment = {
+      id: makeId('comment'),
+      contentType: p.contentType,
+      contentId: p.contentId,
+      authorId: me().id,
+      body: p.body.trim(),
+      createdAt: new Date().toISOString()
+    }
+    db.comments.push(comment)
+    if (item.ownerId !== me().id)
+      note(item.ownerId, '失物招领收到一条新评论', item.type, item.id)
+    return { ...clone(comment), author: user(comment.authorId) }
   }
   if (method === 'notification.list')
     return list(db.notifications.filter((n) => n.recipientId === me().id))
