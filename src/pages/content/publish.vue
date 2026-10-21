@@ -17,12 +17,40 @@
         maxlength="2000"
         placeholder="补充要求、约定和注意事项"
       />
-      <text class="label">类别 / 技能</text>
-      <input
-        class="input"
-        v-model="form.category"
-        placeholder="如电影、摄影、生活用品；失物填丢失或拾获"
-      />
+      <template v-if="type === 'lost_found'">
+        <text class="label">发布类型</text>
+        <view class="choice-grid two-columns">
+          <button
+            v-for="option in lostKindOptions"
+            :key="option.value"
+            class="choice-button"
+            :class="{ selected: form.lostKind === option.value }"
+            @tap="form.lostKind = option.value"
+          >
+            {{ option.label }}
+          </button>
+        </view>
+        <text class="label">物品分类</text>
+        <view class="choice-grid three-columns">
+          <button
+            v-for="option in lostCategoryOptions"
+            :key="option.value"
+            class="choice-button"
+            :class="{ selected: form.category === option.value }"
+            @tap="form.category = option.value"
+          >
+            {{ option.label }}
+          </button>
+        </view>
+      </template>
+      <template v-else>
+        <text class="label">类别 / 技能</text>
+        <input
+          class="input"
+          v-model="form.category"
+          placeholder="如电影、摄影、生活用品"
+        />
+      </template>
       <text class="label">地点</text>
       <input class="input" v-model="form.location" placeholder="具体地点" />
       <template v-if="type === 'plan'">
@@ -59,7 +87,7 @@
           placeholder="如 35.00"
         />
       </template>
-      <text class="label">图片</text>
+      <text class="label">图片{{ type === 'lost_found' ? '（必传，最多 3 张）' : '' }}</text>
       <view class="actions">
         <image
           v-for="(image, index) in form.images"
@@ -101,6 +129,7 @@ const type = ref('plan'),
     title: '',
     body: '',
     category: '',
+    lostKind: 'lost',
     location: '',
     images: []
   }),
@@ -111,6 +140,15 @@ const type = ref('plan'),
   price = ref(''),
   error = ref(''),
   saving = ref(false)
+const lostKindOptions = [
+  { label: '丢失物品', value: 'lost' },
+  { label: '拾到物品', value: 'found' }
+]
+const lostCategoryOptions = [
+  { label: '卡片', value: 'card' },
+  { label: '钥匙', value: 'key' },
+  { label: '杂物', value: 'misc' }
+]
 onLoad((options) => {
   if (contentTypes.includes(options.type)) type.value = options.type
   date.value = new Date(Date.now() + 86400000 + 8 * 3600000)
@@ -139,6 +177,8 @@ async function save() {
   try {
     const params = { ...form, images: [...form.images] }
     if (!form.category.trim()) throw new Error('请填写类别或技能')
+    if (type.value === 'lost_found' && !form.images.length)
+      throw new Error('请至少添加一张物品照片')
     if (['plan', 'help'].includes(type.value))
       params.category = form.category.trim()
     if (type.value === 'plan')
@@ -162,3 +202,28 @@ async function save() {
   }
 }
 </script>
+
+<style scoped>
+.choice-grid {
+  display: grid;
+  gap: 12rpx;
+}
+.two-columns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.three-columns {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.choice-button {
+  min-height: 44px;
+  background: #edf0e5;
+  color: #52664f;
+  border: 2rpx solid transparent;
+}
+.choice-button.selected {
+  background: #e2ecd7;
+  border-color: #7a9b67;
+  color: #304a3a;
+  font-weight: 650;
+}
+</style>

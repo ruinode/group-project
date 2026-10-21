@@ -26,6 +26,32 @@
         技能求助
       </button>
     </view>
+    <view v-if="showLostFilters" class="lost-filter-panel">
+      <view class="filter-label">物品分类</view>
+      <view class="filter-shortcuts">
+        <button
+          v-for="option in lostCategoryOptions"
+          :key="option.value"
+          class="filter-chip"
+          :class="{ selected: category === option.value }"
+          @tap="chooseCategory(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      </view>
+      <view class="filter-label">招领类型</view>
+      <view class="filter-shortcuts">
+        <button
+          v-for="option in lostKindOptions"
+          :key="option.value"
+          class="filter-chip"
+          :class="{ selected: lostKind === option.value }"
+          @tap="chooseLostKind(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      </view>
+    </view>
     <view class="panel">
       <input
         class="input"
@@ -107,7 +133,7 @@
     <EmptyState
       v-if="!loading && !error && !items.length"
       :description="
-        showFilters
+        showFilters || showLostFilters
           ? '换个类别、状态或关键词试试，也可以发布一条新内容。'
           : undefined
       "
@@ -135,6 +161,7 @@ const props = defineProps({
   title: { required: true },
   subtitle: { default: '' },
   showFilters: { type: Boolean, default: false },
+  showLostFilters: { type: Boolean, default: false },
   categoryOptions: { type: Array, default: () => [] },
   statusOptions: { type: Array, default: () => [] }
 })
@@ -144,7 +171,19 @@ const items = ref([]),
   loading = ref(false),
   cursor = ref(null),
   category = ref(''),
+  lostKind = ref(''),
   status = ref('')
+const lostCategoryOptions = [
+  { label: '全部', value: '' },
+  { label: '卡片', value: 'card' },
+  { label: '钥匙', value: 'key' },
+  { label: '杂物', value: 'misc' }
+]
+const lostKindOptions = [
+  { label: '全部', value: '' },
+  { label: '我丢失的', value: 'lost' },
+  { label: '我拾到的', value: 'found' }
+]
 const statusIndex = computed(() =>
   Math.max(
     0,
@@ -165,8 +204,12 @@ async function load(reset) {
     cursor.value = null
     appliedFilters = {
       keyword: keyword.value.trim(),
-      ...(props.showFilters
-        ? { category: category.value.trim(), status: status.value }
+      ...(props.showFilters || props.showLostFilters
+        ? {
+            category: category.value.trim(),
+            status: status.value,
+            ...(props.showLostFilters ? { lostKind: lostKind.value } : {})
+          }
         : {})
     }
   }
@@ -190,11 +233,16 @@ function publish() {
 function clear() {
   keyword.value = ''
   category.value = ''
+  lostKind.value = ''
   status.value = ''
   load(true)
 }
 function chooseCategory(value) {
   category.value = value
+  load(true)
+}
+function chooseLostKind(value) {
+  lostKind.value = value
   load(true)
 }
 function chooseStatus(event) {
@@ -222,6 +270,13 @@ onUnmounted(() => {
   padding: 6rpx;
   margin-top: 28rpx;
   background: #e8eddf;
+  border-radius: 16rpx;
+}
+.lost-filter-panel {
+  margin-top: 24rpx;
+  padding: 20rpx 22rpx;
+  background: #fffef8;
+  border: 2rpx solid #e1e5d6;
   border-radius: 16rpx;
 }
 .content-switcher button {

@@ -77,6 +77,8 @@ contentType 为 plan / help / market / lost_found / event。当前 content/detai
 
 内容共有 id/type/ownerId/title/body/category/location/campusId/campusName/images/visibility/status/createdAt；列表和详情附公开 owner 摘要。图片演示为本机临时地址，真实服务需返回可访问图片地址或经授权解析的 fileID，禁止把私人临时地址当永久图片。
 
+失物额外包含 `lostKind: 'lost'|'found'`；`category` 固定为 `card|key|misc`，分别对应卡片（身份证、校园卡、银行卡等）、钥匙和杂物。创建失物要求 1～3 张图片；演示地址只在本机当前环境有效，真实版本必须走公共上传。失物状态为 active/returned/closed，作者通过 markReturned 将有效发布更新为 returned（界面显示“已完成”）。
+
 Plan 增加 startAt/endAt/capacity/memberIds；Market 增加 priceCents。时间使用 ISO 8601；前端输入和活动日期按北京时间 +08 判断，存储可用 UTC。价格为整数分。
 
 ## 常用模块
@@ -87,7 +89,7 @@ Plan 增加 startAt/endAt/capacity/memberIds；Market 增加 priceCents。时间
 | user.getProfile | `{userId?}`；省略取本人 | 公开 User：id/nickname/campusId/campusName/skillTags/bio |
 | user.listPublicContent | `{userId,cursor?,pageSize?}` | 该用户公开发布分页；不包含私有内容 |
 | myContent.list | `{contentType?,status?,cursor?,pageSize?}` | 当前用户发布分页；身份取后端会话 |
-| plan/help/market/lostFound.list | `{keyword?,category?,ownerId?,status?,cursor?,pageSize?}` | Content 分页 |
+| plan/help/market/lostFound.list | `{keyword?,category?,lostKind?,ownerId?,status?,cursor?,pageSize?}` | Content 分页；lostKind 仅失物使用 |
 | 模块.get | `{id}` | 单条内容与公开作者摘要 |
 | 模块.create/update | 内容字段；update 含 id | 保存后的 Content；作者与校区由后端确定 |
 | plan.getCandidates | `{planId,cursor?,pageSize?}` | `{items:[{candidatePlanId,ownerId,owner,plan,overlap,reasons}],nextCursor}` |
@@ -96,9 +98,11 @@ Plan 增加 startAt/endAt/capacity/memberIds；Market 增加 priceCents。时间
 | invitation.respond | `{invitationId,action,idempotencyKey}` | `{invitation,targetPlan}`；action=accept/reject/cancel |
 | invitation.cancel | `{invitationId,idempotencyKey}` | 与 respond(cancel) 一致 |
 | conversation.open | `{contentType,contentId,peerUserId}` | 会话，含原内容链接和 participantIds |
-| conversation.list | `{cursor?,pageSize?}` | 当前用户会话分页 |
+| conversation.list | `{cursor?,pageSize?}` | 当前用户会话分页，含 peer 摘要、lastMessage 与原内容字段 |
 | message.list | `{conversationId,cursor?,pageSize?}` | Message 分页，含 sender 摘要，按新到旧排列 |
 | message.send | `{conversationId,body,idempotencyKey}` | 保存的 Message |
+| comment.list | `{contentType,contentId,cursor?,pageSize?}` | 公开评论分页，含 author 摘要 |
+| comment.create | `{contentType,contentId,body}` | 当前仅 lost_found；保存评论并给非本人发布者生成站内通知 |
 | notification.list/markRead | 分页 / `{notificationId}` | 通知分页 / 保存的通知 |
 | favorite.set/list | `{contentType,contentId,selected}` / 分页 | `{selected}` / 收藏分页 |
 | report.create | `{contentType,contentId,reason}` | 举报编号与状态 |
