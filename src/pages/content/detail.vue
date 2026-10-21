@@ -23,19 +23,7 @@
         {{ item.memberIds.length }}/{{ item.capacity }} 人
       </view>
       <view v-if="type === 'market'" class="section-title">
-        <template v-if="item.marketType === 'buy'">
-          预算 ¥{{ (item.budgetCents / 100).toFixed(2) }}
-        </template>
-        <template v-else>¥{{ (item.priceCents / 100).toFixed(2) }}</template>
-      </view>
-      <view v-if="type === 'market'" class="muted">
-        <template v-if="item.marketType === 'sell'">
-          成色：{{ item.condition }} · 交接：{{ item.handoverCampus }}
-        </template>
-        <template v-else>关键词：{{ item.keywords }}</template>
-      </view>
-      <view v-if="type === 'market'" class="muted">
-        参考估价后续提供
+        ¥{{ (item.priceCents / 100).toFixed(2) }}
       </view>
       <view class="body" style="margin-top: 26rpx">{{ item.body }}</view>
       <view class="actions">
@@ -59,26 +47,10 @@
         >
           查看相近计划
         </button>
-        <button
-          v-if="!isOwn && type === 'market' && item.status === 'active'"
-          class="primary"
-          :disabled="busy"
-          @tap="reserve"
-        >
-          预约交接
-        </button>
         <button class="secondary" :disabled="busy" @tap="toggleFavorite">
           {{ selected ? '取消收藏' : '收藏' }}
         </button>
         <button class="secondary" :disabled="busy" @tap="report">举报</button>
-        <button
-          v-if="isOwn && type === 'market' && item.status === 'active'"
-          class="primary"
-          :disabled="busy"
-          @tap="complete"
-        >
-          标记交易完成
-        </button>
         <button
           v-if="isOwn && ['open', 'active', 'full'].includes(item.status)"
           class="secondary"
@@ -89,7 +61,7 @@
             type === 'lost_found'
               ? '确认已归还'
               : type === 'market'
-                ? '下架'
+                ? '关闭发布'
                 : '标记完成'
           }}
         </button>
@@ -238,25 +210,6 @@ function contact() {
 function candidates() {
   uni.navigateTo({
     url: `/pages/partner/candidates?planId=${encodeURIComponent(id.value)}`
-  })
-}
-function reserve() {
-  run(async () => {
-    await api.market.reserve({ id: id.value })
-    uni.showToast({ title: '已提交预约', icon: 'success' })
-    load()
-  })
-}
-function complete() {
-  uni.showModal({
-    title: '确认交易完成',
-    content: '确认标记该商品已交易完成？完成后不可再预约或修改。',
-    success: (r) => {
-      if (r.confirm)
-        run(async () => {
-          item.value = await api.market.complete({ id: id.value })
-        })
-    }
   })
 }
 function toggleFavorite() {
